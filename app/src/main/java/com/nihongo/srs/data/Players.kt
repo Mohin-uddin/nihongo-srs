@@ -90,6 +90,15 @@ class PlayerStore(context: Context) {
         }
     }
 
+    /** Takes back points given by mistake (e.g. a card answer the user undid). */
+    fun takeBack(n: Int, playerId: Int = active.id) {
+        if (n <= 0) return
+        val date = LocalDate.now().toString()
+        change(playerId) {
+            it.copy(points = (it.points - n).coerceAtLeast(0), today = (it.todayPoints(date) - n).coerceAtLeast(0), todayDate = date)
+        }
+    }
+
     fun addWin(playerId: Int) = change(playerId) { it.copy(gamesWon = it.gamesWon + 1) }
 
     fun setActive(id: Int) {

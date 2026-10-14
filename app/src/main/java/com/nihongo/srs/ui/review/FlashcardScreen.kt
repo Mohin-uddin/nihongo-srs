@@ -17,6 +17,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Undo
 import androidx.compose.material.icons.automirrored.rounded.VolumeUp
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
@@ -28,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -88,10 +90,11 @@ fun FlashcardScreen(
                 state.isLoading -> Box(Modifier.fillMaxSize(), Alignment.Center) {
                     CircularProgressIndicator()
                 }
-                state.isFinished -> SessionSummary(state, onBack)
+                state.isFinished -> SessionSummary(state, onBack, onPrevious = vm::goBack)
                 else -> {
                     val card = state.current!!
                     SessionProgress(state.index, state.total)
+                    if (state.canGoBack) PreviousCardButton(state.mode, vm::goBack)
 
                     FlipCard(
                         vocab = card.vocab,
@@ -244,8 +247,24 @@ private fun LearnButtons(enabled: Boolean, onSkip: () -> Unit, onLearned: () -> 
     }
 }
 
+/** Go back one card and undo the answer given there, for when a button was pressed by mistake. */
 @Composable
-private fun SessionSummary(state: ReviewUiState, onBack: () -> Unit) {
+private fun PreviousCardButton(mode: SessionMode, onClick: () -> Unit) {
+    TextButton(onClick = onClick, modifier = Modifier.testTag("previous_card")) {
+        Icon(Icons.AutoMirrored.Rounded.Undo, null)
+        Spacer(Modifier.width(8.dp))
+        Text(
+            when (mode) {
+                SessionMode.LEARN -> "আগের শব্দে ফিরুন · ভুল করে চাপলে আবার নতুন হবে"
+                SessionMode.REVIEW -> "আগের শব্দে ফিরুন · আগের উত্তর বাতিল হবে"
+            },
+            style = MaterialTheme.typography.labelLarge,
+        )
+    }
+}
+
+@Composable
+private fun SessionSummary(state: ReviewUiState, onBack: () -> Unit, onPrevious: () -> Unit) {
     Column(
         Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -269,6 +288,10 @@ private fun SessionSummary(state: ReviewUiState, onBack: () -> Unit) {
             }
         }
         BigButton("Back to Home", "হোমে ফিরুন", onClick = onBack)
+        if (state.canGoBack) {
+            BigOutlinedButton("Previous word", "আগের শব্দে ফিরুন", onClick = onPrevious,
+                icon = Icons.AutoMirrored.Rounded.Undo, modifier = Modifier.testTag("previous_card"))
+        }
     }
 }
 

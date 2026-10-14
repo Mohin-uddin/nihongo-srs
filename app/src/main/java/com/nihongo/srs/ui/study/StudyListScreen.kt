@@ -25,6 +25,11 @@ import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -128,7 +133,8 @@ fun StudyListScreen(
                     WordRow(
                         item,
                         onSpeakWord = { vm.speakWord(item.vocab) },
-                        onSpeakExample = { vm.speakExample(item.vocab, slow = true) }
+                        onSpeakExample = { vm.speakExample(item.vocab, slow = true) },
+                        onUnlearn = { vm.unlearn(item.vocab) },
                     )
                 }
             }
@@ -137,8 +143,23 @@ fun StudyListScreen(
 }
 
 @Composable
-private fun WordRow(item: VocabWithProgress, onSpeakWord: () -> Unit, onSpeakExample: () -> Unit) {
+private fun WordRow(
+    item: VocabWithProgress,
+    onSpeakWord: () -> Unit,
+    onSpeakExample: () -> Unit,
+    onUnlearn: () -> Unit,
+) {
     val v = item.vocab
+    var confirmUnlearn by remember { mutableStateOf(false) }
+    if (confirmUnlearn) {
+        AlertDialog(
+            onDismissRequest = { confirmUnlearn = false },
+            title = { Text("${v.japanese} আবার নতুন করবেন?") },
+            text = { Text("শব্দটা শেখা তালিকা থেকে সরে যাবে, আর \"আজ\" ট্যাবে নতুন শব্দ হিসেবে আবার শিখতে পারবেন।") },
+            confirmButton = { TextButton({ confirmUnlearn = false; onUnlearn() }, Modifier.testTag("unlearn_confirm")) { Text("হ্যাঁ, নতুন করুন") } },
+            dismissButton = { TextButton({ confirmUnlearn = false }) { Text("না") } },
+        )
+    }
     SoftCard(padding = 16.dp) {
         Row(verticalAlignment = Alignment.Top) {
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -157,11 +178,13 @@ private fun WordRow(item: VocabWithProgress, onSpeakWord: () -> Unit, onSpeakExa
             FilledTonalIconButton(onClick = onSpeakWord) { Icon(Icons.AutoMirrored.Rounded.VolumeUp, "Listen") }
         }
         item.progress?.let {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Pill(v.level)
                 Pill(SpacedRepetitionEngine.stageLabel(it.stage, it.isMastered),
                     color = MaterialTheme.colorScheme.surfaceContainerHigh,
                     textColor = MaterialTheme.colorScheme.onSurfaceVariant)
+                Spacer(Modifier.weight(1f))
+                TextButton({ confirmUnlearn = true }, Modifier.testTag("unlearn_${v.id}")) { Text("শিখিনি? নতুন করুন") }
             }
         }
         ExampleSentence(v, onSpeak = onSpeakExample)

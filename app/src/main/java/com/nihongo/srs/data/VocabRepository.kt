@@ -112,6 +112,18 @@ class VocabRepository(
         progress.log(learned = 1)
     }
 
+    /** Undo of [markLearned]: the word goes back to the new-word pool. */
+    suspend fun unlearn(vocabId: Long) {
+        dao.resetProgress(vocabId)
+        progress.log(learned = -1)
+    }
+
+    /** Undo of [submitReview]: puts the card back exactly as it was before the answer. */
+    suspend fun undoReview(before: UserProgress, correct: Boolean) {
+        dao.upsertProgress(before)
+        progress.log(reviewed = -1, correct = if (correct) -1 else 0)
+    }
+
     /** A review answer: "I Knew It" (correct = true) or "Forgot" (correct = false). */
     suspend fun submitReview(current: UserProgress, correct: Boolean, countAsReview: Boolean = true): UserProgress {
         val updated = engine.review(current, correct)

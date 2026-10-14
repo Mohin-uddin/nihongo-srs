@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 /** LEARNED = every word you have started, TODAY = learned or reviewed today, N5 / N4 / MINE = the whole list. */
 enum class StudyFilter(val en: String, val bn: String) {
@@ -58,6 +59,9 @@ class StudyListViewModel(
     private fun VocabEntity.matches(q: String): Boolean =
         listOf(japanese, reading, romaji, meaning, meaningBn, example, exampleReading, exampleEn, exampleBn)
             .any { it.contains(q, ignoreCase = true) }
+
+    /** "I haven't really learned this": the word goes back to the new-word pool. */
+    fun unlearn(v: VocabEntity) = viewModelScope.launch { repo.unlearn(v.id) }
 
     fun speakWord(v: VocabEntity) = speaker.speak(v.reading)
 

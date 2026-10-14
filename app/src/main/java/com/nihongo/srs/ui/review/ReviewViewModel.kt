@@ -33,6 +33,14 @@ data class CardItem(
     val reverse: Boolean = false,
 )
 
+/** One answered card, kept so the user can go back and undo a mis-tap. */
+data class DoneStep(
+    val index: Int,
+    /** LEARN: true if "Learned" was pressed (false = skipped). REVIEW: the answer given. */
+    val positive: Boolean,
+    val points: Int,
+)
+
 data class ReviewUiState(
     val mode: SessionMode = SessionMode.REVIEW,
     val isLoading: Boolean = true,
@@ -42,7 +50,9 @@ data class ReviewUiState(
     val correctCount: Int = 0,
     val forgotCount: Int = 0,
     val isBusy: Boolean = false,
+    val history: List<DoneStep> = emptyList(),
 ) {
+    val canGoBack: Boolean get() = history.isNotEmpty() && !isBusy
     val current: CardItem? get() = cards.getOrNull(index)
     val isFinished: Boolean get() = !isLoading && index >= cards.size
     val total: Int get() = cards.size
@@ -122,8 +132,10 @@ class ReviewViewModel(
         viewModelScope.launch {
             repo.submitReview(progress, correct)
             players.award(if (correct) Points.REVIEW_CORRECT else Points.REVIEW_TRIED)
+            val points = if (correct) Points.REVIEW_CORRECT else Points.REVIEW_TRIED
             _state.update {
                 moveNext(it).copy(
+                    history = it.history + DoneStep(s.index, correct, points),
                     isBusy = false,
                     correctCount = it.correctCount + if (correct) 1 else 0,
                     forgotCount = it.forgotCount + if (correct) 0 else 1,
@@ -141,15 +153,52 @@ class ReviewViewModel(
         viewModelScope.launch {
             repo.markLearned(card.vocab.id)
             players.award(Points.LEARN)
-            _state.update { moveNext(it).copy(isBusy = false, correctCount = it.correctCount + 1) }
+            _state.update {
+                moveNext(it).copy(
+                    isBusy = false, correctCount = it.correctCount + 1,
+                    history = it.history + DoneStep(s.index, true, Points.LEARN),
+                )
+            }
             afterMove()
         }
     }
 
     /** LEARN mode: skip this word for now (it stays in the new-word pool). */
     fun skip() {
-        _state.update { moveNext(it) }
+        val s = _state.value
+        if (s.current == null || s.isBusy) return
+        _state.update { moveNext(it).copy(history = it.history + DoneStep(s.index, false, 0)) }
         afterMove()
+    }
+
+    /**
+     * Back to the previous card and undo what was pressed there, so a mis-tap costs nothing:
+     * a "Learned" word becomes new again, a review answer is put back as it was.
+     */
+    fun goBack() {
+        val s = _state.value
+        if (!s.canGoBack) return
+        val step = s.history.last()
+        val card = s.cards.getOrNull(step.index) ?: return
+        _state.update { it.copy(isBusy = true) }
+        viewModelScope.launch {
+            when (s.mode) {
+                SessionMode.LEARN -> if (step.positive) repo.unlearn(card.vocab.id)
+                SessionMode.REVIEW -> card.progress?.let { repo.undoReview(it, step.positive) }
+            }
+            players.takeBack(step.points)
+            _state.update {
+                it.copy(
+                    index = step.index,
+                    isFlipped = showAnswerByDefault,
+                    isBusy = false,
+                    history = it.history.dropLast(1),
+                    correctCount = it.correctCount - if (step.positive) 1 else 0,
+                    forgotCount = it.forgotCount - if (it.mode == SessionMode.REVIEW && !step.positive) 1 else 0,
+                )
+            }
+            afterMove()
+        }
     }
 
     override fun onCleared() {

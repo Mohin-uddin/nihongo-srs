@@ -14,9 +14,9 @@ interface StatsDao {
     @Query(
         """
         UPDATE study_day SET
-            reviewed = reviewed + :reviewed,
-            reviewedCorrect = reviewedCorrect + :correct,
-            learned = learned + :learned,
+            reviewed = MAX(0, reviewed + :reviewed),
+            reviewedCorrect = MAX(0, reviewedCorrect + :correct),
+            learned = MAX(0, learned + :learned),
             exams = exams + :exams,
             bestExamPercent = MAX(bestExamPercent, :examPercent),
             spoken = spoken + :spoken,

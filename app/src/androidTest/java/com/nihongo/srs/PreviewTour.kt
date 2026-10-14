@@ -121,7 +121,11 @@ class PreviewTour {
         tapTag("learn_N5")
         waitFor("Learned, review tomorrow")
         shot("learn_new_word")
-        repeat(4) { tapTag("learned"); Thread.sleep(300) }
+        repeat(5) { tapTag("learned"); Thread.sleep(300) }
+        // A mis-tap: go back, and the 5th word is new again.
+        tapTag("previous_card")
+        Thread.sleep(800)
+        shot("learn_went_back")
         back()
 
         // Review (with reverse cards)
