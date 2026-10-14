@@ -76,7 +76,11 @@ class PreviewTour {
         shell("mkdir -p $DIR")
 
         // Home
-        waitFor("N5\n")
+        // Wait until the bundled words are loaded (first launch fills the database).
+        rule.waitUntil(30_000) {
+            rule.onAllNodesWithText("N5\n", substring = true).fetchSemanticsNodes().isNotEmpty() &&
+                rule.onAllNodesWithText("N5\n0 new").fetchSemanticsNodes().isEmpty()
+        }
         shot("home")
         runCatching { node("Daily 25-minute plan").performScrollTo() }
         shot("home_bottom")
