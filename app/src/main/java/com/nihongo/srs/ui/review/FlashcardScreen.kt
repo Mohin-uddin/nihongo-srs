@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
@@ -25,7 +27,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -47,7 +48,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nihongo.srs.data.VocabEntity
 import com.nihongo.srs.srs.SpacedRepetitionEngine
+import com.nihongo.srs.ui.ExampleSentence
 import com.nihongo.srs.ui.TtsBanner
+import com.nihongo.srs.ui.WordAnswer
 import com.nihongo.srs.ui.theme.CorrectGreen
 import com.nihongo.srs.ui.theme.ForgotRed
 
@@ -106,6 +109,7 @@ fun FlashcardScreen(
 
                     FlipCard(
                         vocab = card.vocab,
+                        reverse = card.reverse,
                         stageText = card.progress?.let {
                             SpacedRepetitionEngine.stageLabel(it.stage, it.isMastered)
                         } ?: "New • নতুন",
@@ -113,24 +117,23 @@ fun FlashcardScreen(
                         onFlip = vm::flip,
                         onSpeak = { vm.speakCurrent(slow = false) },
                         onSpeakSlow = { vm.speakCurrent(slow = true) },
+                        onSpeakExample = vm::speakExample,
                         modifier = Modifier.weight(1f)
                     )
 
-                    if (!state.isFlipped) {
-                        Text(
-                            "Say it out loud, then tap the card • জোরে বলুন, তারপর কার্ডে চাপ দিন",
-                            style = MaterialTheme.typography.bodySmall,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
-
                     when (state.mode) {
-                        SessionMode.REVIEW -> ReviewButtons(
-                            enabled = state.isFlipped && !state.isBusy,
-                            onForgot = { vm.answer(false) },
-                            onKnew = { vm.answer(true) }
-                        )
+                        SessionMode.REVIEW -> if (state.isFlipped) {
+                            ReviewButtons(
+                                enabled = !state.isBusy,
+                                onForgot = { vm.answer(false) },
+                                onKnew = { vm.answer(true) }
+                            )
+                        } else {
+                            Button(onClick = vm::flip, modifier = Modifier.fillMaxWidth().height(56.dp)) {
+                                Text("Say it out loud, then show answer\nজোরে বলুন, তারপর উত্তর দেখুন",
+                                    textAlign = TextAlign.Center)
+                            }
+                        }
                         SessionMode.LEARN -> LearnButtons(
                             enabled = !state.isBusy,
                             onSkip = vm::skip,
@@ -146,11 +149,13 @@ fun FlashcardScreen(
 @Composable
 private fun FlipCard(
     vocab: VocabEntity,
+    reverse: Boolean,
     stageText: String,
     isFlipped: Boolean,
     onFlip: () -> Unit,
     onSpeak: () -> Unit,
     onSpeakSlow: () -> Unit,
+    onSpeakExample: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val rotation by animateFloatAsState(
@@ -170,49 +175,53 @@ private fun FlipCard(
             .clickable(onClick = onFlip),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
-        Box(
+        Column(
             Modifier
                 .fillMaxSize()
                 // Un-mirror the back side's content.
                 .graphicsLayer { rotationY = if (showBack) 180f else 0f }
                 .padding(16.dp)
         ) {
-            AssistChip(onClick = {}, label = { Text(stageText) }, modifier = Modifier.align(Alignment.TopStart))
-            Row(Modifier.align(Alignment.TopEnd)) {
-                IconButton(onClick = onSpeakSlow) { Icon(Icons.Default.SlowMotionVideo, "Slow") }
-                IconButton(onClick = onSpeak) { Icon(Icons.AutoMirrored.Filled.VolumeUp, "Listen") }
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                AssistChip(onClick = {}, label = { Text(stageText) })
+                Spacer(Modifier.weight(1f))
+                // On a reverse card the sound would give the answer away, so it waits for the flip.
+                if (showBack || !reverse) {
+                    IconButton(onClick = onSpeakSlow) { Icon(Icons.Default.SlowMotionVideo, "Slow") }
+                    IconButton(onClick = onSpeak) { Icon(Icons.AutoMirrored.Filled.VolumeUp, "Listen") }
+                }
             }
 
             Column(
-                Modifier.align(Alignment.Center).fillMaxWidth(),
+                Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically)
             ) {
-                Text(
-                    vocab.japanese,
-                    fontSize = if (vocab.japanese.length > 6) 36.sp else 56.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-                if (showBack) {
-                    Text(vocab.reading, style = MaterialTheme.typography.headlineSmall)
-                    if (vocab.romaji.isNotBlank()) {
-                        Text(vocab.romaji, style = MaterialTheme.typography.titleMedium,
+                when {
+                    showBack -> {
+                        WordAnswer(vocab, showJapanese = true)
+                        ExampleSentence(vocab, onSpeak = onSpeakExample)
+                    }
+                    reverse -> {
+                        Text("How do you say this in Japanese?\nজাপানিতে কী বলে?",
+                            style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.primary)
+                        Text("🇬🇧 ${vocab.meaning}", style = MaterialTheme.typography.headlineSmall,
+                            textAlign = TextAlign.Center)
+                        Text("🇧🇩 ${vocab.meaningBn}", style = MaterialTheme.typography.headlineSmall,
+                            textAlign = TextAlign.Center)
+                    }
+                    else -> {
+                        Text(
+                            vocab.japanese,
+                            fontSize = if (vocab.japanese.length > 6) 36.sp else 56.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
+                        )
+                        Text("What does it mean? • এর মানে কী?",
+                            style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
-                    HorizontalDivider(Modifier.padding(vertical = 8.dp))
-                    if (vocab.meaning.isNotBlank()) {
-                        Text("🇬🇧 ${vocab.meaning}", style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center)
-                    }
-                    if (vocab.meaningBn.isNotBlank()) {
-                        Text("🇧🇩 ${vocab.meaningBn}", style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center)
-                    }
-                } else {
-                    Text("Tap to flip • উল্টাতে চাপুন",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }

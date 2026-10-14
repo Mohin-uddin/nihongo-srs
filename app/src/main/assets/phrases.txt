@@ -1,0 +1,74 @@
+# Daily conversation phrases.
+# Format: category|japanese|kana (words separated by spaces)|romaji (empty = auto)|English|বাংলা
+Greetings • শুভেচ্ছা|おはようございます|おはようございます|ohayou gozaimasu|Good morning|শুভ সকাল
+Greetings • শুভেচ্ছা|こんにちは|こんにちは|konnichiwa|Hello / Good afternoon|হ্যালো / শুভ দুপুর
+Greetings • শুভেচ্ছা|こんばんは|こんばんは|konbanwa|Good evening|শুভ সন্ধ্যা
+Greetings • শুভেচ্ছা|おやすみなさい|おやすみなさい||Good night|শুভ রাত্রি
+Greetings • শুভেচ্ছা|ありがとうございます|ありがとう ございます||Thank you very much|অনেক ধন্যবাদ
+Greetings • শুভেচ্ছা|どういたしまして|どういたしまして||You're welcome|কোনো ব্যাপার না
+Greetings • শুভেচ্ছা|すみません|すみません||Excuse me / Sorry|মাফ করবেন / দুঃখিত
+Greetings • শুভেচ্ছা|ごめんなさい|ごめんなさい||I'm sorry|আমি দুঃখিত
+Greetings • শুভেচ্ছা|お元気ですか|おげんき です か||How are you?|আপনি কেমন আছেন?
+Greetings • শুভেচ্ছা|元気です|げんき です||I'm fine|আমি ভালো আছি
+Greetings • শুভেচ্ছা|さようなら|さようなら||Goodbye|বিদায়
+Greetings • শুভেচ্ছা|また明日|また あした||See you tomorrow|কাল দেখা হবে
+Greetings • শুভেচ্ছা|行ってきます|いって きます||I'm leaving (said when going out)|আমি যাচ্ছি (বাসা থেকে বের হওয়ার সময়)
+Greetings • শুভেচ্ছা|ただいま|ただいま||I'm home|আমি ফিরে এসেছি
+Self-intro • নিজের পরিচয়|はじめまして|はじめまして||Nice to meet you (first time)|আপনার সাথে পরিচিত হয়ে ভালো লাগলো
+Self-intro • নিজের পরিচয়|私の名前はモヒンです|わたし の なまえ は モヒン です||My name is Mohin|আমার নাম মোহিন
+Self-intro • নিজের পরিচয়|私はバングラデシュ人です|わたし は バングラデシュじん です||I am Bangladeshi|আমি বাংলাদেশি
+Self-intro • নিজের পরিচয়|ダッカから来ました|ダッカ から きました||I came from Dhaka|আমি ঢাকা থেকে এসেছি
+Self-intro • নিজের পরিচয়|日本語を勉強しています|にほんご を べんきょう して います||I am studying Japanese|আমি জাপানি ভাষা শিখছি
+Self-intro • নিজের পরিচয়|日本語が少し話せます|にほんご が すこし はなせます||I can speak a little Japanese|আমি একটু জাপানি বলতে পারি
+Self-intro • নিজের পরিচয়|日本で働きたいです|にほん で はたらきたい です||I want to work in Japan|আমি জাপানে কাজ করতে চাই
+Self-intro • নিজের পরিচয়|よろしくお願いします|よろしく おねがい します||Please treat me well / Nice to meet you|আমার প্রতি সদয় থাকবেন
+Self-intro • নিজের পরিচয়|お名前は何ですか|おなまえ は なん です か||What is your name?|আপনার নাম কী?
+Self-intro • নিজের পরিচয়|どこから来ましたか|どこ から きました か||Where are you from?|আপনি কোথা থেকে এসেছেন?
+Shopping • কেনাকাটা|これはいくらですか|これ は いくら です か||How much is this?|এটার দাম কত?
+Shopping • কেনাকাটা|これをください|これ を ください||I'll take this, please|এটা দিন
+Shopping • কেনাকাটা|見ているだけです|みて いる だけ です||I'm just looking|আমি শুধু দেখছি
+Shopping • কেনাকাটা|他の色はありますか|ほか の いろ は あります か||Do you have other colors?|অন্য রং আছে?
+Shopping • কেনাকাটা|カードで払えますか|カード で はらえます か||Can I pay by card?|কার্ডে দেওয়া যাবে?
+Shopping • কেনাকাটা|袋をください|ふくろ を ください||A bag, please|একটা ব্যাগ দিন
+Restaurant • রেস্টুরেন্ট|メニューをください|メニュー を ください||The menu, please|মেনুটা দিন
+Restaurant • রেস্টুরেন্ট|水をください|みず を ください||Water, please|পানি দিন
+Restaurant • রেস্টুরেন্ট|これは何ですか|これ は なん です か||What is this?|এটা কী?
+Restaurant • রেস্টুরেন্ট|豚肉は食べられません|ぶたにく は たべられません||I can't eat pork|আমি শূকরের মাংস খেতে পারি না
+Restaurant • রেস্টুরেন্ট|ハラールの食べ物はありますか|ハラール の たべもの は あります か||Do you have halal food?|হালাল খাবার আছে?
+Restaurant • রেস্টুরেন্ট|いただきます|いただきます||(said before eating)|(খাওয়ার আগে বলা হয়)
+Restaurant • রেস্টুরেন্ট|美味しいです|おいしい です||It's delicious|খুব মজা
+Restaurant • রেস্টুরেন্ট|ごちそうさまでした|ごちそうさま でした||Thank you for the meal (after eating)|খাবারের জন্য ধন্যবাদ (খাওয়ার পরে)
+Restaurant • রেস্টুরেন্ট|お会計をお願いします|おかいけい を おねがい します||The bill, please|বিলটা দিন
+Work • অফিস/কাজ|お疲れ様です|おつかれさま です||Thanks for your hard work (greeting at work)|পরিশ্রমের জন্য ধন্যবাদ (কাজের শুভেচ্ছা)
+Work • অফিস/কাজ|分かりました|わかりました||I understand / Got it|বুঝেছি
+Work • অফিস/কাজ|分かりません|わかりません||I don't understand|আমি বুঝতে পারছি না
+Work • অফিস/কাজ|もう一度お願いします|もう いちど おねがい します||One more time, please|আরেকবার বলুন
+Work • অফিস/কাজ|ゆっくり話してください|ゆっくり はなして ください||Please speak slowly|দয়া করে আস্তে বলুন
+Work • অফিস/কাজ|遅れてすみません|おくれて すみません||Sorry I'm late|দেরি হওয়ার জন্য দুঃখিত
+Work • অফিস/কাজ|何をすればいいですか|なに を すれば いい です か||What should I do?|আমি কী করব?
+Work • অফিস/কাজ|手伝いましょうか|てつだいましょう か||Shall I help you?|আমি সাহায্য করব?
+Work • অফিস/কাজ|確認します|かくにん します||I'll check|আমি যাচাই করে দেখছি
+Work • অফিস/কাজ|お先に失礼します|おさき に しつれい します||Excuse me for leaving first|আগে চলে যাচ্ছি, মাফ করবেন
+Directions • পথ/যাতায়াত|駅はどこですか|えき は どこ です か||Where is the station?|স্টেশন কোথায়?
+Directions • পথ/যাতায়াত|トイレはどこですか|トイレ は どこ です か||Where is the toilet?|টয়লেট কোথায়?
+Directions • পথ/যাতায়াত|この電車は東京へ行きますか|この でんしゃ は とうきょう へ いきます か||Does this train go to Tokyo?|এই ট্রেন কি টোকিও যায়?
+Directions • পথ/যাতায়াত|まっすぐ行ってください|まっすぐ いって ください||Please go straight|সোজা যান
+Directions • পথ/যাতায়াত|右に曲がってください|みぎ に まがって ください||Please turn right|ডানে ঘুরুন
+Directions • পথ/যাতায়াত|左に曲がってください|ひだり に まがって ください||Please turn left|বামে ঘুরুন
+Directions • পথ/যাতায়াত|切符はどこで買えますか|きっぷ は どこ で かえます か||Where can I buy a ticket?|টিকিট কোথায় কেনা যায়?
+Directions • পথ/যাতায়াত|ここで降ります|ここ で おります||I'll get off here|আমি এখানে নামব
+Daily life • দৈনন্দিন|今何時ですか|いま なんじ です か||What time is it now?|এখন কয়টা বাজে?
+Daily life • দৈনন্দিন|今日は暑いですね|きょう は あつい です ね||It's hot today, isn't it?|আজ গরম, তাই না?
+Daily life • দৈনন্দিন|いい天気ですね|いい てんき です ね||Nice weather, isn't it?|আবহাওয়া ভালো, তাই না?
+Daily life • দৈনন্দিন|ちょっと待ってください|ちょっと まって ください||Please wait a moment|একটু অপেক্ষা করুন
+Daily life • দৈনন্দিন|大丈夫です|だいじょうぶ です||I'm okay / It's fine|ঠিক আছে / সমস্যা নেই
+Daily life • দৈনন্দিন|お腹が空きました|おなか が すきました||I'm hungry|আমার খিদে পেয়েছে
+Daily life • দৈনন্দিন|疲れました|つかれました||I'm tired|আমি ক্লান্ত
+Daily life • দৈনন্দিন|英語を話せますか|えいご を はなせます か||Can you speak English?|আপনি কি ইংরেজি বলতে পারেন?
+Health & help • স্বাস্থ্য ও সাহায্য|助けてください|たすけて ください||Help me, please!|সাহায্য করুন!
+Health & help • স্বাস্থ্য ও সাহায্য|気分が悪いです|きぶん が わるい です||I feel sick|আমার খারাপ লাগছে
+Health & help • স্বাস্থ্য ও সাহায্য|頭が痛いです|あたま が いたい です||I have a headache|আমার মাথা ব্যথা করছে
+Health & help • স্বাস্থ্য ও সাহায্য|病院へ連れて行ってください|びょういん へ つれて いって ください||Please take me to the hospital|আমাকে হাসপাতালে নিয়ে যান
+Health & help • স্বাস্থ্য ও সাহায্য|救急車を呼んでください|きゅうきゅうしゃ を よんで ください||Please call an ambulance|অ্যাম্বুলেন্স ডাকুন
+Health & help • স্বাস্থ্য ও সাহায্য|警察を呼んでください|けいさつ を よんで ください||Please call the police|পুলিশ ডাকুন
+Health & help • স্বাস্থ্য ও সাহায্য|財布をなくしました|さいふ を なくしました||I lost my wallet|আমার মানিব্যাগ হারিয়ে গেছে

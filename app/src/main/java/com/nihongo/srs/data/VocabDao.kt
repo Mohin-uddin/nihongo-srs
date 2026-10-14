@@ -18,14 +18,27 @@ interface VocabDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertVocab(vocab: VocabEntity): Long
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAllVocab(list: List<VocabEntity>): List<Long>
-
     @Delete
     suspend fun deleteVocab(vocab: VocabEntity)
 
-    @Query("SELECT COUNT(*) FROM vocab")
-    suspend fun vocabCount(): Int
+    @Query("SELECT id FROM vocab WHERE japanese = :japanese AND type = :type LIMIT 1")
+    suspend fun findId(japanese: String, type: String): Long?
+
+    /** Refreshes bundled content (meanings, examples) without touching progress. */
+    @Query(
+        """
+        UPDATE vocab SET reading = :reading, romaji = :romaji, meaning = :meaning,
+            meaningBn = :meaningBn, level = :level, example = :example,
+            exampleReading = :exampleReading, exampleEn = :exampleEn,
+            exampleBn = :exampleBn, category = :category
+        WHERE id = :id
+        """
+    )
+    suspend fun updateContent(
+        id: Long, reading: String, romaji: String, meaning: String, meaningBn: String,
+        level: String, example: String, exampleReading: String, exampleEn: String,
+        exampleBn: String, category: String,
+    )
 
     /** All items of one type (WORD / PHRASE), with progress, for the Manage list. */
     @Transaction
@@ -34,6 +47,31 @@ interface VocabDao {
 
     @Query("SELECT * FROM vocab WHERE type = :type ORDER BY id")
     fun observeByType(type: String): Flow<List<VocabEntity>>
+
+    @Query("SELECT * FROM vocab WHERE type = 'WORD'")
+    suspend fun getAllWords(): List<VocabEntity>
+
+    /** Every word the user has started learning (including mastered), newest first. */
+    @Transaction
+    @Query(
+        """
+        SELECT v.* FROM vocab v
+        INNER JOIN user_progress p ON p.vocabId = v.id
+        WHERE v.type = 'WORD'
+        ORDER BY p.learnedAt DESC, v.id DESC
+        """
+    )
+    fun observeLearned(): Flow<List<VocabWithProgress>>
+
+    @Transaction
+    @Query(
+        """
+        SELECT v.* FROM vocab v
+        INNER JOIN user_progress p ON p.vocabId = v.id
+        WHERE v.type = 'WORD'
+        """
+    )
+    suspend fun getLearned(): List<VocabWithProgress>
 
     // ----------------------------------------------------------- reviews
 
@@ -62,26 +100,34 @@ interface VocabDao {
     )
     fun observeDueCount(endOfToday: Long): Flow<Int>
 
-    /** New words = items with no progress row yet. */
+    @Query(
+        """
+        SELECT COUNT(*) FROM user_progress
+        WHERE isMastered = 0 AND nextReview <= :endOfToday
+        """
+    )
+    suspend fun countDue(endOfToday: Long): Int
+
+    /** New words of one level = items with no progress row yet. */
     @Query(
         """
         SELECT v.* FROM vocab v
         LEFT JOIN user_progress p ON p.vocabId = v.id
-        WHERE p.vocabId IS NULL AND v.type = :type
+        WHERE p.vocabId IS NULL AND v.type = 'WORD' AND v.level = :level
         ORDER BY v.id ASC
         LIMIT :limit
         """
     )
-    suspend fun getNewItems(type: String, limit: Int): List<VocabEntity>
+    suspend fun getNewWords(level: String, limit: Int): List<VocabEntity>
 
     @Query(
         """
         SELECT COUNT(*) FROM vocab v
         LEFT JOIN user_progress p ON p.vocabId = v.id
-        WHERE p.vocabId IS NULL AND v.type = 'WORD'
+        WHERE p.vocabId IS NULL AND v.type = 'WORD' AND v.level = :level
         """
     )
-    fun observeNewWordCount(): Flow<Int>
+    fun observeNewWordCount(level: String): Flow<Int>
 
     @Query("SELECT COUNT(*) FROM user_progress WHERE isMastered = 1")
     fun observeMasteredCount(): Flow<Int>

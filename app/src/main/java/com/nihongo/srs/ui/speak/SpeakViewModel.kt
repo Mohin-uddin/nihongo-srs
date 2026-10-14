@@ -15,6 +15,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 
@@ -42,8 +44,19 @@ class SpeakViewModel(
     private val checker: PronunciationChecker,
 ) : ViewModel() {
 
-    val phrases: StateFlow<List<VocabEntity>> = repo.observePhrases()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+    private val allPhrases: StateFlow<List<VocabEntity>> = repo.observePhrases()
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    /** Topic filter; null = all topics. */
+    val category = MutableStateFlow<String?>(null)
+
+    val categories: StateFlow<List<String>> = allPhrases
+        .map { list -> list.map { it.category.ifBlank { OTHER } }.distinct() }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
+    val phrases: StateFlow<List<VocabEntity>> = combine(allPhrases, category) { list, c ->
+        if (c == null) list else list.filter { it.category.ifBlank { OTHER } == c }
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     private val _state = MutableStateFlow(SpeakUiState())
     val state: StateFlow<SpeakUiState> = _state.asStateFlow()
@@ -54,7 +67,7 @@ class SpeakViewModel(
     private fun current(): VocabEntity? = phrases.value.getOrNull(_state.value.index)
 
     fun listen(slow: Boolean) {
-        current()?.let { speaker.speak(it.reading, slow) }
+        current()?.let { speaker.speak(it.reading.replace(" ", ""), slow) }
     }
 
     fun next() = move(+1)
@@ -67,6 +80,12 @@ class SpeakViewModel(
         _state.update {
             it.copy(index = (it.index + delta + size) % size, mic = MicState.Idle)
         }
+    }
+
+    fun selectCategory(c: String?) {
+        checker.stop()
+        category.value = c
+        _state.update { it.copy(index = 0, mic = MicState.Idle) }
     }
 
     fun toggleMeaning() = _state.update { it.copy(showMeaning = !it.showMeaning) }
@@ -100,6 +119,8 @@ class SpeakViewModel(
     }
 
     companion object {
+        const val OTHER = "Other • অন্যান্য"
+
         val Factory = viewModelFactory {
             initializer {
                 val app = this[APPLICATION_KEY] as NihongoApp

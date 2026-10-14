@@ -24,6 +24,11 @@ enum class SessionMode { REVIEW, LEARN }
 data class CardItem(
     val vocab: VocabEntity,
     val progress: UserProgress?,
+    /**
+     * Reverse card: show the English/Bangla meaning and ask the user to recall
+     * the Japanese. Recalling (not just recognising) is what makes words stick.
+     */
+    val reverse: Boolean = false,
 )
 
 data class ReviewUiState(
@@ -49,9 +54,15 @@ class ReviewViewModel(
     private val repo: VocabRepository,
     private val speaker: JapaneseSpeaker,
     mode: SessionMode,
+    private val level: String,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(ReviewUiState(mode = mode))
+    // Learn mode shows the whole card at once: there is nothing to test yet.
+    private val showAnswerByDefault = mode == SessionMode.LEARN
+
+    private val _state = MutableStateFlow(
+        ReviewUiState(mode = mode, isFlipped = showAnswerByDefault)
+    )
     val state: StateFlow<ReviewUiState> = _state.asStateFlow()
 
     val ttsStatus = speaker.status
@@ -62,14 +73,20 @@ class ReviewViewModel(
 
     private fun load() = viewModelScope.launch {
         val cards = when (_state.value.mode) {
-            SessionMode.REVIEW -> repo.getDueReviews().map { CardItem(it.vocab, it.progress) }
-            SessionMode.LEARN -> repo.getNewWords(NEW_WORDS_PER_SESSION).map { CardItem(it, null) }
+            SessionMode.REVIEW -> repo.getDueReviews().map {
+                // Alternate direction: about half the cards ask for the Japanese.
+                val stage = it.progress?.stage ?: 0
+                CardItem(it.vocab, it.progress, reverse = (it.vocab.id + stage) % 2L == 1L)
+            }
+            SessionMode.LEARN -> repo.getNewWords(level, NEW_WORDS_PER_SESSION).map { CardItem(it, null) }
         }
-        _state.update { it.copy(isLoading = false, cards = cards, index = 0, isFlipped = false) }
+        _state.update { it.copy(isLoading = false, cards = cards, index = 0, isFlipped = showAnswerByDefault) }
+        if (showAnswerByDefault) speakCurrent()
     }
 
     /** Tap on the card: show / hide the reading and meaning. */
     fun flip() {
+        if (showAnswerByDefault) return
         _state.update { it.copy(isFlipped = !it.isFlipped) }
         // Auto-play pronunciation when the answer is revealed.
         if (_state.value.isFlipped) speakCurrent()
@@ -79,6 +96,17 @@ class ReviewViewModel(
         val v = _state.value.current?.vocab ?: return
         // Speak the kana reading so the TTS never guesses the wrong kanji reading.
         speaker.speak(v.reading, slow)
+    }
+
+    fun speakExample() {
+        val v = _state.value.current?.vocab ?: return
+        speaker.speak(v.exampleReading.ifBlank { v.example }.replace(" ", ""), slow = true)
+    }
+
+    private fun moveNext(s: ReviewUiState) = s.copy(index = s.index + 1, isFlipped = showAnswerByDefault)
+
+    private fun afterMove() {
+        if (showAnswerByDefault) speakCurrent()
     }
 
     /** REVIEW mode: "I Knew It" (true) or "Forgot" (false). */
@@ -91,9 +119,7 @@ class ReviewViewModel(
         viewModelScope.launch {
             repo.submitReview(progress, correct)
             _state.update {
-                it.copy(
-                    index = it.index + 1,
-                    isFlipped = false,
+                moveNext(it).copy(
                     isBusy = false,
                     correctCount = it.correctCount + if (correct) 1 else 0,
                     forgotCount = it.forgotCount + if (correct) 0 else 1,
@@ -110,16 +136,15 @@ class ReviewViewModel(
         _state.update { it.copy(isBusy = true) }
         viewModelScope.launch {
             repo.markLearned(card.vocab.id)
-            _state.update {
-                it.copy(index = it.index + 1, isFlipped = false, isBusy = false,
-                    correctCount = it.correctCount + 1)
-            }
+            _state.update { moveNext(it).copy(isBusy = false, correctCount = it.correctCount + 1) }
+            afterMove()
         }
     }
 
     /** LEARN mode: skip this word for now (it stays in the new-word pool). */
     fun skip() {
-        _state.update { it.copy(index = it.index + 1, isFlipped = false) }
+        _state.update { moveNext(it) }
+        afterMove()
     }
 
     override fun onCleared() {
@@ -129,6 +154,7 @@ class ReviewViewModel(
     companion object {
         const val NEW_WORDS_PER_SESSION = 10
         const val ARG_MODE = "mode"
+        const val ARG_LEVEL = "level"
 
         val Factory = viewModelFactory {
             initializer {
@@ -137,7 +163,8 @@ class ReviewViewModel(
                 val mode = handle.get<String>(ARG_MODE)
                     ?.let { runCatching { SessionMode.valueOf(it) }.getOrNull() }
                     ?: SessionMode.REVIEW
-                ReviewViewModel(app.repository, app.speaker, mode)
+                val level = handle.get<String>(ARG_LEVEL) ?: "N5"
+                ReviewViewModel(app.repository, app.speaker, mode, level)
             }
         }
     }

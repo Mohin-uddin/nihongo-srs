@@ -65,6 +65,7 @@ class SpacedRepetitionEngine(
             lastReviewed = now,
             nextReview = startOfDayPlus(now, INTERVAL_DAYS[0]),
             isMastered = false,
+            learnedAt = now,
         )
     }
 
@@ -108,6 +109,9 @@ class SpacedRepetitionEngine(
     /** Is this word due on or before today? */
     fun isDue(progress: UserProgress): Boolean =
         !progress.isMastered && progress.nextReview <= endOfToday()
+
+    /** Local midnight at the start of today. */
+    fun startOfToday(): Long = startOfDayPlus(clock(), 0)
 
     /** Last millisecond of today in the phone's time zone (used by the DAO due query). */
     fun endOfToday(): Long = startOfDayPlus(clock(), 1) - 1

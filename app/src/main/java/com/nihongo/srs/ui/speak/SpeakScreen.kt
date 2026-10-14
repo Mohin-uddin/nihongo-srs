@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -25,6 +26,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -59,6 +61,8 @@ fun SpeakScreen(
     vm: SpeakViewModel = viewModel(factory = SpeakViewModel.Factory),
 ) {
     val phrases by vm.phrases.collectAsStateWithLifecycle()
+    val categories by vm.categories.collectAsStateWithLifecycle()
+    val category by vm.category.collectAsStateWithLifecycle()
     val state by vm.state.collectAsStateWithLifecycle()
     val tts by vm.ttsStatus.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -76,7 +80,7 @@ fun SpeakScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Speaking • কথা বলা") },
+                title = { Text("Daily conversation • প্রতিদিনের কথা") },
                 navigationIcon = {
                     IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back") }
                 }
@@ -88,6 +92,19 @@ fun SpeakScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             TtsBanner(tts)
+
+            // Topic chips: Greetings, Shopping, Work, ...
+            Row(
+                Modifier.horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                FilterChip(selected = category == null, onClick = { vm.selectCategory(null) },
+                    label = { Text("All • সব") })
+                categories.forEach { c ->
+                    FilterChip(selected = category == c, onClick = { vm.selectCategory(c) },
+                        label = { Text(c) })
+                }
+            }
 
             val phrase = phrases.getOrNull(state.index)
             if (phrase == null) {

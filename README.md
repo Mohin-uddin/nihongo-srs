@@ -26,12 +26,17 @@ Phone: Android 8.0 (API 26) or newer.
 
 | Screen | What it does |
 |---|---|
-| Home | Words due today, Learning / Mastered / New counts, Start Review, Learn 10 new words, daily plan |
-| Flashcards | Tap to flip (reading, romaji, English, বাংলা). "I Knew It" / "Forgot". Listen + slow listen |
-| Manage | Add your own words (with Bangla meaning), preload JLPT N5, search, reset, delete |
-| Speaking | 25 everyday phrases. Listen → repeat → mic checks you and gives a % score |
+| Home | Due today, Learning / Mastered counts, learn N5 / N4 / your own words, practice, daily reminder |
+| Flashcards | Review: some cards show the Japanese, some show the Bangla and ask for the Japanese (active recall). Learn: whole card shown, no flipping. Every word has an example sentence |
+| My words | All learned words (today or all) with answers and sentences visible, no flipping. Sentences-only mode for reading aloud |
+| Exam | Today's or full exam, at least 20 multiple-choice questions (meaning, Japanese, listening). Wrong answers are asked again and go back to tomorrow's review |
+| Daily conversation | 72 phrases in 8 topics (greetings, self-intro, shopping, restaurant incl. halal, work, directions, daily life, health). Listen → repeat → mic check |
+| Manage | Add your own words (with Bangla meaning and sentence), reload N5 + N4, search, reset, delete |
+| Reminder | Local notification once a day at a time you choose (default 8 PM) |
 
-Bundled content: 100 JLPT N5 words + 25 speaking phrases, all with English and Bangla meanings.
+Bundled content (in `app/src/main/assets`): 100 N5 words and 106 N4 words, each with an example
+sentence, plus 72 phrases, all in English and Bangla. Edit those text files to add more; bump
+`StarterContent.VERSION` so existing installs pick up the changes.
 
 ## The 1-4-7 schedule (as specified)
 
@@ -57,7 +62,9 @@ starts from the day you actually reviewed.
 | 4. Flashcard UI | `ui/review/FlashcardScreen.kt` |
 | 5. Manifest & Gradle | `app/src/main/AndroidManifest.xml`, `app/build.gradle.kts`, `build.gradle.kts` |
 | Speech | `speech/JapaneseSpeaker.kt` (TTS), `speech/PronunciationChecker.kt` (mic), `speech/PronunciationScorer.kt` |
-| Word list | `data/N5Seed.kt` — add more words here |
+| Word lists | `app/src/main/assets/n5.txt`, `n4.txt`, `phrases.txt` |
+| Exam | `ui/exam/ExamGenerator.kt`, `ExamViewModel.kt`, `ExamScreen.kt` |
+| Reminder | `reminder/ReminderWorker.kt`, `ReminderScheduler.kt` |
 
 ## How to actually learn to speak • কিভাবে কথা বলা শিখবেন
 

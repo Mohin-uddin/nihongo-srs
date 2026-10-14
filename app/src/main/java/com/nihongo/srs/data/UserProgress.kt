@@ -1,5 +1,6 @@
 package com.nihongo.srs.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
@@ -33,4 +34,6 @@ data class UserProgress(
     val lastReviewed: Long,
     val nextReview: Long,
     val isMastered: Boolean,
+    /** When the word was first learned (Day 0). Added in DB version 2. */
+    @ColumnInfo(defaultValue = "0") val learnedAt: Long = 0,
 )

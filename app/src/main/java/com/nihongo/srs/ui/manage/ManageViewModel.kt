@@ -26,6 +26,9 @@ data class VocabForm(
     val romaji: String = "",
     val meaning: String = "",
     val meaningBn: String = "",
+    val example: String = "",
+    val exampleEn: String = "",
+    val exampleBn: String = "",
 ) {
     val isValid: Boolean
         get() = japanese.isNotBlank() && reading.isNotBlank() &&
@@ -71,7 +74,10 @@ class ManageViewModel(
                     romaji = f.romaji.trim(),
                     meaning = f.meaning.trim(),
                     meaningBn = f.meaningBn.trim(),
-                    level = "N5",
+                    example = f.example.trim(),
+                    exampleEn = f.exampleEn.trim(),
+                    exampleBn = f.exampleBn.trim(),
+                    level = VocabEntity.LEVEL_MINE,
                 )
             )
             if (added) {
@@ -84,9 +90,9 @@ class ManageViewModel(
     }
 
     fun preloadN5() = viewModelScope.launch {
-        val n = repo.preloadStarterData()
+        val n = repo.reloadStarterContent()
         _messages.emit(
-            if (n == 0) "N5 list already loaded • N5 তালিকা আগেই লোড করা আছে"
+            if (n == 0) "All N5 + N4 words and phrases are already loaded • সব আগেই লোড করা আছে"
             else "$n items added • $n টি যোগ হয়েছে"
         )
     }

@@ -86,6 +86,9 @@ fun ManageScreen(
                         Field("Romaji (e.g. mizu)", form.romaji) { v -> vm.updateForm { it.copy(romaji = v) } }
                         Field("English meaning", form.meaning) { v -> vm.updateForm { it.copy(meaning = v) } }
                         Field("বাংলা অর্থ (Bengali meaning)", form.meaningBn) { v -> vm.updateForm { it.copy(meaningBn = v) } }
+                        Field("Example sentence (optional) • উদাহরণ বাক্য", form.example) { v -> vm.updateForm { it.copy(example = v) } }
+                        Field("Sentence in English (optional)", form.exampleEn) { v -> vm.updateForm { it.copy(exampleEn = v) } }
+                        Field("বাক্যের বাংলা অর্থ (optional)", form.exampleBn) { v -> vm.updateForm { it.copy(exampleBn = v) } }
                         Button(onClick = vm::save, modifier = Modifier.fillMaxWidth()) {
                             Text("Save • সেভ করুন")
                         }
@@ -95,7 +98,7 @@ fun ManageScreen(
             item {
                 OutlinedButton(onClick = { vm.preloadN5() }, modifier = Modifier.fillMaxWidth()) {
                     Icon(Icons.Default.Download, null)
-                    Text("  Preload JLPT N5 words • N5 শব্দ লোড করুন")
+                    Text("  Load N5 + N4 words & phrases • N5 + N4 লোড করুন")
                 }
             }
             item {
@@ -156,7 +159,7 @@ private fun WordRow(
     Card(Modifier.fillMaxWidth()) {
         Row(Modifier.padding(start = 12.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f).padding(vertical = 8.dp)) {
-                Text("${v.japanese}  (${v.reading})", fontWeight = FontWeight.Bold)
+                Text("${v.japanese}  (${v.reading})  · ${v.level}", fontWeight = FontWeight.Bold)
                 Text("${v.meaning} • ${v.meaningBn}", style = MaterialTheme.typography.bodyMedium)
                 Text(
                     p?.let { SpacedRepetitionEngine.stageLabel(it.stage, it.isMastered) } ?: "Not started • শুরু হয়নি",

@@ -4,6 +4,9 @@
     <!-- Only needed for the optional "Speak & check" pronunciation feature. -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
+    <!-- Daily study reminder (Android 13+ asks the user). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <!-- The app has no INTERNET permission: everything works offline. -->
 
     <!-- Android 11+ package visibility: let the app find the TTS engine and speech recognizer. -->

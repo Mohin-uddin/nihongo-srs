@@ -1,16 +1,21 @@
 package com.nihongo.srs.ui.home
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.nihongo.srs.NihongoApp
+import com.nihongo.srs.data.AppPrefs
+import com.nihongo.srs.data.VocabEntity
 import com.nihongo.srs.data.VocabRepository
+import com.nihongo.srs.reminder.ReminderScheduler
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
@@ -18,29 +23,62 @@ import kotlinx.coroutines.launch
 
 data class HomeUiState(
     val dueToday: Int = 0,
-    val newWords: Int = 0,
+    val newN5: Int = 0,
+    val newN4: Int = 0,
+    val newMine: Int = 0,
     val learning: Int = 0,
     val mastered: Int = 0,
 )
 
-class HomeViewModel(private val repo: VocabRepository) : ViewModel() {
+data class ReminderUi(val enabled: Boolean, val hour: Int, val minute: Int) {
+    val label: String
+        get() {
+            val h12 = if (hour % 12 == 0) 12 else hour % 12
+            return "%d:%02d %s".format(h12, minute, if (hour < 12) "AM" else "PM")
+        }
+}
+
+class HomeViewModel(
+    private val app: Application,
+    private val repo: VocabRepository,
+    private val prefs: AppPrefs,
+) : ViewModel() {
 
     /** Changes after midnight so "due today" counts stay correct. */
     private val endOfToday = MutableStateFlow(repo.endOfToday())
 
+    private val newCounts = combine(
+        repo.observeNewWordCount("N5"),
+        repo.observeNewWordCount("N4"),
+        repo.observeNewWordCount(VocabEntity.LEVEL_MINE),
+    ) { n5, n4, mine -> Triple(n5, n4, mine) }
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val uiState: StateFlow<HomeUiState> = combine(
         endOfToday.flatMapLatest { repo.observeDueCount(it) },
-        repo.observeNewWordCount(),
+        newCounts,
         repo.observeLearningCount(),
         repo.observeMasteredCount(),
     ) { due, new, learning, mastered ->
-        HomeUiState(due, new, learning, mastered)
+        HomeUiState(due, new.first, new.second, new.third, learning, mastered)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), HomeUiState())
 
+    private val _reminder = MutableStateFlow(
+        ReminderUi(prefs.reminderEnabled, prefs.reminderHour, prefs.reminderMinute)
+    )
+    val reminder: StateFlow<ReminderUi> = _reminder.asStateFlow()
+
+    /** True once: on first launch we ask for notification permission. */
+    val shouldAskNotificationPermission: Boolean
+        get() = !prefs.notificationPermissionAsked
+
+    fun onNotificationPermissionAsked() {
+        prefs.notificationPermissionAsked = true
+    }
+
     init {
-        // First launch: load the bundled N5 words + speaking phrases.
-        viewModelScope.launch { repo.seedIfEmpty() }
+        // First launch / app update: load the bundled N5 + N4 words and phrases.
+        viewModelScope.launch { repo.syncStarterContentIfNeeded() }
     }
 
     /** Call when the Home screen becomes visible again. */
@@ -48,9 +86,20 @@ class HomeViewModel(private val repo: VocabRepository) : ViewModel() {
         endOfToday.value = repo.endOfToday()
     }
 
+    fun setReminder(enabled: Boolean, hour: Int = prefs.reminderHour, minute: Int = prefs.reminderMinute) {
+        prefs.reminderEnabled = enabled
+        prefs.reminderHour = hour
+        prefs.reminderMinute = minute
+        _reminder.value = ReminderUi(enabled, hour, minute)
+        ReminderScheduler.schedule(app, enabled, hour, minute, replace = true)
+    }
+
     companion object {
         val Factory = viewModelFactory {
-            initializer { HomeViewModel((this[APPLICATION_KEY] as NihongoApp).repository) }
+            initializer {
+                val app = this[APPLICATION_KEY] as NihongoApp
+                HomeViewModel(app, app.repository, app.prefs)
+            }
         }
     }
 }
