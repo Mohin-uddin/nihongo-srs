@@ -10,7 +10,7 @@ package com.nihongo.srs.data
 object StarterContent {
 
     /** Bump this when the asset files change so existing installs get the new content. */
-    const val VERSION = 2
+    const val VERSION = 3
 
     const val N5_FILE = "n5.txt"
     const val N4_FILE = "n4.txt"

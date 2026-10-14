@@ -37,7 +37,7 @@ Phone: Android 8.0 (API 26) or newer.
 | Kana | Hiragana and katakana chart with sound, plus a 20-question kana quiz |
 | Reminder | Local notification once a day at a time you choose (default 8 PM) |
 
-Bundled content (in `app/src/main/assets`): 100 N5 words and 106 N4 words, each with an example
+Bundled content (in `app/src/main/assets`): 719 N5 words (the full N5 level) and 106 N4 words, each with an example
 sentence, plus 72 phrases, all in English and Bangla. Edit those text files to add more; bump
 `StarterContent.VERSION` so existing installs pick up the changes.
 

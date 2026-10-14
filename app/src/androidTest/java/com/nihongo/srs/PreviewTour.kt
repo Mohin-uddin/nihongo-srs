@@ -76,7 +76,7 @@ class PreviewTour {
         shell("mkdir -p $DIR")
 
         // Home
-        waitFor("N5\n100 new")
+        waitFor("N5\n")
         shot("home")
         runCatching { node("Daily 25-minute plan").performScrollTo() }
         shot("home_bottom")

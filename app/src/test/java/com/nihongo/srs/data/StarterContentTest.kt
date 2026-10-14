@@ -14,7 +14,7 @@ class StarterContentTest {
     fun wordListsParseCompletely() {
         val n5 = StarterContent.parseWords(asset(StarterContent.N5_FILE), "N5")
         val n4 = StarterContent.parseWords(asset(StarterContent.N4_FILE), "N4")
-        assertTrue("N5 size ${n5.size}", n5.size >= 100)
+        assertTrue("N5 size ${n5.size}", n5.size >= 600)
         assertTrue("N4 size ${n4.size}", n4.size >= 100)
         (n5 + n4).forEach { v ->
             listOf(v.japanese, v.reading, v.romaji, v.meaning, v.meaningBn,

@@ -1,4 +1,4 @@
-# JLPT N5 starter words.
+# JLPT N5 words (full list, about the vocabulary of a first-year course like Minna no Nihongo I).
 # Format: japanese|kana|romaji|English|বাংলা|example (Japanese)|example (kana, words separated by spaces)|example English|example বাংলা
 # Leave romaji empty to generate it from the kana automatically.
 私|わたし|watashi|I, me|আমি|私は学生です。|わたし は がくせい です。|I am a student.|আমি একজন ছাত্র।
@@ -101,3 +101,622 @@
 好き|すき|suki|liked, to like|পছন্দ|私は日本が好きです。|わたし は にほん が すき です。|I like Japan.|আমি জাপান পছন্দ করি।
 元気|げんき|genki|healthy, energetic|ভালো আছি / সুস্থ|お元気ですか。|おげんき です か。|How are you?|আপনি কেমন আছেন?
 忙しい|いそがしい|isogashii|busy|ব্যস্ত|今日は忙しいです。|きょう は いそがしい です。|I'm busy today.|আজ আমি ব্যস্ত।
+私たち|わたしたち|watashitachi|we, us|আমরা|私たちはバングラデシュから来ました。|わたしたち は バングラデシュ から きました。|We came from Bangladesh.|আমরা বাংলাদেশ থেকে এসেছি।
+僕|ぼく|boku|I (male, casual)|আমি (ছেলেরা বলে)|僕は大学生です。|ぼく は だいがくせい です。|I am a university student.|আমি বিশ্ববিদ্যালয়ের ছাত্র।
+皆さん|みなさん|minasan|everyone (polite)|সবাই / আপনারা সবাই|皆さんは日本語が上手です。|みなさん は にほんご が じょうず です。|Everyone is good at Japanese.|আপনারা সবাই জাপানি ভাষায় দক্ষ।
+みんな|みんな|minna|everyone, all|সবাই|みんなで晩ご飯を食べます。|みんな で ばんごはん を たべます。|We all eat dinner together.|আমরা সবাই মিলে রাতের খাবার খাই।
+自分|じぶん|jibun|oneself, myself|নিজে / নিজের|自分で料理を作ります。|じぶん で りょうり を つくります。|I cook by myself.|আমি নিজেই রান্না করি।
+一人|ひとり|hitori|one person, alone|একজন / একা|私は一人で日本へ来ました。|わたし は ひとり で にほん へ きました。|I came to Japan alone.|আমি একা জাপানে এসেছি।
+二人|ふたり|futari|two people|দুজন|二人で映画を見ました。|ふたり で えいが を みました。|The two of us watched a movie.|আমরা দুজনে সিনেমা দেখেছি।
+何人|なんにん|nannin|how many people|কতজন|家族は何人ですか。|かぞく は なんにん です か。|How many people are in your family?|আপনার পরিবারে কতজন আছেন?
+大人|おとな|otona|adult|প্রাপ্তবয়স্ক / বড় মানুষ|大人は千円です。|おとな は せんえん です。|Adults are 1,000 yen.|বড়দের জন্য এক হাজার ইয়েন।
+大勢|おおぜい|oozei|many people, crowd|অনেক মানুষ / ভিড়|駅に人が大勢います。|えき に ひと が おおぜい います。|There are many people at the station.|স্টেশনে অনেক মানুষ আছে।
+方|かた|kata|person (polite)|ব্যক্তি (সম্মানসূচক) / উনি|あの方は先生です。|あの かた は せんせい です。|That person is a teacher.|উনি একজন শিক্ষক।
+だれ|だれ|dare|who|কে|あの人はだれですか。|あの ひと は だれ です か。|Who is that person?|ওই লোকটি কে?
+どなた|どなた|donata|who (polite)|কে (সম্মানসূচক)|あの方はどなたですか。|あの かた は どなた です か。|Who is that gentleman?|উনি কে?
+男の子|おとこのこ|otoko no ko|boy|ছেলে / বালক|公園で男の子が遊んでいます。|こうえん で おとこのこ が あそんで います。|A boy is playing in the park.|পার্কে একটি ছেলে খেলছে।
+女の子|おんなのこ|onna no ko|girl|মেয়ে / বালিকা|あの女の子は私の妹です。|あの おんなのこ は わたし の いもうと です。|That girl is my younger sister.|ওই মেয়েটি আমার ছোট বোন।
+男の人|おとこのひと|otoko no hito|man|পুরুষ / লোক|あの男の人は先生です。|あの おとこのひと は せんせい です。|That man is a teacher.|ওই লোকটি একজন শিক্ষক।
+女の人|おんなのひと|onna no hito|woman|মহিলা|あの女の人はだれですか。|あの おんなのひと は だれ です か。|Who is that woman?|ওই মহিলা কে?
+両親|りょうしん|ryoushin|parents|বাবা-মা|両親はダッカに住んでいます。|りょうしん は ダッカ に すんで います。|My parents live in Dhaka.|আমার বাবা-মা ঢাকায় থাকেন।
+兄弟|きょうだい|kyoudai|siblings, brothers|ভাইবোন|兄弟が何人いますか。|きょうだい が なんにん います か。|How many siblings do you have?|আপনার কয়জন ভাইবোন আছে?
+お父さん|おとうさん|otousan|father, dad (someone's)|বাবা / (অন্যের) বাবা|お父さんのお仕事は何ですか。|おとうさん の おしごと は なん です か。|What is your father's job?|আপনার বাবা কী কাজ করেন?
+お母さん|おかあさん|okaasan|mother, mom (someone's)|মা / (অন্যের) মা|お母さんは料理が上手ですね。|おかあさん は りょうり が じょうず です ね。|Your mother is a good cook.|আপনার মা খুব ভালো রান্না করেন।
+兄|あに|ani|(my) older brother|(আমার) বড় ভাই|兄は銀行で働いています。|あに は ぎんこう で はたらいて います。|My older brother works at a bank.|আমার বড় ভাই ব্যাংকে চাকরি করেন।
+お兄さん|おにいさん|oniisan|(someone's) older brother|(অন্যের) বড় ভাই|お兄さんはおいくつですか。|おにいさん は おいくつ です か。|How old is your older brother?|আপনার বড় ভাইয়ের বয়স কত?
+姉|あね|ane|(my) older sister|(আমার) বড় বোন|姉は大学の先生です。|あね は だいがく の せんせい です。|My older sister is a university teacher.|আমার বড় বোন বিশ্ববিদ্যালয়ের শিক্ষক।
+お姉さん|おねえさん|oneesan|(someone's) older sister|(অন্যের) বড় বোন|お姉さんは結婚していますか。|おねえさん は けっこん して います か。|Is your older sister married?|আপনার বড় বোন কি বিবাহিত?
+弟|おとうと|otouto|(my) younger brother|(আমার) ছোট ভাই|弟は十五歳です。|おとうと は じゅうごさい です。|My younger brother is fifteen.|আমার ছোট ভাইয়ের বয়স পনেরো বছর।
+弟さん|おとうとさん|otoutosan|(someone's) younger brother|(অন্যের) ছোট ভাই|弟さんは何をしていますか。|おとうとさん は なに を して います か。|What does your younger brother do?|আপনার ছোট ভাই কী করে?
+妹|いもうと|imouto|(my) younger sister|(আমার) ছোট বোন|妹はまだ学生です。|いもうと は まだ がくせい です。|My younger sister is still a student.|আমার ছোট বোন এখনো ছাত্রী।
+妹さん|いもうとさん|imoutosan|(someone's) younger sister|(অন্যের) ছোট বোন|妹さんはお元気ですか。|いもうとさん は おげんき です か。|How is your younger sister?|আপনার ছোট বোন কেমন আছে?
+夫|おっと|otto|(my) husband|(আমার) স্বামী|夫は毎朝七時に家を出ます。|おっと は まいあさ しちじ に いえ を でます。|My husband leaves home at seven every morning.|আমার স্বামী প্রতিদিন সকাল সাতটায় বাসা থেকে বের হন।
+妻|つま|tsuma|(my) wife|(আমার) স্ত্রী|妻はバングラデシュ人です。|つま は バングラデシュじん です。|My wife is Bangladeshi.|আমার স্ত্রী বাংলাদেশি।
+ご主人|ごしゅじん|goshujin|(someone's) husband|(অন্যের) স্বামী|ご主人はお元気ですか。|ごしゅじん は おげんき です か。|How is your husband?|আপনার স্বামী কেমন আছেন?
+奥さん|おくさん|okusan|(someone's) wife|(অন্যের) স্ত্রী|奥さんも日本語を話しますか。|おくさん も にほんご を はなします か。|Does your wife speak Japanese too?|আপনার স্ত্রীও কি জাপানি বলেন?
+お子さん|おこさん|okosan|(someone's) child|(অন্যের) সন্তান|お子さんは何人ですか。|おこさん は なんにん です か。|How many children do you have?|আপনার কয়টি সন্তান?
+おじいさん|おじいさん|ojiisan|grandfather, old man|দাদা / নানা / বৃদ্ধ লোক|おじいさんは八十歳です。|おじいさん は はちじゅっさい です。|My grandfather is eighty.|আমার দাদার বয়স আশি বছর।
+おばあさん|おばあさん|obaasan|grandmother, old woman|দাদি / নানি / বৃদ্ধা|おばあさんと一緒に住んでいます。|おばあさん と いっしょ に すんで います。|I live with my grandmother.|আমি দাদির সাথে থাকি।
+おじさん|おじさん|ojisan|uncle, middle-aged man|চাচা / মামা / কাকু|おじさんはチッタゴンに住んでいます。|おじさん は チッタゴン に すんで います。|My uncle lives in Chittagong.|আমার চাচা চট্টগ্রামে থাকেন।
+おばさん|おばさん|obasan|aunt, middle-aged woman|খালা / ফুফু / মামি|おばさんの家へ遊びに行きます。|おばさん の いえ へ あそび に いきます。|I am going to visit my aunt's house.|আমি খালার বাসায় বেড়াতে যাব।
+会社員|かいしゃいん|kaishain|company employee|চাকরিজীবী / কোম্পানির কর্মচারী|兄は会社員です。|あに は かいしゃいん です。|My older brother is a company employee.|আমার বড় ভাই একজন চাকরিজীবী।
+銀行員|ぎんこういん|ginkouin|bank employee|ব্যাংকার / ব্যাংক কর্মচারী|父は銀行員です。|ちち は ぎんこういん です。|My father is a bank employee.|আমার বাবা একজন ব্যাংকার।
+店員|てんいん|ten'in|shop clerk|দোকানের কর্মচারী / বিক্রয়কর্মী|姉はデパートの店員です。|あね は デパート の てんいん です。|My older sister is a department store clerk.|আমার বড় বোন ডিপার্টমেন্ট স্টোরের বিক্রয়কর্মী।
+警察官|けいさつかん|keisatsukan|police officer|পুলিশ অফিসার|駅の前に警察官がいます。|えき の まえ に けいさつかん が います。|There is a police officer in front of the station.|স্টেশনের সামনে একজন পুলিশ অফিসার আছেন।
+お巡りさん|おまわりさん|omawarisan|police officer (friendly)|পুলিশ / পুলিশ মামা|交番にお巡りさんがいます。|こうばん に おまわりさん が います。|There is a police officer at the police box.|পুলিশ বক্সে একজন পুলিশ আছেন।
+エンジニア|エンジニア|enjinia|engineer|ইঞ্জিনিয়ার / প্রকৌশলী|兄はダッカでエンジニアをしています。|あに は ダッカ で エンジニア を して います。|My brother works as an engineer in Dhaka.|আমার ভাই ঢাকায় ইঞ্জিনিয়ার হিসেবে কাজ করেন।
+留学生|りゅうがくせい|ryuugakusei|international student|বিদেশি শিক্ষার্থী|私はバングラデシュから来た留学生です。|わたし は バングラデシュ から きた りゅうがくせい です。|I am an international student from Bangladesh.|আমি বাংলাদেশ থেকে আসা একজন বিদেশি শিক্ষার্থী।
+生徒|せいと|seito|pupil, student|ছাত্র / শিক্ষার্থী (স্কুলের)|このクラスには生徒が二十人います。|この クラス に は せいと が にじゅうにん います。|There are twenty students in this class.|এই ক্লাসে বিশজন শিক্ষার্থী আছে।
+日本人|にほんじん|nihonjin|Japanese person|জাপানি (মানুষ)|会社に日本人が大勢います。|かいしゃ に にほんじん が おおぜい います。|There are many Japanese people at my company.|আমার অফিসে অনেক জাপানি আছেন।
+外国人|がいこくじん|gaikokujin|foreigner|বিদেশি|この町には外国人が多いです。|この まち に は がいこくじん が おおい です。|There are many foreigners in this town.|এই শহরে অনেক বিদেশি আছে।
+外国|がいこく|gaikoku|foreign country, abroad|বিদেশ|来年外国へ行きます。|らいねん がいこく へ いきます。|I am going abroad next year.|আমি আগামী বছর বিদেশে যাব।
+バングラデシュ|バングラデシュ|banguradeshu|Bangladesh|বাংলাদেশ|バングラデシュは夏がとても暑いです。|バングラデシュ は なつ が とても あつい です。|Summer in Bangladesh is very hot.|বাংলাদেশে গ্রীষ্মকাল খুব গরম।
+アメリカ|アメリカ|amerika|America, USA|আমেরিকা / যুক্তরাষ্ট্র|友達はアメリカに住んでいます。|ともだち は アメリカ に すんで います。|My friend lives in America.|আমার বন্ধু আমেরিকায় থাকে।
+イギリス|イギリス|igirisu|UK, Britain|যুক্তরাজ্য / ব্রিটেন|姉はイギリスの大学で勉強しました。|あね は イギリス の だいがく で べんきょう しました。|My older sister studied at a university in the UK.|আমার বড় বোন যুক্তরাজ্যের একটি বিশ্ববিদ্যালয়ে পড়েছেন।
+中国|ちゅうごく|chuugoku|China|চীন|中国は日本の近くにあります。|ちゅうごく は にほん の ちかく に あります。|China is near Japan.|চীন জাপানের কাছে অবস্থিত।
+韓国|かんこく|kankoku|South Korea|দক্ষিণ কোরিয়া|韓国の料理は辛いです。|かんこく の りょうり は からい です。|Korean food is spicy.|কোরিয়ার খাবার ঝাল।
+インド|インド|indo|India|ভারত|インドはバングラデシュの隣の国です。|インド は バングラデシュ の となり の くに です。|India is Bangladesh's neighboring country.|ভারত বাংলাদেশের প্রতিবেশী দেশ।
+フランス|フランス|furansu|France|ফ্রান্স|フランスのパンはおいしいです。|フランス の パン は おいしい です。|French bread is delicious.|ফ্রান্সের রুটি খুব মজার।
+英語|えいご|eigo|English (language)|ইংরেজি|英語を少し話します。|えいご を すこし はなします。|I speak a little English.|আমি একটু ইংরেজি বলি।
+中国語|ちゅうごくご|chuugokugo|Chinese (language)|চীনা ভাষা|中国語は難しいですか。|ちゅうごくご は むずかしい です か。|Is Chinese difficult?|চীনা ভাষা কি কঠিন?
+韓国語|かんこくご|kankokugo|Korean (language)|কোরিয়ান ভাষা|妹は韓国語を勉強しています。|いもうと は かんこくご を べんきょう して います。|My younger sister is studying Korean.|আমার ছোট বোন কোরিয়ান ভাষা শিখছে।
+ベンガル語|ベンガルご|bengarugo|Bengali (language)|বাংলা ভাষা|ベンガル語はバングラデシュの言葉です。|ベンガルご は バングラデシュ の ことば です。|Bengali is the language of Bangladesh.|বাংলা বাংলাদেশের ভাষা।
+言葉|ことば|kotoba|word, language|শব্দ / ভাষা|新しい言葉を毎日覚えます。|あたらしい ことば を まいにち おぼえます。|I memorize new words every day.|আমি প্রতিদিন নতুন শব্দ মুখস্থ করি।
+これ|これ|kore|this (one)|এটা|これは私のかばんです。|これ は わたし の かばん です。|This is my bag.|এটা আমার ব্যাগ।
+それ|それ|sore|that (one near you)|ওটা / সেটা|それは何ですか。|それ は なん です か。|What is that?|ওটা কী?
+あれ|あれ|are|that (one over there)|ওইটা (দূরের)|あれは私の大学です。|あれ は わたし の だいがく です。|That over there is my university.|ওইটা আমার বিশ্ববিদ্যালয়।
+どれ|どれ|dore|which (one)|কোনটা|あなたの傘はどれですか。|あなた の かさ は どれ です か。|Which one is your umbrella?|আপনার ছাতা কোনটা?
+この|この|kono|this ~|এই|この本はおもしろいです。|この ほん は おもしろい です。|This book is interesting.|এই বইটা মজার।
+その|その|sono|that ~ (near you)|সেই / ওই|そのかばんはいくらですか。|その かばん は いくら です か。|How much is that bag?|ওই ব্যাগটার দাম কত?
+あの|あの|ano|that ~ (over there)|ওই (দূরের)|あの建物は病院です。|あの たてもの は びょういん です。|That building over there is a hospital.|ওই দালানটা একটা হাসপাতাল।
+どの|どの|dono|which ~|কোন|どの電車に乗りますか。|どの でんしゃ に のります か。|Which train will you take?|আপনি কোন ট্রেনে উঠবেন?
+ここ|ここ|koko|here|এখানে|ここは私の部屋です。|ここ は わたし の へや です。|This is my room.|এটা আমার ঘর।
+そこ|そこ|soko|there (near you)|সেখানে / ওখানে|そこにかばんを置いてください。|そこ に かばん を おいて ください。|Please put the bag there.|ব্যাগটা ওখানে রাখুন।
+あそこ|あそこ|asoko|over there|ওই যে ওখানে|トイレはあそこです。|トイレ は あそこ です。|The toilet is over there.|টয়লেট ওই যে ওখানে।
+どこ|どこ|doko|where|কোথায়|駅はどこですか。|えき は どこ です か。|Where is the station?|স্টেশন কোথায়?
+こちら|こちら|kochira|this way, this person (polite)|এদিকে / ইনি|こちらは田中さんです。|こちら は たなか さん です。|This is Mr. Tanaka.|ইনি তানাকা সাহেব।
+そちら|そちら|sochira|that way, there (polite)|ওদিকে / ওখানে|そちらは雨ですか。|そちら は あめ です か。|Is it raining where you are?|ওখানে কি বৃষ্টি হচ্ছে?
+あちら|あちら|achira|over there (polite)|ওই দিকে|エレベーターはあちらです。|エレベーター は あちら です。|The elevator is over there.|লিফট ওই দিকে।
+どちら|どちら|dochira|which, where (polite)|কোনটি / কোথায় (সম্মানসূচক)|お国はどちらですか。|おくに は どちら です か。|Which country are you from?|আপনি কোন দেশের?
+こっち|こっち|kocchi|this way, here (casual)|এদিকে|こっちへ来てください。|こっち へ きて ください。|Please come this way.|এদিকে আসুন।
+そっち|そっち|socchi|that way, there (casual)|ওদিকে|今からそっちへ行きます。|いま から そっち へ いきます。|I will go there now.|আমি এখনই ওদিকে আসছি।
+あっち|あっち|acchi|over there (casual)|ওই দিকে|駅はあっちです。|えき は あっち です。|The station is that way.|স্টেশন ওই দিকে।
+どっち|どっち|docchi|which (of two, casual)|কোনটা (দুটোর মধ্যে)|コーヒーと紅茶とどっちが好きですか。|コーヒー と こうちゃ と どっち が すき です か。|Which do you like, coffee or tea?|কফি আর চায়ের মধ্যে আপনার কোনটা পছন্দ?
+こんな|こんな|konna|this kind of, like this|এমন / এ রকম|こんなかばんがほしいです。|こんな かばん が ほしい です。|I want a bag like this.|আমি এ রকম একটা ব্যাগ চাই।
+どんな|どんな|donna|what kind of|কেমন / কী ধরনের|どんな料理が好きですか。|どんな りょうり が すき です か。|What kind of food do you like?|আপনি কী ধরনের খাবার পছন্দ করেন?
+何|なに|nani|what|কী|何を食べますか。|なに を たべます か。|What will you eat?|আপনি কী খাবেন?
+いつ|いつ|itsu|when|কখন / কবে|いつ日本へ来ましたか。|いつ にほん へ きました か。|When did you come to Japan?|আপনি কবে জাপানে এসেছেন?
+いくつ|いくつ|ikutsu|how many, how old|কয়টা / কত বয়স|りんごはいくつありますか。|りんご は いくつ あります か。|How many apples are there?|কয়টা আপেল আছে?
+いくら|いくら|ikura|how much (price)|কত (দাম)|このシャツはいくらですか。|この シャツ は いくら です か。|How much is this shirt?|এই শার্টটার দাম কত?
+どう|どう|dou|how, how about|কেমন|日本の食べ物はどうですか。|にほん の たべもの は どう です か。|How do you find Japanese food?|জাপানের খাবার কেমন লাগছে?
+どうして|どうして|doushite|why|কেন|どうして昨日休みましたか。|どうして きのう やすみました か。|Why were you absent yesterday?|আপনি গতকাল কেন আসেননি?
+どのくらい|どのくらい|donokurai|how long, how much|কতটা / কতক্ষণ|家から駅までどのくらいかかりますか。|いえ から えき まで どのくらい かかります か。|How long does it take from your home to the station?|বাসা থেকে স্টেশনে যেতে কতক্ষণ লাগে?
+何歳|なんさい|nansai|how old|কত বছর বয়স|お子さんは何歳ですか。|おこさん は なんさい です か。|How old is your child?|আপনার সন্তানের বয়স কত?
+そんな|そんな|sonna|that kind of, like that|ওরকম / সে রকম|そんな話は聞きませんでした。|そんな はなし は ききません でした。|I didn't hear anything like that.|আমি ওরকম কোনো কথা শুনিনি।
+あんな|あんな|anna|that kind of (over there)|ওই রকম|あんな大きい家に住みたいです。|あんな おおきい いえ に すみたい です。|I want to live in a big house like that.|আমি ওই রকম বড় একটা বাড়িতে থাকতে চাই।
+何語|なにご|nanigo|what language|কোন ভাষা|ブラジルでは何語を話しますか。|ブラジル で は なにご を はなします か。|What language do they speak in Brazil?|ব্রাজিলে কোন ভাষায় কথা বলে?
+ドイツ|ドイツ|doitsu|Germany|জার্মানি|ドイツの車は高いです。|ドイツ の くるま は たかい です。|German cars are expensive.|জার্মানির গাড়ির দাম বেশি।
+タイ|タイ|tai|Thailand|থাইল্যান্ড|夏休みにタイへ行きました。|なつやすみ に タイ へ いきました。|I went to Thailand during the summer vacation.|গ্রীষ্মের ছুটিতে আমি থাইল্যান্ডে গিয়েছিলাম।
+ゼロ|ゼロ|zero|zero|শূন্য|私の電話番号はゼロから始まります。|わたし の でんわばんごう は ゼロ から はじまります。|My phone number starts with zero.|আমার ফোন নম্বর শূন্য দিয়ে শুরু হয়।
+零|れい|rei|zero|শূন্য|テストは零点でした。|テスト は れいてん でした。|I got zero on the test.|আমি পরীক্ষায় শূন্য পেয়েছি।
+万|まん|man|ten thousand|দশ হাজার|このカメラは三万円です。|この カメラ は さんまんえん です。|This camera is 30,000 yen.|এই ক্যামেরার দাম ৩০,০০০ ইয়েন।
+一つ|ひとつ|hitotsu|one (thing)|একটি|りんごを一つください。|りんご を ひとつ ください。|One apple, please.|একটা আপেল দিন।
+二つ|ふたつ|futatsu|two (things)|দুটি|卵を二つ買いました。|たまご を ふたつ かいました。|I bought two eggs.|আমি দুটো ডিম কিনেছি।
+三つ|みっつ|mittsu|three (things)|তিনটি|かばんが三つあります。|かばん が みっつ あります。|There are three bags.|তিনটা ব্যাগ আছে।
+四つ|よっつ|yottsu|four (things)|চারটি|箱の中にみかんが四つあります。|はこ の なか に みかん が よっつ あります。|There are four oranges in the box.|বাক্সের মধ্যে চারটা কমলা আছে।
+五つ|いつつ|itsutsu|five (things)|পাঁচটি|ケーキを五つ買いました。|ケーキ を いつつ かいました。|I bought five cakes.|আমি পাঁচটা কেক কিনেছি।
+六つ|むっつ|muttsu|six (things)|ছয়টি|この部屋には窓が六つあります。|この へや に は まど が むっつ あります。|This room has six windows.|এই ঘরে ছয়টা জানালা আছে।
+七つ|ななつ|nanatsu|seven (things)|সাতটি|机の上にコップが七つあります。|つくえ の うえ に コップ が ななつ あります。|There are seven cups on the desk.|টেবিলের উপর সাতটা কাপ আছে।
+八つ|やっつ|yattsu|eight (things)|আটটি|あめを八つもらいました。|あめ を やっつ もらいました。|I got eight candies.|আমি আটটা লজেন্স পেয়েছি।
+九つ|ここのつ|kokonotsu|nine (things)|নয়টি|いすが九つあります。|いす が ここのつ あります。|There are nine chairs.|নয়টা চেয়ার আছে।
+一枚|いちまい|ichimai|one (flat thing)|একটি (কাগজ ইত্যাদি)|紙を一枚ください。|かみ を いちまい ください。|One sheet of paper, please.|একটা কাগজ দিন।
+何枚|なんまい|nanmai|how many (flat things)|কয়টি (কাগজ, টিকিট ইত্যাদি)|切手を何枚買いますか。|きって を なんまい かいます か。|How many stamps will you buy?|আপনি কয়টা ডাকটিকিট কিনবেন?
+一台|いちだい|ichidai|one (machine, vehicle)|একটি (গাড়ি, যন্ত্র)|家に車が一台あります。|うち に くるま が いちだい あります。|We have one car at home.|আমাদের বাড়িতে একটা গাড়ি আছে।
+何台|なんだい|nandai|how many (machines)|কয়টি (গাড়ি, যন্ত্র)|パソコンは何台ありますか。|パソコン は なんだい あります か。|How many computers are there?|কয়টা কম্পিউটার আছে?
+一本|いっぽん|ippon|one (long thin thing)|একটি (লম্বা জিনিস)|ペンを一本貸してください。|ペン を いっぽん かして ください。|Please lend me a pen.|আমাকে একটা কলম ধার দিন।
+三本|さんぼん|sanbon|three (long thin things)|তিনটি (লম্বা জিনিস)|水を三本買いました。|みず を さんぼん かいました。|I bought three bottles of water.|আমি তিন বোতল পানি কিনেছি।
+六本|ろっぽん|roppon|six (long thin things)|ছয়টি (লম্বা জিনিস)|鉛筆を六本持っています。|えんぴつ を ろっぽん もって います。|I have six pencils.|আমার কাছে ছয়টা পেন্সিল আছে।
+何本|なんぼん|nanbon|how many (long things)|কয়টি (লম্বা জিনিস)|傘は何本ありますか。|かさ は なんぼん あります か。|How many umbrellas are there?|কয়টা ছাতা আছে?
+一冊|いっさつ|issatsu|one (book)|একটি (বই)|図書館で本を一冊借りました。|としょかん で ほん を いっさつ かりました。|I borrowed one book from the library.|আমি লাইব্রেরি থেকে একটা বই ধার নিয়েছি।
+何冊|なんさつ|nansatsu|how many (books)|কয়টি (বই)|かばんに本が何冊ありますか。|かばん に ほん が なんさつ あります か。|How many books are in your bag?|ব্যাগে কয়টা বই আছে?
+一回|いっかい|ikkai|once, one time|একবার|私は週に一回プールへ行きます。|わたし は しゅう に いっかい プール へ いきます。|I go to the pool once a week.|আমি সপ্তাহে একবার সুইমিং পুলে যাই।
+何回|なんかい|nankai|how many times|কতবার|日本へ何回来ましたか。|にほん へ なんかい きました か。|How many times have you come to Japan?|আপনি কতবার জাপানে এসেছেন?
+一階|いっかい|ikkai|first floor|নিচতলা / এক তলা|トイレは一階にあります。|トイレ は いっかい に あります。|The toilet is on the first floor.|টয়লেট নিচতলায়।
+三階|さんがい|sangai|third floor|তিন তলা|私の部屋は三階です。|わたし の へや は さんがい です。|My room is on the third floor.|আমার ঘর তিন তলায়।
+何階|なんがい|nangai|which floor|কত তলা|事務所は何階ですか。|じむしょ は なんがい です か。|Which floor is the office on?|অফিস কত তলায়?
+一歳|いっさい|issai|one year old|এক বছর বয়স|妹の子供は一歳です。|いもうと の こども は いっさい です。|My younger sister's child is one year old.|আমার ছোট বোনের বাচ্চার বয়স এক বছর।
+二十歳|はたち|hatachi|twenty years old|বিশ বছর বয়স|私は二十歳です。|わたし は はたち です。|I am twenty years old.|আমার বয়স বিশ বছর।
+一分|いっぷん|ippun|one minute|এক মিনিট|駅まで一分です。|えき まで いっぷん です。|It's one minute to the station.|স্টেশন পর্যন্ত এক মিনিট লাগে।
+三分|さんぷん|sanpun|three minutes|তিন মিনিট|お湯を入れて三分待ちます。|おゆ を いれて さんぷん まちます。|Add hot water and wait three minutes.|গরম পানি দিয়ে তিন মিনিট অপেক্ষা করুন।
+十分|じゅっぷん|juppun|ten minutes|দশ মিনিট|家から駅まで歩いて十分です。|うち から えき まで あるいて じゅっぷん です。|It's a ten-minute walk from my house to the station.|বাসা থেকে স্টেশন হেঁটে দশ মিনিট।
+何分|なんぷん|nanpun|how many minutes|কত মিনিট|駅までバスで何分かかりますか。|えき まで バス で なんぷん かかります か。|How many minutes does it take to the station by bus?|বাসে স্টেশনে যেতে কত মিনিট লাগে?
+一時|いちじ|ichiji|one o'clock|একটা বাজে|昼休みは一時までです。|ひるやすみ は いちじ まで です。|Lunch break is until one o'clock.|দুপুরের বিরতি একটা পর্যন্ত।
+四時|よじ|yoji|four o'clock|চারটা|仕事は四時に終わります。|しごと は よじ に おわります。|Work ends at four o'clock.|কাজ চারটায় শেষ হয়।
+七時|しちじ|shichiji|seven o'clock|সাতটা|毎朝七時に起きます。|まいあさ しちじ に おきます。|I get up at seven every morning.|আমি প্রতিদিন সকাল সাতটায় ঘুম থেকে উঠি।
+九時|くじ|kuji|nine o'clock|নয়টা|銀行は九時からです。|ぎんこう は くじ から です。|The bank opens at nine.|ব্যাংক নয়টা থেকে খোলে।
+何時|なんじ|nanji|what time|কয়টা|今何時ですか。|いま なんじ です か。|What time is it now?|এখন কয়টা বাজে?
+一番|いちばん|ichiban|number one, most|এক নম্বর / সবচেয়ে|私は果物の中でマンゴーが一番好きです。|わたし は くだもの の なか で マンゴー が いちばん すき です。|I like mangoes best of all fruits.|সব ফলের মধ্যে আমি আম সবচেয়ে বেশি পছন্দ করি।
+何番|なんばん|nanban|what number|কত নম্বর|電話番号は何番ですか。|でんわばんごう は なんばん です か。|What is your phone number?|আপনার ফোন নম্বর কত?
+月曜日|げつようび|getsuyoubi|Monday|সোমবার|月曜日から仕事です。|げつようび から しごと です。|Work starts on Monday.|সোমবার থেকে কাজ শুরু।
+火曜日|かようび|kayoubi|Tuesday|মঙ্গলবার|火曜日に日本語のクラスがあります。|かようび に にほんご の クラス が あります。|I have Japanese class on Tuesday.|মঙ্গলবার আমার জাপানি ক্লাস আছে।
+水曜日|すいようび|suiyoubi|Wednesday|বুধবার|水曜日は休みです。|すいようび は やすみ です。|Wednesday is a day off.|বুধবার ছুটি।
+木曜日|もくようび|mokuyoubi|Thursday|বৃহস্পতিবার|木曜日に友達に会います。|もくようび に ともだち に あいます。|I will meet a friend on Thursday.|বৃহস্পতিবার আমি বন্ধুর সাথে দেখা করব।
+金曜日|きんようび|kin'youbi|Friday|শুক্রবার|バングラデシュでは金曜日が休みです。|バングラデシュ で は きんようび が やすみ です。|In Bangladesh, Friday is a holiday.|বাংলাদেশে শুক্রবার ছুটির দিন।
+土曜日|どようび|doyoubi|Saturday|শনিবার|土曜日に買い物に行きます。|どようび に かいもの に いきます。|I go shopping on Saturday.|আমি শনিবার কেনাকাটা করতে যাই।
+日曜日|にちようび|nichiyoubi|Sunday|রবিবার|日曜日は家で休みます。|にちようび は うち で やすみます。|On Sunday I rest at home.|রবিবার আমি বাসায় বিশ্রাম নিই।
+何曜日|なんようび|nan'youbi|what day of the week|কী বার|今日は何曜日ですか。|きょう は なんようび です か。|What day is it today?|আজ কী বার?
+一月|いちがつ|ichigatsu|January|জানুয়ারি|一月はとても寒いです。|いちがつ は とても さむい です。|January is very cold.|জানুয়ারিতে খুব ঠান্ডা।
+四月|しがつ|shigatsu|April|এপ্রিল|日本の学校は四月に始まります。|にほん の がっこう は しがつ に はじまります。|Japanese schools start in April.|জাপানের স্কুল এপ্রিলে শুরু হয়।
+七月|しちがつ|shichigatsu|July|জুলাই|七月に国へ帰ります。|しちがつ に くに へ かえります。|I'll go back to my country in July.|আমি জুলাইয়ে দেশে ফিরব।
+九月|くがつ|kugatsu|September|সেপ্টেম্বর|九月に日本へ来ました。|くがつ に にほん へ きました。|I came to Japan in September.|আমি সেপ্টেম্বরে জাপানে এসেছি।
+十二月|じゅうにがつ|juunigatsu|December|ডিসেম্বর|十二月は忙しいです。|じゅうにがつ は いそがしい です。|December is busy.|ডিসেম্বর মাসে খুব ব্যস্ততা থাকে।
+何月|なんがつ|nangatsu|what month|কোন মাস|誕生日は何月ですか。|たんじょうび は なんがつ です か。|What month is your birthday?|আপনার জন্মদিন কোন মাসে?
+一日|ついたち|tsuitachi|first day of the month|মাসের ১ তারিখ|四月一日に会社に入りました。|しがつ ついたち に かいしゃ に はいりました。|I joined the company on April 1st.|আমি ১ এপ্রিল কোম্পানিতে যোগ দিয়েছি।
+二日|ふつか|futsuka|2nd (day), two days|২ তারিখ / দুই দিন|五月二日は休みです。|ごがつ ふつか は やすみ です。|May 2nd is a day off.|২ মে ছুটির দিন।
+三日|みっか|mikka|3rd (day), three days|৩ তারিখ / তিন দিন|風邪で三日休みました。|かぜ で みっか やすみました。|I was off for three days with a cold.|সর্দিতে আমি তিন দিন ছুটি নিয়েছি।
+四日|よっか|yokka|4th (day), four days|৪ তারিখ / চার দিন|テストは七月四日です。|テスト は しちがつ よっか です。|The test is on July 4th.|পরীক্ষা ৪ জুলাই।
+五日|いつか|itsuka|5th (day), five days|৫ তারিখ / পাঁচ দিন|給料は毎月五日です。|きゅうりょう は まいつき いつか です。|Payday is the 5th of every month.|প্রতি মাসের ৫ তারিখে বেতন হয়।
+六日|むいか|muika|6th (day), six days|৬ তারিখ / ছয় দিন|六日に友達が来ます。|むいか に ともだち が きます。|A friend is coming on the 6th.|৬ তারিখে আমার বন্ধু আসবে।
+七日|なのか|nanoka|7th (day), seven days|৭ তারিখ / সাত দিন|七日に国から母が来ます。|なのか に くに から はは が きます。|My mother is coming from my country on the 7th.|৭ তারিখে দেশ থেকে মা আসবেন।
+八日|ようか|youka|8th (day), eight days|৮ তারিখ / আট দিন|八日は仕事が休みです。|ようか は しごと が やすみ です。|I have the 8th off work.|৮ তারিখে আমার কাজের ছুটি।
+九日|ここのか|kokonoka|9th (day), nine days|৯ তারিখ / নয় দিন|九日に病院へ行きます。|ここのか に びょういん へ いきます。|I'll go to the hospital on the 9th.|৯ তারিখে আমি হাসপাতালে যাব।
+十日|とおか|tooka|10th (day), ten days|১০ তারিখ / দশ দিন|十日に日本語の試験があります。|とおか に にほんご の しけん が あります。|There is a Japanese exam on the 10th.|১০ তারিখে জাপানি পরীক্ষা আছে।
+十四日|じゅうよっか|juuyokka|14th (day), fourteen days|১৪ তারিখ / চৌদ্দ দিন|会議は十四日です。|かいぎ は じゅうよっか です。|The meeting is on the 14th.|মিটিং ১৪ তারিখে।
+二十日|はつか|hatsuka|20th (day), twenty days|২০ তারিখ / বিশ দিন|二十日にパーティーがあります。|はつか に パーティー が あります。|There's a party on the 20th.|২০ তারিখে একটা পার্টি আছে।
+二十四日|にじゅうよっか|nijuuyokka|24th (day), 24 days|২৪ তারিখ / চব্বিশ দিন|十二月二十四日に友達と食事をします。|じゅうにがつ にじゅうよっか に ともだち と しょくじ を します。|I'll have a meal with friends on December 24th.|২৪ ডিসেম্বর আমি বন্ধুদের সাথে খাওয়াদাওয়া করব।
+何日|なんにち|nannichi|what date, how many days|কত তারিখ / কত দিন|今日は何日ですか。|きょう は なんにち です か。|What's the date today?|আজ কত তারিখ?
+午前|ごぜん|gozen|morning, a.m.|সকাল / পূর্বাহ্ন|午前九時に会社へ行きます。|ごぜん くじ に かいしゃ へ いきます。|I go to the office at 9 a.m.|আমি সকাল নয়টায় অফিসে যাই।
+午後|ごご|gogo|afternoon, p.m.|বিকাল / অপরাহ্ন|午後三時に会議があります。|ごご さんじ に かいぎ が あります。|There's a meeting at 3 p.m.|বিকাল তিনটায় মিটিং আছে।
+今朝|けさ|kesa|this morning|আজ সকালে|今朝パンを食べました。|けさ パン を たべました。|I ate bread this morning.|আজ সকালে আমি রুটি খেয়েছি।
+今晩|こんばん|konban|this evening, tonight|আজ সন্ধ্যায় / আজ রাতে|今晩何をしますか。|こんばん なに を します か。|What will you do tonight?|আজ রাতে আপনি কী করবেন?
+夕方|ゆうがた|yuugata|evening|সন্ধ্যা / বিকেল|夕方六時に家へ帰ります。|ゆうがた ろくじ に うち へ かえります。|I go home at six in the evening.|আমি সন্ধ্যা ছয়টায় বাসায় ফিরি।
+先週|せんしゅう|senshuu|last week|গত সপ্তাহ|先週京都へ行きました。|せんしゅう きょうと へ いきました。|I went to Kyoto last week.|আমি গত সপ্তাহে কিয়োটো গিয়েছিলাম।
+来週|らいしゅう|raishuu|next week|আগামী সপ্তাহ|来週テストがあります。|らいしゅう テスト が あります。|There's a test next week.|আগামী সপ্তাহে পরীক্ষা আছে।
+今週|こんしゅう|konshuu|this week|এই সপ্তাহ|今週はとても忙しいです。|こんしゅう は とても いそがしい です。|I'm very busy this week.|এই সপ্তাহে আমি খুব ব্যস্ত।
+毎週|まいしゅう|maishuu|every week|প্রতি সপ্তাহ|毎週日曜日に掃除をします。|まいしゅう にちようび に そうじ を します。|I clean every Sunday.|আমি প্রতি রবিবার ঘর পরিষ্কার করি।
+先月|せんげつ|sengetsu|last month|গত মাস|先月日本へ来ました。|せんげつ にほん へ きました。|I came to Japan last month.|আমি গত মাসে জাপানে এসেছি।
+来月|らいげつ|raigetsu|next month|আগামী মাস|来月国へ帰ります。|らいげつ くに へ かえります。|I'm going back home next month.|আমি আগামী মাসে দেশে ফিরব।
+今月|こんげつ|kongetsu|this month|এই মাস|今月は休みが少ないです。|こんげつ は やすみ が すくない です。|There are few days off this month.|এই মাসে ছুটি কম।
+毎月|まいつき|maitsuki|every month|প্রতি মাস|毎月国の家族にお金を送ります。|まいつき くに の かぞく に おかね を おくります。|I send money to my family back home every month.|আমি প্রতি মাসে দেশে পরিবারের কাছে টাকা পাঠাই।
+去年|きょねん|kyonen|last year|গত বছর|去年日本語の勉強を始めました。|きょねん にほんご の べんきょう を はじめました。|I started studying Japanese last year.|আমি গত বছর জাপানি শেখা শুরু করেছি।
+来年|らいねん|rainen|next year|আগামী বছর|来年日本へ行きます。|らいねん にほん へ いきます。|I'm going to Japan next year.|আমি আগামী বছর জাপানে যাব।
+今年|ことし|kotoshi|this year|এই বছর|今年の夏はとても暑いです。|ことし の なつ は とても あつい です。|This summer is very hot.|এ বছরের গ্রীষ্ম খুব গরম।
+毎年|まいとし|maitoshi|every year|প্রতি বছর|毎年夏に国へ帰ります。|まいとし なつ に くに へ かえります。|Every year I go back home in summer.|আমি প্রতি বছর গ্রীষ্মে দেশে যাই।
+毎朝|まいあさ|maiasa|every morning|প্রতিদিন সকালে|毎朝コーヒーを飲みます。|まいあさ コーヒー を のみます。|I drink coffee every morning.|আমি প্রতিদিন সকালে কফি খাই।
+毎晩|まいばん|maiban|every night|প্রতি রাতে|毎晩十一時に寝ます。|まいばん じゅういちじ に ねます。|I go to bed at eleven every night.|আমি প্রতি রাতে এগারোটায় ঘুমাই।
+一昨日|おととい|ototoi|the day before yesterday|গত পরশু|一昨日雨が降りました。|おととい あめ が ふりました。|It rained the day before yesterday.|গত পরশু বৃষ্টি হয়েছিল।
+明後日|あさって|asatte|the day after tomorrow|আগামী পরশু|明後日友達が来ます。|あさって ともだち が きます。|A friend is coming the day after tomorrow.|আগামী পরশু আমার বন্ধু আসবে।
+半|はん|han|half, half past|অর্ধেক / সাড়ে|毎朝六時半に起きます。|まいあさ ろくじ はん に おきます。|I get up at 6:30 every morning.|আমি প্রতিদিন সকাল সাড়ে ছয়টায় উঠি।
+ごろ|ごろ|goro|about (time), around|প্রায় / -র দিকে|十時ごろ寝ます。|じゅうじ ごろ ねます。|I go to bed around ten.|আমি দশটার দিকে ঘুমাই।
+誕生日|たんじょうび|tanjoubi|birthday|জন্মদিন|私の誕生日は五月八日です。|わたし の たんじょうび は ごがつ ようか です。|My birthday is May 8th.|আমার জন্মদিন ৮ মে।
+夏休み|なつやすみ|natsuyasumi|summer vacation|গ্রীষ্মের ছুটি|夏休みに北海道へ行きます。|なつやすみ に ほっかいどう へ いきます。|I'll go to Hokkaido during summer vacation.|গ্রীষ্মের ছুটিতে আমি হোক্কাইডো যাব।
+時計|とけい|tokei|clock, watch|ঘড়ি|この時計は父にもらいました。|この とけい は ちち に もらいました。|I got this watch from my father.|এই ঘড়িটা আমি বাবার কাছ থেকে পেয়েছি।
+春|はる|haru|spring|বসন্ত / বসন্তকাল|日本の春は桜がきれいです。|にほん の はる は さくら が きれい です。|Cherry blossoms are beautiful in Japan's spring.|জাপানে বসন্তকালে চেরি ফুল খুব সুন্দর।
+夏|なつ|natsu|summer|গ্রীষ্ম / গরমকাল|バングラデシュの夏はとても暑いです。|バングラデシュ の なつ は とても あつい です。|Summer in Bangladesh is very hot.|বাংলাদেশে গ্রীষ্মকালে খুব গরম পড়ে।
+秋|あき|aki|autumn, fall|শরৎ / শরৎকাল|秋は涼しいです。|あき は すずしい です。|Autumn is cool.|শরৎকালে আবহাওয়া ঠান্ডা ও আরামদায়ক।
+冬|ふゆ|fuyu|winter|শীত / শীতকাল|冬は北海道で雪がたくさん降ります。|ふゆ は ほっかいどう で ゆき が たくさん ふります。|In winter it snows a lot in Hokkaido.|শীতকালে হোক্কাইডোতে প্রচুর তুষার পড়ে।
+晩|ばん|ban|evening, night|সন্ধ্যা / রাত|朝から晩まで働きます。|あさ から ばん まで はたらきます。|I work from morning till night.|আমি সকাল থেকে রাত পর্যন্ত কাজ করি।
+今夜|こんや|kon'ya|tonight|আজ রাত|今夜は月がきれいです。|こんや は つき が きれい です。|The moon is beautiful tonight.|আজ রাতে চাঁদটা খুব সুন্দর।
+一週間|いっしゅうかん|isshuukan|one week|এক সপ্তাহ|一週間大阪にいました。|いっしゅうかん おおさか に いました。|I was in Osaka for a week.|আমি এক সপ্তাহ ওসাকায় ছিলাম।
+一か月|いっかげつ|ikkagetsu|one month|এক মাস|一か月日本語を勉強しました。|いっかげつ にほんご を べんきょう しました。|I studied Japanese for one month.|আমি এক মাস জাপানি পড়েছি।
+何年|なんねん|nannen|what year, how many years|কোন সাল / কত বছর|日本に何年いますか。|にほん に なんねん います か。|How many years have you been in Japan?|আপনি কত বছর ধরে জাপানে আছেন?
+昼休み|ひるやすみ|hiruyasumi|lunch break|দুপুরের বিরতি|昼休みは十二時からです。|ひるやすみ は じゅうにじ から です。|Lunch break starts at twelve.|দুপুরের বিরতি বারোটা থেকে।
+何時間|なんじかん|nanjikan|how many hours|কত ঘণ্টা|毎日何時間寝ますか。|まいにち なんじかん ねます か。|How many hours do you sleep every day?|আপনি প্রতিদিন কত ঘণ্টা ঘুমান?
+銀行|ぎんこう|ginkou|bank|ব্যাংক|銀行でお金を出します。|ぎんこう で おかね を だします。|I take out money at the bank.|আমি ব্যাংক থেকে টাকা তুলি।
+郵便局|ゆうびんきょく|yuubinkyoku|post office|ডাকঘর / পোস্ট অফিস|郵便局で切手を買います。|ゆうびんきょく で きって を かいます。|I buy stamps at the post office.|আমি পোস্ট অফিস থেকে ডাকটিকিট কিনি।
+図書館|としょかん|toshokan|library|লাইব্রেরি / গ্রন্থাগার|図書館で本を読みます。|としょかん で ほん を よみます。|I read books at the library.|আমি লাইব্রেরিতে বই পড়ি।
+大学|だいがく|daigaku|university|বিশ্ববিদ্যালয়|兄は大学の学生です。|あに は だいがく の がくせい です。|My older brother is a university student.|আমার বড় ভাই বিশ্ববিদ্যালয়ের ছাত্র।
+映画館|えいがかん|eigakan|movie theater|সিনেমা হল|日曜日に映画館へ行きます。|にちようび に えいがかん へ いきます。|I go to the movie theater on Sunday.|আমি রবিবারে সিনেমা হলে যাই।
+公園|こうえん|kouen|park|পার্ক / উদ্যান|子供たちは公園で遊んでいます。|こどもたち は こうえん で あそんで います。|The children are playing in the park.|বাচ্চারা পার্কে খেলছে।
+喫茶店|きっさてん|kissaten|coffee shop, cafe|ক্যাফে / চায়ের দোকান|喫茶店でコーヒーを飲みました。|きっさてん で コーヒー を のみました。|I drank coffee at a cafe.|আমি ক্যাফেতে কফি খেয়েছি।
+食堂|しょくどう|shokudou|cafeteria, dining hall|ক্যান্টিন / খাবারের ঘর|昼ご飯は会社の食堂で食べます。|ひるごはん は かいしゃ の しょくどう で たべます。|I eat lunch in the company cafeteria.|আমি অফিসের ক্যান্টিনে দুপুরের খাবার খাই।
+大使館|たいしかん|taishikan|embassy|দূতাবাস|バングラデシュ大使館は東京にあります。|バングラデシュ たいしかん は とうきょう に あります。|The Bangladesh embassy is in Tokyo.|বাংলাদেশ দূতাবাস টোকিওতে আছে।
+交番|こうばん|kouban|police box|পুলিশ বক্স / পুলিশ চৌকি|交番で道を聞きました。|こうばん で みち を ききました。|I asked the way at the police box.|আমি পুলিশ বক্সে রাস্তা জিজ্ঞেস করেছি।
+町|まち|machi|town|শহর / নগর|私の町は小さいです。|わたし の まち は ちいさい です。|My town is small.|আমার শহরটা ছোট।
+村|むら|mura|village|গ্রাম|両親は村に住んでいます。|りょうしん は むら に すんで います。|My parents live in a village.|আমার বাবা-মা গ্রামে থাকেন।
+建物|たてもの|tatemono|building|ভবন / দালান|あの白い建物は病院です。|あの しろい たてもの は びょういん です。|That white building is a hospital.|ওই সাদা ভবনটা একটা হাসপাতাল।
+庭|にわ|niwa|garden, yard|বাগান / উঠান|庭に花があります。|にわ に はな が あります。|There are flowers in the garden.|বাগানে ফুল আছে।
+教室|きょうしつ|kyoushitsu|classroom|শ্রেণিকক্ষ / ক্লাসরুম|教室に学生が二十人います。|きょうしつ に がくせい が にじゅうにん います。|There are twenty students in the classroom.|ক্লাসরুমে বিশজন ছাত্র আছে।
+玄関|げんかん|genkan|entrance, front door|প্রবেশপথ / সদর দরজা|玄関で靴を脱ぎます。|げんかん で くつ を ぬぎます。|I take off my shoes at the entrance.|আমি প্রবেশপথে জুতা খুলি।
+門|もん|mon|gate|ফটক / গেট|学校の門の前で待っています。|がっこう の もん の まえ で まって います。|I am waiting in front of the school gate.|আমি স্কুলের গেটের সামনে অপেক্ষা করছি।
+階段|かいだん|kaidan|stairs|সিঁড়ি|階段で二階へ行きます。|かいだん で にかい へ いきます。|I take the stairs to the second floor.|আমি সিঁড়ি দিয়ে দোতলায় যাই।
+エレベーター|エレベーター|erebeetaa|elevator|লিফট|エレベーターはあちらです。|エレベーター は あちら です。|The elevator is over there.|লিফট ওই দিকে।
+デパート|デパート|depaato|department store|ডিপার্টমেন্ট স্টোর|デパートでかばんを買いました。|デパート で かばん を かいました。|I bought a bag at the department store.|আমি ডিপার্টমেন্ট স্টোর থেকে একটা ব্যাগ কিনেছি।
+スーパー|スーパー|suupaa|supermarket|সুপারমার্কেট|スーパーで野菜を買います。|スーパー で やさい を かいます。|I buy vegetables at the supermarket.|আমি সুপারমার্কেট থেকে সবজি কিনি।
+レストラン|レストラン|resutoran|restaurant|রেস্তোরাঁ|駅の近くのレストランで晩ご飯を食べました。|えき の ちかく の レストラン で ばんごはん を たべました。|I ate dinner at a restaurant near the station.|আমি স্টেশনের কাছের একটা রেস্তোরাঁয় রাতের খাবার খেয়েছি।
+ホテル|ホテル|hoteru|hotel|হোটেল|このホテルは高いです。|この ホテル は たかい です。|This hotel is expensive.|এই হোটেলটা দামি।
+プール|プール|puuru|swimming pool|সুইমিং পুল|夏はプールで泳ぎます。|なつ は プール で およぎます。|In summer I swim in the pool.|গ্রীষ্মকালে আমি সুইমিং পুলে সাঁতার কাটি।
+池|いけ|ike|pond|পুকুর|公園の池に魚がいます。|こうえん の いけ に さかな が います。|There are fish in the park pond.|পার্কের পুকুরে মাছ আছে।
+川|かわ|kawa|river|নদী|バングラデシュには川がたくさんあります。|バングラデシュ に は かわ が たくさん あります。|There are many rivers in Bangladesh.|বাংলাদেশে অনেক নদী আছে।
+山|やま|yama|mountain|পাহাড় / পর্বত|日本で一番高い山は富士山です。|にほん で いちばん たかい やま は ふじさん です。|The highest mountain in Japan is Mt. Fuji.|জাপানের সবচেয়ে উঁচু পর্বত হলো ফুজি পর্বত।
+海|うみ|umi|sea, ocean|সমুদ্র / সাগর|コックスバザールで海を見ました。|コックスバザール で うみ を みました。|I saw the sea at Cox's Bazar.|আমি কক্সবাজারে সমুদ্র দেখেছি।
+空|そら|sora|sky|আকাশ|今日は空がきれいです。|きょう は そら が きれい です。|The sky is beautiful today.|আজ আকাশটা খুব সুন্দর।
+島|しま|shima|island|দ্বীপ|日本は島の国です。|にほん は しま の くに です。|Japan is an island country.|জাপান একটি দ্বীপের দেশ।
+寺|てら|tera|temple|বৌদ্ধ মন্দির|京都で古いお寺を見ました。|きょうと で ふるい おてら を みました。|I saw an old temple in Kyoto.|আমি কিয়োতোতে একটা পুরোনো বৌদ্ধ মন্দির দেখেছি।
+本屋|ほんや|hon'ya|bookstore|বইয়ের দোকান|駅の前に本屋があります。|えき の まえ に ほんや が あります。|There is a bookstore in front of the station.|স্টেশনের সামনে একটা বইয়ের দোকান আছে।
+八百屋|やおや|yaoya|greengrocer|সবজির দোকান|八百屋でトマトを買いました。|やおや で トマト を かいました。|I bought tomatoes at the greengrocer.|আমি সবজির দোকান থেকে টমেটো কিনেছি।
+動物園|どうぶつえん|doubutsuen|zoo|চিড়িয়াখানা|子供と動物園へ行きました。|こども と どうぶつえん へ いきました。|I went to the zoo with my child.|আমি বাচ্চাকে নিয়ে চিড়িয়াখানায় গিয়েছিলাম।
+事務所|じむしょ|jimusho|office|অফিস / কার্যালয়|事務所は三階にあります。|じむしょ は さんがい に あります。|The office is on the third floor.|অফিসটা তিনতলায়।
+所|ところ|tokoro|place|জায়গা / স্থান|静かな所に住みたいです。|しずかな ところ に すみたい です。|I want to live in a quiet place.|আমি একটা নিরিবিলি জায়গায় থাকতে চাই।
+入口|いりぐち|iriguchi|entrance|প্রবেশপথ / ঢোকার পথ|デパートの入口で待っています。|デパート の いりぐち で まって います。|I am waiting at the department store entrance.|আমি ডিপার্টমেন্ট স্টোরের ঢোকার পথে অপেক্ষা করছি।
+出口|でぐち|deguchi|exit|বের হওয়ার পথ / প্রস্থানপথ|出口はどこですか。|でぐち は どこ です か。|Where is the exit?|বের হওয়ার পথ কোথায়?
+廊下|ろうか|rouka|hallway, corridor|করিডোর / বারান্দা|廊下を走らないでください。|ろうか を はしらないで ください。|Please do not run in the hallway.|দয়া করে করিডোরে দৌড়াবেন না।
+お手洗い|おてあらい|otearai|restroom, toilet|শৌচাগার / টয়লেট|お手洗いは二階にあります。|おてあらい は にかい に あります。|The restroom is on the second floor.|টয়লেট দোতলায়।
+ポスト|ポスト|posuto|mailbox, postbox|ডাকবাক্স|手紙をポストに入れました。|てがみ を ポスト に いれました。|I put the letter in the mailbox.|আমি চিঠিটা ডাকবাক্সে ফেলেছি।
+ビル|ビル|biru|building (tall)|বিল্ডিং / উঁচু দালান|駅の前に高いビルがあります。|えき の まえ に たかい ビル が あります。|There is a tall building in front of the station.|স্টেশনের সামনে একটা উঁচু বিল্ডিং আছে।
+アパート|アパート|apaato|apartment|ফ্ল্যাট / অ্যাপার্টমেন্ট|私は小さいアパートに住んでいます。|わたし は ちいさい アパート に すんで います。|I live in a small apartment.|আমি একটা ছোট ফ্ল্যাটে থাকি।
+上|うえ|ue|on, above, top|উপরে / উপর|机の上に本があります。|つくえ の うえ に ほん が あります。|There is a book on the desk.|টেবিলের উপর একটা বই আছে।
+下|した|shita|under, below|নিচে / নিচ|椅子の下に猫がいます。|いす の した に ねこ が います。|There is a cat under the chair.|চেয়ারের নিচে একটা বিড়াল আছে।
+前|まえ|mae|front, before|সামনে / আগে|駅の前で会いましょう。|えき の まえ で あいましょう。|Let's meet in front of the station.|চলুন স্টেশনের সামনে দেখা করি।
+後ろ|うしろ|ushiro|behind, back|পেছনে / পিছন|私の後ろに田中さんがいます。|わたし の うしろ に たなかさん が います。|Mr. Tanaka is behind me.|আমার পেছনে তানাকা সাহেব আছেন।
+中|なか|naka|inside, in|ভেতরে / মধ্যে|かばんの中に財布があります。|かばん の なか に さいふ が あります。|There is a wallet in the bag.|ব্যাগের ভেতরে একটা মানিব্যাগ আছে।
+外|そと|soto|outside|বাইরে|外は寒いです。|そと は さむい です。|It is cold outside.|বাইরে ঠান্ডা।
+隣|となり|tonari|next to, next door|পাশে / পাশের|銀行の隣に郵便局があります。|ぎんこう の となり に ゆうびんきょく が あります。|There is a post office next to the bank.|ব্যাংকের পাশে একটা পোস্ট অফিস আছে।
+横|よこ|yoko|side, beside|পাশে / পাশ|テレビの横に電話があります。|テレビ の よこ に でんわ が あります。|There is a phone beside the TV.|টিভির পাশে একটা ফোন আছে।
+近く|ちかく|chikaku|nearby, vicinity|কাছে / কাছাকাছি|家の近くにスーパーがあります。|いえ の ちかく に スーパー が あります。|There is a supermarket near my house.|আমার বাসার কাছে একটা সুপারমার্কেট আছে।
+間|あいだ|aida|between|মাঝে / মধ্যে|銀行と本屋の間に喫茶店があります。|ぎんこう と ほんや の あいだ に きっさてん が あります。|There is a cafe between the bank and the bookstore.|ব্যাংক আর বইয়ের দোকানের মাঝে একটা ক্যাফে আছে।
+右|みぎ|migi|right|ডান / ডানদিক|トイレは右にあります。|トイレ は みぎ に あります。|The toilet is on the right.|টয়লেট ডানদিকে।
+左|ひだり|hidari|left|বাম / বামদিক|次の角を左に曲がってください。|つぎ の かど を ひだり に まがって ください。|Please turn left at the next corner.|দয়া করে পরের মোড়ে বামে ঘুরুন।
+東|ひがし|higashi|east|পূর্ব|駅の東に公園があります。|えき の ひがし に こうえん が あります。|There is a park east of the station.|স্টেশনের পূর্ব দিকে একটা পার্ক আছে।
+西|にし|nishi|west|পশ্চিম|大阪は東京の西にあります。|おおさか は とうきょう の にし に あります。|Osaka is west of Tokyo.|ওসাকা টোকিওর পশ্চিমে।
+南|みなみ|minami|south|দক্ষিণ|バングラデシュの南に海があります。|バングラデシュ の みなみ に うみ が あります。|There is sea to the south of Bangladesh.|বাংলাদেশের দক্ষিণে সমুদ্র আছে।
+北|きた|kita|north|উত্তর|北海道は日本の北にあります。|ほっかいどう は にほん の きた に あります。|Hokkaido is in the north of Japan.|হোক্কাইদো জাপানের উত্তরে।
+向こう|むこう|mukou|over there, the other side|ওপারে / ওদিকে|川の向こうに山が見えます。|かわ の むこう に やま が みえます。|You can see mountains across the river.|নদীর ওপারে পাহাড় দেখা যায়।
+側|そば|soba|near, beside|কাছে / পাশে|駅のそばに住んでいます。|えき の そば に すんで います。|I live near the station.|আমি স্টেশনের কাছে থাকি।
+真ん中|まんなか|mannaka|middle, center|ঠিক মাঝখানে|部屋の真ん中にテーブルがあります。|へや の まんなか に テーブル が あります。|There is a table in the middle of the room.|ঘরের ঠিক মাঝখানে একটা টেবিল আছে।
+飛行機|ひこうき|hikouki|airplane|বিমান / উড়োজাহাজ|飛行機で日本へ行きます。|ひこうき で にほん へ いきます。|I am going to Japan by plane.|আমি বিমানে জাপান যাব।
+自転車|じてんしゃ|jitensha|bicycle|সাইকেল|自転車で会社へ行きます。|じてんしゃ で かいしゃ へ いきます。|I go to work by bicycle.|আমি সাইকেলে অফিসে যাই।
+バス|バス|basu|bus|বাস|バスで大学へ行きます。|バス で だいがく へ いきます。|I go to the university by bus.|আমি বাসে বিশ্ববিদ্যালয়ে যাই।
+タクシー|タクシー|takushii|taxi|ট্যাক্সি|駅からタクシーで帰りました。|えき から タクシー で かえりました。|I went home from the station by taxi.|আমি স্টেশন থেকে ট্যাক্সিতে বাড়ি ফিরেছি।
+地下鉄|ちかてつ|chikatetsu|subway, metro|মেট্রো / পাতাল রেল|地下鉄は便利です。|ちかてつ は べんり です。|The subway is convenient.|মেট্রো খুব সুবিধাজনক।
+新幹線|しんかんせん|shinkansen|bullet train|বুলেট ট্রেন|新幹線で大阪へ行きました。|しんかんせん で おおさか へ いきました。|I went to Osaka by bullet train.|আমি বুলেট ট্রেনে ওসাকা গিয়েছি।
+船|ふね|fune|ship, boat|জাহাজ / নৌকা|船で島へ行きます。|ふね で しま へ いきます。|I go to the island by boat.|আমি জাহাজে করে দ্বীপে যাই।
+切符|きっぷ|kippu|ticket|টিকিট|駅で切符を買います。|えき で きっぷ を かいます。|I buy a ticket at the station.|আমি স্টেশন থেকে টিকিট কিনি।
+橋|はし|hashi|bridge|সেতু / ব্রিজ|あの橋を渡ってください。|あの はし を わたって ください。|Please cross that bridge.|দয়া করে ওই সেতুটা পার হন।
+交差点|こうさてん|kousaten|intersection, crossing|মোড় / চৌরাস্তা|次の交差点を右に曲がってください。|つぎ の こうさてん を みぎ に まがって ください。|Please turn right at the next intersection.|দয়া করে পরের মোড়ে ডানে ঘুরুন।
+信号|しんごう|shingou|traffic light|ট্রাফিক সিগন্যাল|あの信号を左に曲がってください。|あの しんごう を ひだり に まがって ください。|Please turn left at that traffic light.|দয়া করে ওই সিগন্যাল থেকে বামে ঘুরুন।
+角|かど|kado|corner|কোণা / মোড়|あの角に銀行があります。|あの かど に ぎんこう が あります。|There is a bank on that corner.|ওই কোণায় একটা ব্যাংক আছে।
+バス停|バスてい|basutei|bus stop|বাস স্টপ|バス停で友達を待っています。|バスてい で ともだち を まって います。|I am waiting for my friend at the bus stop.|আমি বাস স্টপে বন্ধুর জন্য অপেক্ষা করছি।
+自動車|じどうしゃ|jidousha|automobile, car|মোটরগাড়ি / গাড়ি|兄は自動車の会社で働いています。|あに は じどうしゃ の かいしゃ で はたらいて います。|My older brother works at a car company.|আমার বড় ভাই একটা গাড়ির কোম্পানিতে কাজ করেন।
+晴れ|はれ|hare|sunny weather, clear|রোদেলা / পরিষ্কার আবহাওয়া|明日は晴れです。|あした は はれ です。|It will be sunny tomorrow.|আগামীকাল রোদ থাকবে।
+曇り|くもり|kumori|cloudy weather|মেঘলা|今日は曇りです。|きょう は くもり です。|It is cloudy today.|আজ আকাশ মেঘলা।
+雪|ゆき|yuki|snow|তুষার / বরফ|北海道は冬に雪がたくさん降ります。|ほっかいどう は ふゆ に ゆき が たくさん ふります。|It snows a lot in Hokkaido in winter.|হোক্কাইদোতে শীতকালে অনেক তুষার পড়ে।
+風|かぜ|kaze|wind|বাতাস / হাওয়া|今日は風が強いです。|きょう は かぜ が つよい です。|The wind is strong today.|আজ খুব জোরে বাতাস বইছে।
+雲|くも|kumo|cloud|মেঘ|空に白い雲があります。|そら に しろい くも が あります。|There are white clouds in the sky.|আকাশে সাদা মেঘ আছে।
+花|はな|hana|flower|ফুল|母は花が好きです。|はは は はな が すき です。|My mother likes flowers.|আমার মা ফুল ভালোবাসেন।
+木|き|ki|tree, wood|গাছ / কাঠ|庭に大きい木があります。|にわ に おおきい き が あります。|There is a big tree in the garden.|বাগানে একটা বড় গাছ আছে।
+動物|どうぶつ|doubutsu|animal|প্রাণী / পশু|どんな動物が好きですか。|どんな どうぶつ が すき です か。|What kind of animals do you like?|আপনি কোন ধরনের প্রাণী পছন্দ করেন?
+犬|いぬ|inu|dog|কুকুর|家に犬が一匹います。|いえ に いぬ が いっぴき います。|We have one dog at home.|আমাদের বাসায় একটা কুকুর আছে।
+猫|ねこ|neko|cat|বিড়াল|この猫は白いです。|この ねこ は しろい です。|This cat is white.|এই বিড়ালটা সাদা।
+鳥|とり|tori|bird|পাখি|木の上に鳥がいます。|き の うえ に とり が います。|There is a bird in the tree.|গাছের উপর একটা পাখি আছে।
+ペット|ペット|petto|pet|পোষা প্রাণী|ペットを飼っていますか。|ペット を かって います か。|Do you have a pet?|আপনার কি কোনো পোষা প্রাণী আছে?
+暖かい|あたたかい|atatakai|warm|উষ্ণ / আরামদায়ক গরম|今日は暖かいですね。|きょう は あたたかい です ね。|It is warm today, isn't it?|আজ বেশ উষ্ণ, তাই না?
+涼しい|すずしい|suzushii|cool (weather)|শীতল / ঠান্ডা ঠান্ডা|夜は涼しいです。|よる は すずしい です。|It is cool at night.|রাতে ঠান্ডা ঠান্ডা লাগে।
+近い|ちかい|chikai|near, close|কাছে / নিকটে|家は駅から近いです。|いえ は えき から ちかい です。|My house is close to the station.|আমার বাসা স্টেশন থেকে কাছে।
+遠い|とおい|tooi|far|দূরে / দূর|大学は家から遠いです。|だいがく は いえ から とおい です。|The university is far from my house.|বিশ্ববিদ্যালয় আমার বাসা থেকে দূরে।
+広い|ひろい|hiroi|wide, spacious|প্রশস্ত / বড়|この公園は広いです。|この こうえん は ひろい です。|This park is spacious.|এই পার্কটা বেশ বড়।
+狭い|せまい|semai|narrow, small (space)|সরু / ছোট|私の部屋は狭いです。|わたし の へや は せまい です。|My room is small.|আমার ঘরটা ছোট।
+乗る|のる|noru|to ride, to get on|চড়া / ওঠা|毎朝バスに乗ります。|まいあさ バス に のります。|I take the bus every morning.|আমি প্রতিদিন সকালে বাসে চড়ি।
+降りる|おりる|oriru|to get off|নামা|次の駅で降ります。|つぎ の えき で おります。|I will get off at the next station.|আমি পরের স্টেশনে নামব।
+渡る|わたる|wataru|to cross|পার হওয়া|この川を船で渡ります。|この かわ を ふね で わたります。|We cross this river by boat.|আমরা নৌকায় এই নদী পার হই।
+曲がる|まがる|magaru|to turn|ঘোরা / বাঁক নেওয়া|そこを右に曲がってください。|そこ を みぎ に まがって ください。|Please turn right there.|দয়া করে ওখানে ডানে ঘুরুন।
+歩く|あるく|aruku|to walk|হাঁটা|毎日駅まで歩きます。|まいにち えき まで あるきます。|I walk to the station every day.|আমি প্রতিদিন স্টেশন পর্যন্ত হেঁটে যাই।
+着く|つく|tsuku|to arrive|পৌঁছানো|飛行機は七時に着きます。|ひこうき は しちじ に つきます。|The plane arrives at seven o'clock.|বিমানটা সাতটায় পৌঁছাবে।
+登る|のぼる|noboru|to climb|ওঠা / আরোহণ করা|来年富士山に登りたいです。|らいねん ふじさん に のぼりたい です。|I want to climb Mt. Fuji next year.|আমি আগামী বছর ফুজি পর্বতে উঠতে চাই।
+散歩する|さんぽする|sanpo suru|to take a walk|হাঁটতে বের হওয়া / বেড়ানো|毎朝公園を散歩します。|まいあさ こうえん を さんぽ します。|I take a walk in the park every morning.|আমি প্রতিদিন সকালে পার্কে হাঁটি।
+住む|すむ|sumu|to live, to reside|বাস করা / থাকা|私はダッカに住んでいます。|わたし は ダッカ に すんで います。|I live in Dhaka.|আমি ঢাকায় থাকি।
+泳ぐ|およぐ|oyogu|to swim|সাঁতার কাটা|夏に川で泳ぎました。|なつ に かわ で およぎました。|I swam in the river in summer.|গ্রীষ্মকালে আমি নদীতে সাঁতার কেটেছি।
+降る|ふる|furu|to fall (rain, snow)|পড়া (বৃষ্টি / তুষার)|雨が降っています。|あめ が ふって います。|It is raining.|বৃষ্টি পড়ছে।
+吹く|ふく|fuku|to blow (wind)|বওয়া (বাতাস)|強い風が吹いています。|つよい かぜ が ふいて います。|A strong wind is blowing.|জোরে বাতাস বইছে।
+咲く|さく|saku|to bloom|ফোটা (ফুল)|庭に花が咲きました。|にわ に はな が さきました。|Flowers have bloomed in the garden.|বাগানে ফুল ফুটেছে।
+晴れる|はれる|hareru|to clear up (weather)|আকাশ পরিষ্কার হওয়া|午後は晴れました。|ごご は はれました。|It cleared up in the afternoon.|বিকেলে আকাশ পরিষ্কার হয়ে গেল।
+朝ご飯|あさごはん|asagohan|breakfast|সকালের নাস্তা|毎朝七時に朝ご飯を食べます。|まいあさ しちじ に あさごはん を たべます。|I eat breakfast at seven every morning.|আমি প্রতিদিন সকাল সাতটায় নাস্তা করি।
+昼ご飯|ひるごはん|hirugohan|lunch|দুপুরের খাবার|昼ご飯は会社の近くで食べます。|ひるごはん は かいしゃ の ちかく で たべます。|I eat lunch near my office.|আমি অফিসের কাছে দুপুরের খাবার খাই।
+晩ご飯|ばんごはん|bangohan|dinner|রাতের খাবার|今日の晩ご飯はカレーです。|きょう の ばんごはん は カレー です。|Today's dinner is curry.|আজ রাতের খাবার হলো কারি।
+料理|りょうり|ryouri|cooking, dish|রান্না / খাবার|母の料理はとてもおいしいです。|はは の りょうり は とても おいしい です。|My mother's cooking is very tasty.|আমার মায়ের রান্না খুব মজার।
+果物|くだもの|kudamono|fruit|ফল|私は果物が大好きです。|わたし は くだもの が だいすき です。|I love fruit.|আমি ফল খুব ভালোবাসি।
+りんご|りんご|ringo|apple|আপেল|りんごを三つください。|りんご を みっつ ください。|Three apples, please.|তিনটা আপেল দিন।
+みかん|みかん|mikan|mandarin orange|কমলা|このみかんは甘いです。|この みかん は あまい です。|This mandarin orange is sweet.|এই কমলাটা মিষ্টি।
+バナナ|バナナ|banana|banana|কলা|毎朝バナナを食べます。|まいあさ バナナ を たべます。|I eat a banana every morning.|আমি প্রতিদিন সকালে কলা খাই।
+牛乳|ぎゅうにゅう|gyuunyuu|milk|দুধ|毎晩牛乳を飲みます。|まいばん ぎゅうにゅう を のみます。|I drink milk every night.|আমি প্রতি রাতে দুধ খাই।
+コーヒー|コーヒー|koohii|coffee|কফি|コーヒーを一杯ください。|コーヒー を いっぱい ください。|One cup of coffee, please.|এক কাপ কফি দিন।
+紅茶|こうちゃ|koucha|black tea|চা / লাল চা|バングラデシュの人はよく紅茶を飲みます。|バングラデシュ の ひと は よく こうちゃ を のみます。|People in Bangladesh often drink tea.|বাংলাদেশের মানুষ প্রায়ই চা পান করে।
+ジュース|ジュース|juusu|juice|জুস / রস|冷たいジュースが飲みたいです。|つめたい ジュース が のみたい です。|I want to drink cold juice.|আমি ঠান্ডা জুস খেতে চাই।
+お酒|おさけ|osake|alcohol, sake|মদ / সাকে|私はお酒を飲みません。|わたし は おさけ を のみません。|I don't drink alcohol.|আমি মদ পান করি না।
+ビール|ビール|biiru|beer|বিয়ার|田中さんはビールが好きです。|たなか さん は ビール が すき です。|Mr. Tanaka likes beer.|তানাকা সাহেব বিয়ার পছন্দ করেন।
+塩|しお|shio|salt|লবণ|塩を少し入れます。|しお を すこし いれます。|I add a little salt.|আমি একটু লবণ দিই।
+砂糖|さとう|satou|sugar|চিনি|紅茶に砂糖を入れますか。|こうちゃ に さとう を いれます か。|Do you put sugar in your tea?|আপনি কি চায়ে চিনি দেন?
+しょうゆ|しょうゆ|shouyu|soy sauce|সয়া সস|しょうゆを取ってください。|しょうゆ を とって ください。|Please pass the soy sauce.|সয়া সসটা একটু দিন।
+お菓子|おかし|okashi|sweets, snacks|মিষ্টি / নাস্তা|子供はお菓子が好きです。|こども は おかし が すき です。|Children like sweets.|বাচ্চারা মিষ্টি খেতে পছন্দ করে।
+弁当|べんとう|bentou|boxed lunch|টিফিন / বক্স লাঞ্চ|毎日弁当を作ります。|まいにち べんとう を つくります。|I make a boxed lunch every day.|আমি প্রতিদিন টিফিন বানাই।
+牛肉|ぎゅうにく|gyuuniku|beef|গরুর মাংস|牛肉を三百グラム買いました。|ぎゅうにく を さんびゃく グラム かいました。|I bought 300 grams of beef.|আমি তিনশো গ্রাম গরুর মাংস কিনেছি।
+豚肉|ぶたにく|butaniku|pork|শূকরের মাংস|私は豚肉を食べません。|わたし は ぶたにく を たべません。|I don't eat pork.|আমি শূকরের মাংস খাই না।
+鶏肉|とりにく|toriniku|chicken (meat)|মুরগির মাংস|鶏肉のカレーを作りました。|とりにく の カレー を つくりました。|I made chicken curry.|আমি মুরগির মাংসের কারি রান্না করেছি।
+米|こめ|kome|rice (uncooked)|চাল|日本の米はおいしいです。|にほん の こめ は おいしい です。|Japanese rice is delicious.|জাপানের চাল খুব সুস্বাদু।
+カレー|カレー|karee|curry|কারি / তরকারি|このカレーは少し辛いです。|この カレー は すこし からい です。|This curry is a little spicy.|এই কারিটা একটু ঝাল।
+ケーキ|ケーキ|keeki|cake|কেক|誕生日にケーキを食べました。|たんじょうび に ケーキ を たべました。|I ate cake on my birthday.|জন্মদিনে আমি কেক খেয়েছি।
+食べ物|たべもの|tabemono|food|খাবার|どんな食べ物が好きですか。|どんな たべもの が すき です か。|What kind of food do you like?|আপনি কী ধরনের খাবার পছন্দ করেন?
+飲み物|のみもの|nomimono|drink, beverage|পানীয়|飲み物は何がいいですか。|のみもの は なに が いい です か。|What would you like to drink?|পানীয় হিসেবে কী নেবেন?
+箸|はし|hashi|chopsticks|চপস্টিক / কাঠি|箸で食べるのは難しいです。|はし で たべる の は むずかしい です。|Eating with chopsticks is difficult.|চপস্টিক দিয়ে খাওয়া কঠিন।
+皿|さら|sara|plate, dish|প্লেট / থালা|皿を洗います。|さら を あらいます。|I wash the dishes.|আমি থালা-বাসন ধুই।
+コップ|コップ|koppu|glass, cup|গ্লাস|コップに水を入れてください。|コップ に みず を いれて ください。|Please put water in the glass.|গ্লাসে পানি দিন।
+茶碗|ちゃわん|chawan|rice bowl|ভাতের বাটি|茶碗にご飯を入れます。|ちゃわん に ごはん を いれます。|I put rice in the bowl.|আমি বাটিতে ভাত নিই।
+スプーン|スプーン|supuun|spoon|চামচ|スプーンをください。|スプーン を ください。|A spoon, please.|একটা চামচ দিন।
+ナイフ|ナイフ|naifu|knife|ছুরি|ナイフで肉を切ります。|ナイフ で にく を きります。|I cut the meat with a knife.|আমি ছুরি দিয়ে মাংস কাটি।
+フォーク|フォーク|fooku|fork|কাঁটাচামচ|フォークはありますか。|フォーク は あります か。|Do you have a fork?|কাঁটাচামচ আছে কি?
+机|つくえ|tsukue|desk|ডেস্ক / পড়ার টেবিল|机の上に本があります。|つくえ の うえ に ほん が あります。|There is a book on the desk.|ডেস্কের উপর একটা বই আছে।
+椅子|いす|isu|chair|চেয়ার|この椅子に座ってください。|この いす に すわって ください。|Please sit on this chair.|এই চেয়ারে বসুন।
+窓|まど|mado|window|জানালা|窓を開けてもいいですか。|まど を あけて も いい です か。|May I open the window?|জানালাটা খুলতে পারি?
+ドア|ドア|doa|door|দরজা|ドアを閉めてください。|ドア を しめて ください。|Please close the door.|দরজাটা বন্ধ করুন।
+電気|でんき|denki|electricity, light|বিদ্যুৎ / বাতি|電気を消してください。|でんき を けして ください。|Please turn off the light.|বাতিটা নিভিয়ে দিন।
+テレビ|テレビ|terebi|television, TV|টেলিভিশন / টিভি|毎晩テレビを見ます。|まいばん テレビ を みます。|I watch TV every night.|আমি প্রতি রাতে টিভি দেখি।
+ラジオ|ラジオ|rajio|radio|রেডিও|車でラジオを聞きます。|くるま で ラジオ を ききます。|I listen to the radio in the car.|আমি গাড়িতে রেডিও শুনি।
+冷蔵庫|れいぞうこ|reizouko|refrigerator|ফ্রিজ|牛乳は冷蔵庫にあります。|ぎゅうにゅう は れいぞうこ に あります。|The milk is in the fridge.|দুধ ফ্রিজে আছে।
+鍵|かぎ|kagi|key, lock|চাবি / তালা|部屋の鍵がありません。|へや の かぎ が ありません。|I don't have my room key.|আমার কাছে ঘরের চাবি নেই।
+箱|はこ|hako|box|বাক্স|箱の中に何がありますか。|はこ の なか に なに が あります か。|What is in the box?|বাক্সের ভেতরে কী আছে?
+かばん|かばん|kaban|bag|ব্যাগ|新しいかばんを買いました。|あたらしい かばん を かいました。|I bought a new bag.|আমি একটা নতুন ব্যাগ কিনেছি।
+財布|さいふ|saifu|wallet, purse|মানিব্যাগ|財布を忘れました。|さいふ を わすれました。|I forgot my wallet.|আমি মানিব্যাগ ভুলে এসেছি।
+鉛筆|えんぴつ|enpitsu|pencil|পেন্সিল|鉛筆で書いてください。|えんぴつ で かいて ください。|Please write with a pencil.|পেন্সিল দিয়ে লিখুন।
+ペン|ペン|pen|pen|কলম|ペンを貸してください。|ペン を かして ください。|Please lend me a pen.|আমাকে একটা কলম ধার দিন।
+ボールペン|ボールペン|boorupen|ballpoint pen|বলপেন|このボールペンは百円です。|この ボールペン は ひゃくえん です。|This ballpoint pen is 100 yen.|এই বলপেনটার দাম ১০০ ইয়েন।
+ノート|ノート|nooto|notebook|খাতা|ノートに漢字を書きます。|ノート に かんじ を かきます。|I write kanji in my notebook.|আমি খাতায় কাঞ্জি লিখি।
+紙|かみ|kami|paper|কাগজ|紙を一枚ください。|かみ を いちまい ください。|One sheet of paper, please.|একটা কাগজ দিন।
+辞書|じしょ|jisho|dictionary|অভিধান|辞書で言葉を調べます。|じしょ で ことば を しらべます。|I look up words in the dictionary.|আমি অভিধানে শব্দ খুঁজি।
+雑誌|ざっし|zasshi|magazine|ম্যাগাজিন / সাময়িকী|電車で雑誌を読みます。|でんしゃ で ざっし を よみます。|I read magazines on the train.|আমি ট্রেনে ম্যাগাজিন পড়ি।
+新聞|しんぶん|shinbun|newspaper|খবরের কাগজ / সংবাদপত্র|父は毎朝新聞を読みます。|ちち は まいあさ しんぶん を よみます。|My father reads the newspaper every morning.|আমার বাবা প্রতিদিন সকালে খবরের কাগজ পড়েন।
+手紙|てがみ|tegami|letter|চিঠি|国の母に手紙を書きました。|くに の はは に てがみ を かきました。|I wrote a letter to my mother back home.|আমি দেশে মায়ের কাছে চিঠি লিখেছি।
+葉書|はがき|hagaki|postcard|পোস্টকার্ড|友達に葉書を出しました。|ともだち に はがき を だしました。|I sent a postcard to a friend.|আমি বন্ধুকে একটা পোস্টকার্ড পাঠিয়েছি।
+切手|きって|kitte|postage stamp|ডাকটিকিট|郵便局で切手を買います。|ゆうびんきょく で きって を かいます。|I buy stamps at the post office.|আমি ডাকঘর থেকে ডাকটিকিট কিনি।
+写真|しゃしん|shashin|photograph|ছবি / ফটো|写真を撮ってもいいですか。|しゃしん を とって も いい です か。|May I take a photo?|ছবি তুলতে পারি?
+眼鏡|めがね|megane|glasses|চশমা|私は眼鏡をかけています。|わたし は めがね を かけて います。|I wear glasses.|আমি চশমা পরি।
+帽子|ぼうし|boushi|hat, cap|টুপি|夏は帽子をかぶります。|なつ は ぼうし を かぶります。|I wear a hat in summer.|গ্রীষ্মকালে আমি টুপি পরি।
+靴|くつ|kutsu|shoes|জুতা|日本では家で靴を脱ぎます。|にほん で は いえ で くつ を ぬぎます。|In Japan, people take off their shoes at home.|জাপানে বাড়ির ভেতরে জুতা খুলে রাখা হয়।
+靴下|くつした|kutsushita|socks|মোজা|白い靴下を買いました。|しろい くつした を かいました。|I bought white socks.|আমি সাদা মোজা কিনেছি।
+服|ふく|fuku|clothes|জামাকাপড় / পোশাক|この服は少し大きいです。|この ふく は すこし おおきい です。|These clothes are a little big.|এই জামাটা একটু বড়।
+洋服|ようふく|youfuku|clothes, Western clothes|জামাকাপড় / পশ্চিমা পোশাক|デパートで洋服を買いました。|デパート で ようふく を かいました。|I bought clothes at the department store.|আমি ডিপার্টমেন্ট স্টোর থেকে জামাকাপড় কিনেছি।
+シャツ|シャツ|shatsu|shirt|শার্ট|この青いシャツはいくらですか。|この あおい シャツ は いくら です か。|How much is this blue shirt?|এই নীল শার্টটার দাম কত?
+ズボン|ズボン|zubon|trousers, pants|প্যান্ট / ট্রাউজার|黒いズボンをはきます。|くろい ズボン を はきます。|I wear black trousers.|আমি কালো প্যান্ট পরি।
+スカート|スカート|sukaato|skirt|স্কার্ট|姉は長いスカートが好きです。|あね は ながい スカート が すき です。|My older sister likes long skirts.|আমার বড় বোন লম্বা স্কার্ট পছন্দ করে।
+セーター|セーター|seetaa|sweater|সোয়েটার|冬はセーターを着ます。|ふゆ は セーター を きます。|I wear a sweater in winter.|শীতকালে আমি সোয়েটার পরি।
+コート|コート|kooto|coat|কোট|このコートは暖かいです。|この コート は あたたかい です。|This coat is warm.|এই কোটটা বেশ গরম।
+ネクタイ|ネクタイ|nekutai|necktie|টাই|父にネクタイをあげました。|ちち に ネクタイ を あげました。|I gave my father a necktie.|আমি বাবাকে একটা টাই দিয়েছি।
+背広|せびろ|sebiro|business suit|স্যুট|会社員は背広を着ます。|かいしゃいん は せびろ を きます。|Office workers wear suits.|অফিসকর্মীরা স্যুট পরেন।
+上着|うわぎ|uwagi|jacket, outer wear|জ্যাকেট / উপরের জামা|上着を脱いでください。|うわぎ を ぬいで ください。|Please take off your jacket.|জ্যাকেটটা খুলে ফেলুন।
+ポケット|ポケット|poketto|pocket|পকেট|ポケットに財布があります。|ポケット に さいふ が あります。|My wallet is in my pocket.|আমার পকেটে মানিব্যাগ আছে।
+ハンカチ|ハンカチ|hankachi|handkerchief|রুমাল|ハンカチを持っていますか。|ハンカチ を もって います か。|Do you have a handkerchief?|আপনার কাছে রুমাল আছে?
+色|いろ|iro|color|রং|どの色が好きですか。|どの いろ が すき です か。|Which color do you like?|আপনি কোন রং পছন্দ করেন?
+宿題|しゅくだい|shukudai|homework|বাড়ির কাজ|宿題はもう終わりました。|しゅくだい は もう おわりました。|I have already finished my homework.|আমার বাড়ির কাজ শেষ হয়ে গেছে।
+質問|しつもん|shitsumon|question|প্রশ্ন|質問がありますか。|しつもん が あります か。|Do you have any questions?|আপনার কোনো প্রশ্ন আছে?
+問題|もんだい|mondai|problem, question|সমস্যা / প্রশ্ন|この問題は簡単です。|この もんだい は かんたん です。|This problem is easy.|এই প্রশ্নটা সহজ।
+漢字|かんじ|kanji|kanji, Chinese characters|কাঞ্জি / চীনা অক্ষর|毎日漢字を五つ覚えます。|まいにち かんじ を いつつ おぼえます。|I memorize five kanji every day.|আমি প্রতিদিন পাঁচটা কাঞ্জি মুখস্থ করি।
+ひらがな|ひらがな|hiragana|hiragana|হিরাগানা|ひらがなで名前を書いてください。|ひらがな で なまえ を かいて ください。|Please write your name in hiragana.|হিরাগানায় আপনার নাম লিখুন।
+カタカナ|カタカナ|katakana|katakana|কাতাকানা|カタカナを勉強しています。|カタカナ を べんきょう して います。|I am studying katakana.|আমি কাতাকানা শিখছি।
+映画|えいが|eiga|movie|সিনেমা / চলচ্চিত্র|日曜日に友達と映画を見ました。|にちようび に ともだち と えいが を みました。|I watched a movie with a friend on Sunday.|রবিবারে আমি বন্ধুর সাথে সিনেমা দেখেছি।
+音楽|おんがく|ongaku|music|সংগীত / গান|どんな音楽が好きですか。|どんな おんがく が すき です か。|What kind of music do you like?|আপনি কোন ধরনের গান পছন্দ করেন?
+歌|うた|uta|song|গান|この歌を知っていますか。|この うた を しって います か。|Do you know this song?|আপনি কি এই গানটা জানেন?
+絵|え|e|picture, painting|ছবি / চিত্র|妹は絵が上手です。|いもうと は え が じょうず です。|My younger sister is good at drawing.|আমার ছোট বোন খুব ভালো ছবি আঁকে।
+スポーツ|スポーツ|supootsu|sports|খেলাধুলা|私は毎週スポーツをします。|わたし は まいしゅう スポーツ を します。|I play sports every week.|আমি প্রতি সপ্তাহে খেলাধুলা করি।
+ギター|ギター|gitaa|guitar|গিটার|兄はギターを弾きます。|あに は ギター を ひきます。|My older brother plays the guitar.|আমার বড় ভাই গিটার বাজায়।
+ピアノ|ピアノ|piano|piano|পিয়ানো|ピアノを習っています。|ピアノ を ならって います。|I am learning the piano.|আমি পিয়ানো শিখছি।
+薬|くすり|kusuri|medicine|ওষুধ|ご飯の後で薬を飲みます。|ごはん の あと で くすり を のみます。|I take medicine after meals.|আমি খাওয়ার পরে ওষুধ খাই।
+風邪|かぜ|kaze|cold (illness)|সর্দি / ঠান্ডা লাগা|風邪をひきました。|かぜ を ひきました。|I caught a cold.|আমার ঠান্ডা লেগেছে।
+カメラ|カメラ|kamera|camera|ক্যামেরা|このカメラは高いです。|この カメラ は たかい です。|This camera is expensive.|এই ক্যামেরাটার দাম অনেক বেশি।
+パソコン|パソコン|pasokon|personal computer|কম্পিউটার|パソコンで仕事をします。|パソコン で しごと を します。|I work on a computer.|আমি কম্পিউটারে কাজ করি।
+ベッド|ベッド|beddo|bed|বিছানা / খাট|部屋にベッドがあります。|へや に ベッド が あります。|There is a bed in the room.|ঘরে একটা খাট আছে।
+本棚|ほんだな|hondana|bookshelf|বইয়ের তাক|本棚に辞書があります。|ほんだな に じしょ が あります。|There is a dictionary on the bookshelf.|বইয়ের তাকে একটা অভিধান আছে।
+テーブル|テーブル|teeburu|table|টেবিল|テーブルの上に皿があります。|テーブル の うえ に さら が あります。|There is a plate on the table.|টেবিলের উপর একটা প্লেট আছে।
+ストーブ|ストーブ|sutoobu|heater, stove|হিটার|冬はストーブをつけます。|ふゆ は ストーブ を つけます。|I turn on the heater in winter.|শীতকালে আমি হিটার চালাই।
+シャワー|シャワー|shawaa|shower|শাওয়ার / গোসল|毎朝シャワーを浴びます。|まいあさ シャワー を あびます。|I take a shower every morning.|আমি প্রতিদিন সকালে শাওয়ারে গোসল করি।
+お風呂|おふろ|ofuro|bath|গোসল / বাথটাব|毎晩お風呂に入ります。|まいばん おふろ に はいります。|I take a bath every night.|আমি প্রতি রাতে গোসল করি।
+洗濯|せんたく|sentaku|laundry, washing|কাপড় ধোয়া|日曜日に洗濯をします。|にちようび に せんたく を します。|I do the laundry on Sunday.|আমি রবিবারে কাপড় ধুই।
+掃除|そうじ|souji|cleaning|পরিষ্কার করা / ঝাড়ু দেওয়া|毎週部屋の掃除をします。|まいしゅう へや の そうじ を します。|I clean my room every week.|আমি প্রতি সপ্তাহে ঘর পরিষ্কার করি।
+封筒|ふうとう|fuutou|envelope|খাম|封筒に切手を貼ります。|ふうとう に きって を はります。|I put a stamp on the envelope.|আমি খামে ডাকটিকিট লাগাই।
+万年筆|まんねんひつ|mannenhitsu|fountain pen|ফাউন্টেন পেন / ঝরনা কলম|この万年筆は父のです。|この まんねんひつ は ちち の です。|This fountain pen is my father's.|এই ফাউন্টেন পেনটা আমার বাবার।
+物|もの|mono|thing, object|জিনিস|この店にはいろいろな物があります。|この みせ に は いろいろ な もの が あります。|This shop has many kinds of things.|এই দোকানে নানা রকম জিনিস আছে।
+買い物|かいもの|kaimono|shopping|কেনাকাটা|土曜日に買い物に行きます。|どようび に かいもの に いきます。|I go shopping on Saturday.|আমি শনিবারে কেনাকাটা করতে যাই।
+お土産|おみやげ|omiyage|souvenir, gift|স্যুভেনির / উপহার|国の家族にお土産を買いました。|くに の かぞく に おみやげ を かいました。|I bought souvenirs for my family back home.|আমি দেশের পরিবারের জন্য উপহার কিনেছি।
+プレゼント|プレゼント|purezento|present, gift|উপহার|誕生日のプレゼントをもらいました。|たんじょうび の プレゼント を もらいました。|I received a birthday present.|আমি জন্মদিনের উপহার পেয়েছি।
+たばこ|たばこ|tabako|cigarette, tobacco|সিগারেট / তামাক|ここでたばこを吸わないでください。|ここ で たばこ を すわないで ください。|Please don't smoke here.|এখানে ধূমপান করবেন না।
+灰皿|はいざら|haizara|ashtray|ছাইদানি|灰皿はどこですか。|はいざら は どこ です か。|Where is the ashtray?|ছাইদানিটা কোথায়?
+体|からだ|karada|body|শরীর|体に気をつけてください。|からだ に き を つけて ください。|Please take care of yourself.|শরীরের যত্ন নিন।
+頭|あたま|atama|head|মাথা|頭が痛いです。|あたま が いたい です。|I have a headache.|আমার মাথা ব্যথা করছে।
+顔|かお|kao|face|মুখ / চেহারা|毎朝顔を洗います。|まいあさ かお を あらいます。|I wash my face every morning.|আমি প্রতিদিন সকালে মুখ ধুই।
+目|め|me|eye|চোখ|妹は目が大きいです。|いもうと は め が おおきい です。|My younger sister has big eyes.|আমার ছোট বোনের চোখ বড় বড়।
+耳|みみ|mimi|ear|কান|耳が痛いです。|みみ が いたい です。|My ear hurts.|আমার কান ব্যথা করছে।
+鼻|はな|hana|nose|নাক|犬は鼻がいいです。|いぬ は はな が いい です。|Dogs have a good sense of smell.|কুকুরের ঘ্রাণশক্তি খুব ভালো।
+口|くち|kuchi|mouth|মুখ / মুখগহ্বর|口を大きく開けてください。|くち を おおきく あけて ください。|Please open your mouth wide.|মুখটা বড় করে খুলুন।
+歯|は|ha|tooth|দাঁত|毎晩歯を磨きます。|まいばん は を みがきます。|I brush my teeth every night.|আমি প্রতি রাতে দাঁত মাজি।
+手|て|te|hand|হাত|ご飯の前に手を洗います。|ごはん の まえ に て を あらいます。|I wash my hands before meals.|খাওয়ার আগে আমি হাত ধুই।
+足|あし|ashi|foot, leg|পা|足が少し痛いです。|あし が すこし いたい です。|My legs hurt a little.|আমার পা একটু ব্যথা করছে।
+お腹|おなか|onaka|stomach, belly|পেট|お腹がすきました。|おなか が すきました。|I'm hungry.|আমার ক্ষুধা লেগেছে।
+背|せ|se|height, stature|উচ্চতা|兄は背が高いです。|あに は せ が たかい です。|My older brother is tall.|আমার বড় ভাই লম্বা।
+髪|かみ|kami|hair|চুল|姉は髪が長いです。|あね は かみ が ながい です。|My older sister has long hair.|আমার বড় বোনের চুল লম্বা।
+開ける|あける|akeru|to open|খোলা|窓を開けます。|まど を あけます。|I open the window.|আমি জানালা খুলি।
+閉める|しめる|shimeru|to close, to shut|বন্ধ করা|ドアを閉めてください。|ドア を しめて ください。|Please close the door.|দয়া করে দরজাটা বন্ধ করুন।
+開く|あく|aku|to open (by itself)|খোলা / খুলে যাওয়া|銀行は九時に開きます。|ぎんこう は くじ に あきます。|The bank opens at nine.|ব্যাংক নয়টায় খোলে।
+閉まる|しまる|shimaru|to close (by itself)|বন্ধ হওয়া|この店は八時に閉まります。|この みせ は はちじ に しまります。|This shop closes at eight.|এই দোকান আটটায় বন্ধ হয়।
+上げる|あげる|ageru|to raise, to lift|তোলা / ওঠানো|分かった人は手を上げてください。|わかった ひと は て を あげて ください。|Those who understood, please raise your hand.|যারা বুঝেছেন, হাত তুলুন।
+あげる|あげる|ageru|to give|দেওয়া|母に花をあげました。|はは に はな を あげました。|I gave flowers to my mother.|আমি মাকে ফুল দিয়েছি।
+もらう|もらう|morau|to receive, to get|পাওয়া / নেওয়া|友達から本をもらいました。|ともだち から ほん を もらいました。|I got a book from a friend.|আমি বন্ধুর কাছ থেকে একটা বই পেয়েছি।
+くれる|くれる|kureru|to give (to me)|(আমাকে) দেওয়া|父が時計をくれました。|ちち が とけい を くれました。|My father gave me a watch.|বাবা আমাকে একটা ঘড়ি দিয়েছেন।
+貸す|かす|kasu|to lend|ধার দেওয়া|傘を貸してください。|かさ を かして ください。|Please lend me an umbrella.|আমাকে একটা ছাতা ধার দিন।
+借りる|かりる|kariru|to borrow|ধার নেওয়া|図書館で本を借ります。|としょかん で ほん を かります。|I borrow books at the library.|আমি লাইব্রেরি থেকে বই ধার নিই।
+返す|かえす|kaesu|to return, to give back|ফেরত দেওয়া|明日お金を返します。|あした おかね を かえします。|I will return the money tomorrow.|আমি কাল টাকা ফেরত দেব।
+走る|はしる|hashiru|to run|দৌড়ানো|毎朝公園を走ります。|まいあさ こうえん を はしります。|I run in the park every morning.|আমি প্রতিদিন সকালে পার্কে দৌড়াই।
+遊ぶ|あそぶ|asobu|to play, to hang out|খেলা / ঘুরে বেড়ানো|子供たちは外で遊んでいます。|こどもたち は そと で あそんで います。|The children are playing outside.|বাচ্চারা বাইরে খেলছে।
+休む|やすむ|yasumu|to rest, to take a day off|বিশ্রাম নেওয়া / ছুটি নেওয়া|日曜日は家で休みます。|にちようび は うち で やすみます。|On Sunday I rest at home.|রবিবার আমি বাড়িতে বিশ্রাম নিই।
+座る|すわる|suwaru|to sit|বসা|こちらに座ってください。|こちら に すわって ください。|Please sit here.|দয়া করে এখানে বসুন।
+立つ|たつ|tatsu|to stand|দাঁড়ানো|電車の中で立っていました。|でんしゃ の なか で たって いました。|I was standing on the train.|আমি ট্রেনে দাঁড়িয়ে ছিলাম।
+入る|はいる|hairu|to enter, to go in|ঢোকা / প্রবেশ করা|部屋に入ってください。|へや に はいって ください。|Please come into the room.|দয়া করে ঘরে ঢুকুন।
+出る|でる|deru|to leave, to go out|বের হওয়া|八時に家を出ます。|はちじ に いえ を でます。|I leave home at eight.|আমি আটটায় বাড়ি থেকে বের হই।
+出かける|でかける|dekakeru|to go out|বাইরে যাওয়া / বের হওয়া|土曜日は家族と出かけます。|どようび は かぞく と でかけます。|On Saturday I go out with my family.|শনিবার আমি পরিবারের সাথে বাইরে যাই।
+出す|だす|dasu|to take out, to send, to submit|বের করা / পাঠানো / জমা দেওয়া|郵便局で手紙を出します。|ゆうびんきょく で てがみ を だします。|I send a letter at the post office.|আমি পোস্ট অফিস থেকে চিঠি পাঠাই।
+着る|きる|kiru|to wear (clothes)|পরা (জামা)|冬はコートを着ます。|ふゆ は コート を きます。|In winter I wear a coat.|শীতকালে আমি কোট পরি।
+脱ぐ|ぬぐ|nugu|to take off (clothes, shoes)|খোলা (জামা / জুতা)|ここで靴を脱いでください。|ここ で くつ を ぬいで ください。|Please take off your shoes here.|দয়া করে এখানে জুতা খুলুন।
+履く|はく|haku|to put on (shoes, trousers)|পরা (জুতা / প্যান্ট)|新しい靴を履きます。|あたらしい くつ を はきます。|I put on new shoes.|আমি নতুন জুতা পরি।
+かぶる|かぶる|kaburu|to put on (a hat)|পরা (টুপি)|夏は帽子をかぶります。|なつ は ぼうし を かぶります。|In summer I wear a hat.|গ্রীষ্মকালে আমি টুপি পরি।
+持つ|もつ|motsu|to hold, to have, to carry|ধরা / বহন করা / সাথে থাকা|傘を持っていますか。|かさ を もって います か。|Do you have an umbrella?|আপনার কাছে কি ছাতা আছে?
+置く|おく|oku|to put, to place|রাখা|かばんはここに置いてください。|かばん は ここ に おいて ください。|Please put your bag here.|ব্যাগটা এখানে রাখুন।
+取る|とる|toru|to take, to pass|নেওয়া / এগিয়ে দেওয়া|塩を取ってください。|しお を とって ください。|Please pass me the salt.|দয়া করে লবণটা এগিয়ে দিন।
+撮る|とる|toru|to take (a photo)|(ছবি) তোলা|ここで写真を撮ってもいいですか。|ここ で しゃしん を とって も いい です か。|May I take a photo here?|এখানে কি ছবি তুলতে পারি?
+作る|つくる|tsukuru|to make, to cook|বানানো / তৈরি করা|母は毎日ご飯を作ります。|はは は まいにち ごはん を つくります。|My mother cooks meals every day.|মা প্রতিদিন রান্না করেন।
+洗う|あらう|arau|to wash|ধোয়া|食べる前に手を洗います。|たべる まえ に て を あらいます。|I wash my hands before eating.|খাওয়ার আগে আমি হাত ধুই।
+浴びる|あびる|abiru|to take (a shower)|(গোসল / শাওয়ার) নেওয়া|朝シャワーを浴びます。|あさ シャワー を あびます。|I take a shower in the morning.|আমি সকালে গোসল করি।
+押す|おす|osu|to push, to press|ঠেলা / চাপ দেওয়া|このボタンを押してください。|この ボタン を おして ください。|Please press this button.|দয়া করে এই বোতামটা চাপুন।
+引く|ひく|hiku|to pull|টানা|このドアを引いてください。|この ドア を ひいて ください。|Please pull this door.|দয়া করে এই দরজাটা টানুন।
+弾く|ひく|hiku|to play (an instrument)|বাজানো|妹はギターを弾きます。|いもうと は ギター を ひきます。|My younger sister plays the guitar.|আমার ছোট বোন গিটার বাজায়।
+歌う|うたう|utau|to sing|গান গাওয়া|みんなで歌を歌いました。|みんな で うた を うたいました。|We sang a song together.|আমরা সবাই মিলে গান গেয়েছি।
+呼ぶ|よぶ|yobu|to call|ডাকা|タクシーを呼んでください。|タクシー を よんで ください。|Please call a taxi.|দয়া করে একটা ট্যাক্সি ডাকুন।
+言う|いう|iu|to say|বলা|もう一度言ってください。|もう いちど いって ください。|Please say it once more.|দয়া করে আরেকবার বলুন।
+頼む|たのむ|tanomu|to ask, to request, to order|অনুরোধ করা / অর্ডার দেওয়া|店でコーヒーを頼みました。|みせ で コーヒー を たのみました。|I ordered coffee at the shop.|আমি দোকানে কফি অর্ডার করেছি।
+知る|しる|shiru|to know|জানা|田中さんの電話番号を知っていますか。|たなか さん の でんわ ばんごう を しって います か。|Do you know Mr. Tanaka's phone number?|আপনি কি তানাকা সাহেবের ফোন নম্বর জানেন?
+習う|ならう|narau|to learn (from someone)|শেখা|先生に日本語を習っています。|せんせい に にほんご を ならって います。|I am learning Japanese from a teacher.|আমি একজন শিক্ষকের কাছে জাপানি শিখছি।
+忘れる|わすれる|wasureru|to forget, to leave behind|ভুলে যাওয়া|電車に傘を忘れました。|でんしゃ に かさ を わすれました。|I left my umbrella on the train.|আমি ট্রেনে ছাতা ফেলে এসেছি।
+始まる|はじまる|hajimaru|to begin, to start|শুরু হওয়া|授業は九時に始まります。|じゅぎょう は くじ に はじまります。|Class starts at nine.|ক্লাস নয়টায় শুরু হয়।
+終わる|おわる|owaru|to end, to finish|শেষ হওয়া|仕事は五時に終わります。|しごと は ごじ に おわります。|Work ends at five.|কাজ পাঁচটায় শেষ হয়।
+掛ける|かける|kakeru|to make (a call), to hang|(ফোন) করা / ঝোলানো|毎晩母に電話を掛けます。|まいばん はは に でんわ を かけます。|I call my mother every night.|আমি প্রতি রাতে মাকে ফোন করি।
+消す|けす|kesu|to turn off, to erase|বন্ধ করা / মুছে ফেলা|寝る前に電気を消します。|ねる まえ に でんき を けします。|I turn off the light before going to bed.|ঘুমানোর আগে আমি লাইট বন্ধ করি।
+つける|つける|tsukeru|to turn on|চালু করা / জ্বালানো|暑いですからエアコンをつけます。|あつい です から エアコン を つけます。|It is hot, so I turn on the air conditioner.|গরম লাগছে, তাই আমি এসি চালাই।
+並ぶ|ならぶ|narabu|to line up, to stand in line|লাইনে দাঁড়ানো / সারি বাঁধা|駅で人が並んでいます。|えき で ひと が ならんで います。|People are lining up at the station.|স্টেশনে মানুষ লাইনে দাঁড়িয়ে আছে।
+並べる|ならべる|naraberu|to arrange, to line up (things)|সাজানো / সারি করে রাখা|テーブルに皿を並べます。|テーブル に さら を ならべます。|I set the plates on the table.|আমি টেবিলে প্লেট সাজাই।
+生まれる|うまれる|umareru|to be born|জন্ম নেওয়া / জন্মানো|私はチッタゴンで生まれました。|わたし は チッタゴン で うまれました。|I was born in Chittagong.|আমি চট্টগ্রামে জন্মেছি।
+死ぬ|しぬ|shinu|to die|মারা যাওয়া / মরা|この魚はもう死んでいます。|この さかな は もう しんで います。|This fish is already dead.|এই মাছটা আগেই মরে গেছে।
+結婚する|けっこんする|kekkon suru|to marry|বিয়ে করা|姉は来月結婚します。|あね は らいげつ けっこん します。|My older sister will get married next month.|আমার বড় বোন আগামী মাসে বিয়ে করবে।
+洗濯する|せんたくする|sentaku suru|to do laundry|কাপড় ধোয়া|日曜日に洗濯します。|にちようび に せんたく します。|I do the laundry on Sundays.|আমি রবিবারে কাপড় ধুই।
+掃除する|そうじする|souji suru|to clean|পরিষ্কার করা|毎朝部屋を掃除します。|まいあさ へや を そうじ します。|I clean my room every morning.|আমি প্রতিদিন সকালে ঘর পরিষ্কার করি।
+料理する|りょうりする|ryouri suru|to cook|রান্না করা|夜は家で料理します。|よる は うち で りょうり します。|In the evening I cook at home.|রাতে আমি বাড়িতে রান্না করি।
+練習する|れんしゅうする|renshuu suru|to practice|অনুশীলন করা|毎日漢字を練習します。|まいにち かんじ を れんしゅう します。|I practice kanji every day.|আমি প্রতিদিন কানজি অনুশীলন করি।
+質問する|しつもんする|shitsumon suru|to ask a question|প্রশ্ন করা|分からない時は先生に質問します。|わからない とき は せんせい に しつもん します。|When I don't understand, I ask the teacher.|না বুঝলে আমি শিক্ষককে প্রশ্ন করি।
+電話する|でんわする|denwa suru|to phone, to call|ফোন করা|あとで電話します。|あとで でんわ します。|I will call you later.|আমি পরে ফোন করব।
+買い物する|かいものする|kaimono suru|to go shopping|কেনাকাটা করা|駅の近くのスーパーで買い物します。|えき の ちかく の スーパー で かいもの します。|I shop at the supermarket near the station.|আমি স্টেশনের কাছের সুপারমার্কেটে কেনাকাটা করি।
+コピーする|コピーする|kopii suru|to copy, to photocopy|ফটোকপি করা|この紙を十枚コピーしてください。|この かみ を じゅうまい コピー して ください。|Please make ten copies of this paper.|দয়া করে এই কাগজটা দশ কপি করুন।
+磨く|みがく|migaku|to brush, to polish|মাজা / পালিশ করা|毎晩歯を磨きます。|まいばん は を みがきます。|I brush my teeth every night.|আমি প্রতি রাতে দাঁত মাজি।
+疲れる|つかれる|tsukareru|to get tired|ক্লান্ত হওয়া|今日はとても疲れました。|きょう は とても つかれました。|I am very tired today.|আজ আমি খুব ক্লান্ত।
+鳴く|なく|naku|to sing, to cry (animals)|ডাকা (পশুপাখি)|庭で鳥が鳴いています。|にわ で とり が ないて います。|Birds are singing in the garden.|বাগানে পাখি ডাকছে।
+曇る|くもる|kumoru|to become cloudy|মেঘলা হওয়া|今日は朝から曇っています。|きょう は あさ から くもって います。|It has been cloudy since morning.|আজ সকাল থেকে আকাশ মেঘলা।
+違う|ちがう|chigau|to be different, to be wrong|আলাদা হওয়া / ভুল হওয়া|この答えは違います。|この こたえ は ちがいます。|This answer is wrong.|এই উত্তরটা ভুল।
+要る|いる|iru|to need|দরকার হওয়া / লাগা|ビザが要りますか。|ビザ が いります か。|Do I need a visa?|ভিসা কি লাগবে?
+できる|できる|dekiru|to be able to, can|পারা|日本語ができますか。|にほんご が できます か。|Can you speak Japanese?|আপনি কি জাপানি পারেন?
+なる|なる|naru|to become|হওয়া|来年二十歳になります。|らいねん はたち に なります。|I will turn twenty next year.|আগামী বছর আমার বয়স বিশ হবে।
+見せる|みせる|miseru|to show|দেখানো|パスポートを見せてください。|パスポート を みせて ください。|Please show me your passport.|দয়া করে আপনার পাসপোর্ট দেখান।
+見える|みえる|mieru|to be visible, can see|দেখা যাওয়া|ここから富士山が見えます。|ここ から ふじさん が みえます。|You can see Mt. Fuji from here.|এখান থেকে ফুজি পর্বত দেখা যায়।
+聞こえる|きこえる|kikoeru|to be audible, can hear|শোনা যাওয়া|私の声が聞こえますか。|わたし の こえ が きこえます か。|Can you hear my voice?|আপনি কি আমার কথা শুনতে পাচ্ছেন?
+切る|きる|kiru|to cut|কাটা|ナイフで肉を切ります。|ナイフ で にく を きります。|I cut the meat with a knife.|আমি ছুরি দিয়ে মাংস কাটি।
+貼る|はる|haru|to stick, to paste|লাগানো / সাঁটা|封筒に切手を貼ります。|ふうとう に きって を はります。|I put a stamp on the envelope.|আমি খামে স্ট্যাম্প লাগাই।
+飛ぶ|とぶ|tobu|to fly|ওড়া|空を鳥が飛んでいます。|そら を とり が とんで います。|Birds are flying in the sky.|আকাশে পাখি উড়ছে।
+泊まる|とまる|tomaru|to stay (overnight)|রাত কাটানো / থাকা|京都のホテルに泊まりました。|きょうと の ホテル に とまりました。|I stayed at a hotel in Kyoto.|আমি কিয়োটোর একটা হোটেলে ছিলাম।
+引っ越す|ひっこす|hikkosu|to move (house)|বাসা বদলানো|来月大阪に引っ越します。|らいげつ おおさか に ひっこします。|I am moving to Osaka next month.|আমি আগামী মাসে ওসাকায় বাসা বদলাব।
+吸う|すう|suu|to smoke, to breathe in|(সিগারেট) খাওয়া / শ্বাস নেওয়া|ここでたばこを吸わないでください。|ここ で たばこ を すわないで ください。|Please do not smoke here.|দয়া করে এখানে ধূমপান করবেন না।
+締める|しめる|shimeru|to tie, to fasten|বাঁধা / আটকানো|会社ではネクタイを締めます。|かいしゃ で は ネクタイ を しめます。|I wear a tie at the office.|অফিসে আমি টাই পরি।
+差す|さす|sasu|to put up (an umbrella)|(ছাতা) মেলা / ধরা|雨ですから傘を差します。|あめ です から かさ を さします。|It is raining, so I put up my umbrella.|বৃষ্টি হচ্ছে, তাই আমি ছাতা মেলি।
+勤める|つとめる|tsutomeru|to work for, to be employed|চাকরি করা|兄は銀行に勤めています。|あに は ぎんこう に つとめて います。|My older brother works at a bank.|আমার বড় ভাই একটা ব্যাংকে চাকরি করেন।
+渡す|わたす|watasu|to hand over|হাতে দেওয়া / তুলে দেওয়া|この手紙を先生に渡してください。|この てがみ を せんせい に わたして ください。|Please give this letter to the teacher.|দয়া করে এই চিঠিটা শিক্ষককে দিন।
+売る|うる|uru|to sell|বিক্রি করা|あの店は果物を売っています。|あの みせ は くだもの を うって います。|That shop sells fruit.|ওই দোকানে ফল বিক্রি হয়।
+止まる|とまる|tomaru|to stop|থামা|このバスは駅の前に止まります。|この バス は えき の まえ に とまります。|This bus stops in front of the station.|এই বাসটা স্টেশনের সামনে থামে।
+かかる|かかる|kakaru|to take (time), to cost|লাগা (সময় / টাকা)|家から会社まで一時間かかります。|いえ から かいしゃ まで いちじかん かかります。|It takes one hour from home to work.|বাড়ি থেকে অফিস যেতে এক ঘণ্টা লাগে।
+入れる|いれる|ireru|to put in|ভেতরে রাখা / দেওয়া|コーヒーに砂糖を入れますか。|コーヒー に さとう を いれます か。|Do you put sugar in your coffee?|আপনি কি কফিতে চিনি দেন?
+食事する|しょくじする|shokuji suru|to have a meal|খাওয়া-দাওয়া করা|友達とレストランで食事しました。|ともだち と レストラン で しょくじ しました。|I had a meal with a friend at a restaurant.|আমি বন্ধুর সাথে রেস্টুরেন্টে খেয়েছি।
+旅行する|りょこうする|ryokou suru|to travel|ভ্রমণ করা|去年北海道を旅行しました。|きょねん ほっかいどう を りょこう しました。|I traveled around Hokkaido last year.|গত বছর আমি হোক্কাইদো ভ্রমণ করেছি।
+長い|ながい|nagai|long|লম্বা / দীর্ঘ|この川はとても長いです。|この かわ は とても ながい です。|This river is very long.|এই নদীটি অনেক লম্বা।
+短い|みじかい|mijikai|short|ছোট / খাটো|日本の夏休みは短いです。|にほん の なつやすみ は みじかい です。|Summer vacation in Japan is short.|জাপানে গ্রীষ্মের ছুটি ছোট হয়।
+重い|おもい|omoi|heavy|ভারী|この荷物は重いです。|この にもつ は おもい です。|This luggage is heavy.|এই মালপত্রগুলো ভারী।
+軽い|かるい|karui|light (weight)|হালকা|このかばんは軽いです。|この かばん は かるい です。|This bag is light.|এই ব্যাগটি হালকা।
+早い|はやい|hayai|early|তাড়াতাড়ি / সকাল সকাল|父は朝が早いです。|ちち は あさ が はやい です。|My father gets up early.|আমার বাবা সকালে তাড়াতাড়ি ওঠেন।
+速い|はやい|hayai|fast, quick|দ্রুত / জোরে|日本の電車は速いです。|にほん の でんしゃ は はやい です。|Trains in Japan are fast.|জাপানের ট্রেন খুব দ্রুত চলে।
+遅い|おそい|osoi|slow, late|ধীর / দেরি|このバスは遅いです。|この バス は おそい です。|This bus is slow.|এই বাসটি ধীরে চলে।
+多い|おおい|ooi|many, a lot|অনেক / বেশি|ダッカは人が多いです。|ダッカ は ひと が おおい です。|Dhaka has a lot of people.|ঢাকায় অনেক মানুষ।
+少ない|すくない|sukunai|few, little|কম / অল্প|この町は店が少ないです。|この まち は みせ が すくない です。|This town has few shops.|এই শহরে দোকান কম।
+明るい|あかるい|akarui|bright, cheerful|উজ্জ্বল / হাসিখুশি|この部屋は明るいです。|この へや は あかるい です。|This room is bright.|এই ঘরটি বেশ আলোকিত।
+暗い|くらい|kurai|dark|অন্ধকার|外はもう暗いです。|そと は もう くらい です。|It is already dark outside.|বাইরে এর মধ্যেই অন্ধকার হয়ে গেছে।
+冷たい|つめたい|tsumetai|cold (to the touch)|ঠান্ডা (জিনিস)|冷たい水を飲みます。|つめたい みず を のみます。|I drink cold water.|আমি ঠান্ডা পানি খাই।
+熱い|あつい|atsui|hot (to the touch)|গরম (জিনিস)|このお茶は熱いです。|この おちゃ は あつい です。|This tea is hot.|এই চা-টা গরম।
+甘い|あまい|amai|sweet|মিষ্টি|バングラデシュのお菓子はとても甘いです。|バングラデシュ の おかし は とても あまい です。|Bangladeshi sweets are very sweet.|বাংলাদেশের মিষ্টি খুবই মিষ্টি।
+辛い|からい|karai|spicy, hot|ঝাল|このカレーは辛いです。|この カレー は からい です。|This curry is spicy.|এই তরকারিটা ঝাল।
+痛い|いたい|itai|painful, sore|ব্যথা|頭が痛いです。|あたま が いたい です。|I have a headache.|আমার মাথা ব্যথা করছে।
+難しい|むずかしい|muzukashii|difficult|কঠিন|漢字は難しいです。|かんじ は むずかしい です。|Kanji is difficult.|কাঞ্জি কঠিন।
+易しい|やさしい|yasashii|easy|সহজ|この本は易しいです。|この ほん は やさしい です。|This book is easy.|এই বইটি সহজ।
+面白い|おもしろい|omoshiroi|interesting, funny|মজার / আকর্ষণীয়|日本語の勉強は面白いです。|にほんご の べんきょう は おもしろい です。|Studying Japanese is interesting.|জাপানি পড়াশোনা বেশ মজার।
+つまらない|つまらない|tsumaranai|boring, dull|বিরক্তিকর / নীরস|この映画はつまらないです。|この えいが は つまらない です。|This movie is boring.|এই সিনেমাটা বিরক্তিকর।
+楽しい|たのしい|tanoshii|fun, enjoyable|আনন্দদায়ক / মজার|旅行は楽しかったです。|りょこう は たのしかった です。|The trip was fun.|ভ্রমণটা খুব মজার ছিল।
+若い|わかい|wakai|young|তরুণ / অল্পবয়সী|私の先生は若いです。|わたし の せんせい は わかい です。|My teacher is young.|আমার শিক্ষক তরুণ।
+強い|つよい|tsuyoi|strong|শক্তিশালী / জোরালো|今日は風が強いです。|きょう は かぜ が つよい です。|The wind is strong today.|আজ জোরে বাতাস বইছে।
+弱い|よわい|yowai|weak|দুর্বল|弟は体が弱いです。|おとうと は からだ が よわい です。|My younger brother is not very strong.|আমার ছোট ভাইয়ের শরীর দুর্বল।
+太い|ふとい|futoi|thick, fat|মোটা|この木は太いです。|この き は ふとい です。|This tree is thick.|এই গাছটি মোটা।
+細い|ほそい|hosoi|thin, slender|সরু / চিকন|このペンは細いです。|この ペン は ほそい です。|This pen is thin.|এই কলমটি সরু।
+丸い|まるい|marui|round|গোল|今夜は月が丸いです。|こんや は つき が まるい です。|The moon is round tonight.|আজ রাতে চাঁদটা গোল।
+汚い|きたない|kitanai|dirty|নোংরা / ময়লা|私の部屋は汚いです。|わたし の へや は きたない です。|My room is dirty.|আমার ঘরটি নোংরা।
+かわいい|かわいい|kawaii|cute|সুন্দর / আদুরে|この猫はとてもかわいいです。|この ねこ は とても かわいい です。|This cat is very cute.|এই বিড়ালটি খুব আদুরে।
+白い|しろい|shiroi|white|সাদা|白いシャツを買いました。|しろい シャツ を かいました。|I bought a white shirt.|আমি একটি সাদা শার্ট কিনেছি।
+黒い|くろい|kuroi|black|কালো|黒い傘があります。|くろい かさ が あります。|There is a black umbrella.|একটি কালো ছাতা আছে।
+赤い|あかい|akai|red|লাল|赤いりんごを買いました。|あかい りんご を かいました。|I bought red apples.|আমি লাল আপেল কিনেছি।
+青い|あおい|aoi|blue|নীল|今日は空が青いです。|きょう は そら が あおい です。|The sky is blue today.|আজ আকাশটা নীল।
+黄色い|きいろい|kiiroi|yellow|হলুদ|黄色い花が好きです。|きいろい はな が すき です。|I like yellow flowers.|আমি হলুদ ফুল পছন্দ করি।
+茶色|ちゃいろ|chairo|brown|বাদামি|茶色の靴を買いました。|ちゃいろ の くつ を かいました。|I bought brown shoes.|আমি বাদামি জুতা কিনেছি।
+緑|みどり|midori|green, greenery|সবুজ|バングラデシュは緑が多いです。|バングラデシュ は みどり が おおい です。|Bangladesh has a lot of greenery.|বাংলাদেশে অনেক সবুজ।
+低い|ひくい|hikui|low, short (height)|নিচু / খাটো|この山は低いです。|この やま は ひくい です。|This mountain is low.|এই পাহাড়টি নিচু।
+厚い|あつい|atsui|thick (flat objects)|পুরু / মোটা|この辞書は厚いです。|この じしょ は あつい です。|This dictionary is thick.|এই অভিধানটি মোটা।
+薄い|うすい|usui|thin, weak (taste)|পাতলা / হালকা|このノートは薄いです。|この ノート は うすい です。|This notebook is thin.|এই খাতাটি পাতলা।
+うるさい|うるさい|urusai|noisy, annoying|কোলাহলপূর্ণ / বিরক্তিকর|ダッカの道はうるさいです。|ダッカ の みち は うるさい です。|The streets of Dhaka are noisy.|ঢাকার রাস্তা খুব কোলাহলপূর্ণ।
+欲しい|ほしい|hoshii|want (a thing)|চাওয়া / পেতে ইচ্ছা করা|新しい靴が欲しいです。|あたらしい くつ が ほしい です。|I want new shoes.|আমার নতুন জুতা চাই।
+まずい|まずい|mazui|bad-tasting|বিস্বাদ / খেতে খারাপ|この店のコーヒーはまずいです。|この みせ の コーヒー は まずい です。|The coffee at this shop tastes bad.|এই দোকানের কফি খেতে খারাপ।
+大きな|おおきな|ookina|big (before a noun)|বড়|駅の前に大きな木があります。|えき の まえ に おおきな き が あります。|There is a big tree in front of the station.|স্টেশনের সামনে একটি বড় গাছ আছে।
+小さな|ちいさな|chiisana|small (before a noun)|ছোট|小さな店でお茶を飲みました。|ちいさな みせ で おちゃ を のみました。|I had tea at a small shop.|আমি একটি ছোট দোকানে চা খেয়েছি।
+静か|しずか|shizuka|quiet|শান্ত / নীরব|図書館は静かです。|としょかん は しずか です。|The library is quiet.|লাইব্রেরি শান্ত।
+賑やか|にぎやか|nigiyaka|lively, bustling|জমজমাট / প্রাণবন্ত|この町はとても賑やかです。|この まち は とても にぎやか です。|This town is very lively.|এই শহরটি খুব জমজমাট।
+きれい|きれい|kirei|beautiful, clean|সুন্দর / পরিষ্কার|日本の桜はきれいです。|にほん の さくら は きれい です。|Cherry blossoms in Japan are beautiful.|জাপানের চেরি ফুল খুব সুন্দর।
+有名|ゆうめい|yuumei|famous|বিখ্যাত|この店は有名です。|この みせ は ゆうめい です。|This shop is famous.|এই দোকানটি বিখ্যাত।
+親切|しんせつ|shinsetsu|kind, helpful|দয়ালু / সদয়|日本人はとても親切です。|にほんじん は とても しんせつ です。|Japanese people are very kind.|জাপানিরা খুব সদয়।
+暇|ひま|hima|free (time)|অবসর / ফাঁকা|今日の午後は暇です。|きょう の ごご は ひま です。|I am free this afternoon.|আজ বিকেলে আমি ফাঁকা আছি।
+大変|たいへん|taihen|hard, tough|কষ্টকর / ঝামেলার|日本の仕事は大変です。|にほん の しごと は たいへん です。|Work in Japan is hard.|জাপানে কাজ করা বেশ কষ্টের।
+簡単|かんたん|kantan|easy, simple|সহজ|このテストは簡単でした。|この テスト は かんたん でした。|This test was easy.|এই পরীক্ষাটা সহজ ছিল।
+上手|じょうず|jouzu|skillful, good at|দক্ষ / ভালো পারা|姉は料理が上手です。|あね は りょうり が じょうず です。|My older sister is good at cooking.|আমার বড় বোন খুব ভালো রান্না করে।
+下手|へた|heta|unskillful, bad at|কাঁচা / ভালো না পারা|私は歌が下手です。|わたし は うた が へた です。|I am bad at singing.|আমি ভালো গান গাইতে পারি না।
+嫌い|きらい|kirai|dislike|অপছন্দ|私は寒い冬が嫌いです。|わたし は さむい ふゆ が きらい です。|I don't like cold winters.|আমি ঠান্ডা শীতকাল পছন্দ করি না।
+大好き|だいすき|daisuki|love, like very much|খুব পছন্দ|私はカレーが大好きです。|わたし は カレー が だいすき です。|I love curry.|আমি তরকারি খুব পছন্দ করি।
+大嫌い|だいきらい|daikirai|hate|একদম অপছন্দ / ঘৃণা|弟は野菜が大嫌いです。|おとうと は やさい が だいきらい です。|My younger brother hates vegetables.|আমার ছোট ভাই সবজি একদম পছন্দ করে না।
+いろいろ|いろいろ|iroiro|various|নানা রকম / বিভিন্ন|日本でいろいろな所へ行きました。|にほん で いろいろな ところ へ いきました。|I went to various places in Japan.|আমি জাপানে নানা জায়গায় গিয়েছি।
+同じ|おなじ|onaji|same|একই|私と兄は同じ学校です。|わたし と あに は おなじ がっこう です。|My older brother and I go to the same school.|আমি আর আমার বড় ভাই একই স্কুলে পড়ি।
+丈夫|じょうぶ|joubu|sturdy, durable|মজবুত / টেকসই|このかばんはとても丈夫です。|この かばん は とても じょうぶ です。|This bag is very sturdy.|এই ব্যাগটি খুব মজবুত।
+立派|りっぱ|rippa|splendid, fine|চমৎকার / জাঁকালো|立派な家ですね。|りっぱな いえ です ね。|What a fine house!|কী চমৎকার বাড়ি!
+ハンサム|ハンサム|hansamu|handsome|সুদর্শন|兄はハンサムです。|あに は ハンサム です。|My older brother is handsome.|আমার বড় ভাই সুদর্শন।
+不便|ふべん|fuben|inconvenient|অসুবিধাজনক|駅から遠いので不便です。|えき から とおい ので ふべん です。|It is inconvenient because it is far from the station.|স্টেশন থেকে দূরে বলে অসুবিধা হয়।
+本当|ほんとう|hontou|true, real|সত্য / সত্যি|それは本当ですか。|それ は ほんとう です か。|Is that true?|এটা কি সত্যি?
+まあまあ|まあまあ|maamaa|so-so|মোটামুটি|テストはまあまあでした。|テスト は まあまあ でした。|The test was so-so.|পরীক্ষা মোটামুটি হয়েছে।
+とても|とても|totemo|very|খুব|ダッカの夏はとても暑いです。|ダッカ の なつ は とても あつい です。|Summer in Dhaka is very hot.|ঢাকার গ্রীষ্মকাল খুব গরম।
+少し|すこし|sukoshi|a little, a few|একটু / অল্প|日本語が少し分かります。|にほんご が すこし わかります。|I understand a little Japanese.|আমি একটু জাপানি বুঝি।
+ちょっと|ちょっと|chotto|a little, a moment|একটু|ちょっと待ってください。|ちょっと まって ください。|Please wait a moment.|একটু অপেক্ষা করুন।
+たくさん|たくさん|takusan|many, a lot|অনেক|日本で写真をたくさん撮りました。|にほん で しゃしん を たくさん とりました。|I took a lot of photos in Japan.|আমি জাপানে অনেক ছবি তুলেছি।
+よく|よく|yoku|often, well|প্রায়ই / ভালোভাবে|週末はよく公園へ行きます。|しゅうまつ は よく こうえん へ いきます。|I often go to the park on weekends.|ছুটির দিনে আমি প্রায়ই পার্কে যাই।
+時々|ときどき|tokidoki|sometimes|মাঝে মাঝে|時々日本料理を作ります。|ときどき にほんりょうり を つくります。|I sometimes cook Japanese food.|আমি মাঝে মাঝে জাপানি খাবার রান্না করি।
+いつも|いつも|itsumo|always|সবসময়|私はいつも七時に起きます。|わたし は いつも しちじ に おきます。|I always get up at seven.|আমি সবসময় সাতটায় ঘুম থেকে উঠি।
+たいてい|たいてい|taitei|usually|সাধারণত|朝ご飯はたいていパンです。|あさごはん は たいてい パン です。|I usually have bread for breakfast.|সকালের নাস্তায় সাধারণত রুটি খাই।
+あまり|あまり|amari|not very (with negative)|তেমন (না) / খুব একটা (না)|私はあまりテレビを見ません。|わたし は あまり テレビ を みません。|I don't watch TV much.|আমি খুব একটা টিভি দেখি না।
+全然|ぜんぜん|zenzen|not at all (with negative)|একদম (না) / মোটেও (না)|私はコーヒーを全然飲みません。|わたし は コーヒー を ぜんぜん のみません。|I don't drink coffee at all.|আমি একদম কফি খাই না।
+まだ|まだ|mada|still, not yet|এখনও / এখনও না|姉はまだ学生です。|あね は まだ がくせい です。|My older sister is still a student.|আমার বড় বোন এখনও ছাত্রী।
+もう|もう|mou|already, anymore|ইতিমধ্যে / আর|もう昼ご飯を食べました。|もう ひるごはん を たべました。|I have already eaten lunch.|আমি এর মধ্যেই দুপুরের খাবার খেয়েছি।
+すぐ|すぐ|sugu|immediately, soon|এখনই / সঙ্গে সঙ্গে|すぐ行きます。|すぐ いきます。|I will go right away.|আমি এখনই যাচ্ছি।
+ゆっくり|ゆっくり|yukkuri|slowly, leisurely|ধীরে / আরামে|もう少しゆっくり話してください。|もう すこし ゆっくり はなして ください。|Please speak a little more slowly.|অনুগ্রহ করে আরেকটু ধীরে বলুন।
+一緒に|いっしょに|issho ni|together|একসাথে|一緒に昼ご飯を食べませんか。|いっしょに ひるごはん を たべません か。|Would you like to have lunch together?|একসাথে দুপুরের খাবার খাবেন?
+一人で|ひとりで|hitori de|alone, by oneself|একা|私は一人で日本へ来ました。|わたし は ひとりで にほん へ きました。|I came to Japan by myself.|আমি একা জাপানে এসেছি।
+初めて|はじめて|hajimete|for the first time|প্রথমবার|初めて日本の雪を見ました。|はじめて にほん の ゆき を みました。|I saw snow in Japan for the first time.|আমি প্রথমবার জাপানে তুষার দেখলাম।
+本当に|ほんとうに|hontou ni|really, truly|সত্যিই|日本の電車は本当に便利です。|にほん の でんしゃ は ほんとうに べんり です。|Trains in Japan are really convenient.|জাপানের ট্রেন সত্যিই সুবিধাজনক।
+だんだん|だんだん|dandan|gradually|ধীরে ধীরে / ক্রমে|だんだん寒くなりました。|だんだん さむく なりました。|It has gradually become cold.|ধীরে ধীরে ঠান্ডা পড়েছে।
+たぶん|たぶん|tabun|probably, maybe|সম্ভবত|明日はたぶん雨です。|あした は たぶん あめ です。|It will probably rain tomorrow.|কাল সম্ভবত বৃষ্টি হবে।
+また|また|mata|again|আবার|また日本へ行きたいです。|また にほん へ いきたい です。|I want to go to Japan again.|আমি আবার জাপানে যেতে চাই।
+もっと|もっと|motto|more|আরও|もっと日本語を勉強したいです。|もっと にほんご を べんきょう したい です。|I want to study Japanese more.|আমি আরও জাপানি শিখতে চাই।
+全部|ぜんぶ|zenbu|all, everything|সব / সবকিছু|お金を全部使いました。|おかね を ぜんぶ つかいました。|I spent all the money.|আমি সব টাকা খরচ করে ফেলেছি।
+皆|みんな|minna|everyone, all|সবাই|家族は皆元気です。|かぞく は みんな げんき です。|Everyone in my family is well.|আমার পরিবারের সবাই ভালো আছে।
+だけ|だけ|dake|only, just|শুধু / কেবল|財布に千円だけあります。|さいふ に せんえん だけ あります。|I have only 1,000 yen in my wallet.|আমার মানিব্যাগে শুধু এক হাজার ইয়েন আছে।
+ぐらい|ぐらい|gurai|about, approximately|প্রায় / মতো|駅まで十分ぐらいかかります。|えき まで じゅっぷん ぐらい かかります。|It takes about ten minutes to the station.|স্টেশনে যেতে প্রায় দশ মিনিট লাগে।
+それから|それから|sorekara|and then, after that|তারপর|それから駅へ行きました。|それから えき へ いきました。|After that, I went to the station.|তারপর আমি স্টেশনে গেলাম।
+でも|でも|demo|but, however|কিন্তু|でも今日は時間がありません。|でも きょう は じかん が ありません。|But I don't have time today.|কিন্তু আজ আমার সময় নেই।
+そして|そして|soshite|and, and then|এবং / আর|そして夜は日本語を勉強します。|そして よる は にほんご を べんきょう します。|And at night I study Japanese.|আর রাতে আমি জাপানি পড়ি।
+しかし|しかし|shikashi|however|তবে / কিন্তু|しかし日本の冬はとても寒いです。|しかし にほん の ふゆ は とても さむい です。|However, winter in Japan is very cold.|তবে জাপানের শীতকাল খুব ঠান্ডা।
+じゃあ|じゃあ|jaa|well then|তাহলে|じゃあ明日また会いましょう。|じゃあ あした また あいましょう。|Well then, let's meet again tomorrow.|তাহলে কাল আবার দেখা হবে।
+それでは|それでは|soredewa|well then (formal)|তাহলে / এবার|それでは会議を始めます。|それでは かいぎ を はじめます。|Well then, let's start the meeting.|তাহলে এবার মিটিং শুরু করছি।
+だから|だから|dakara|so, therefore|তাই / সেজন্য|だから今日は学校を休みます。|だから きょう は がっこう を やすみます。|So I will stay home from school today.|তাই আজ আমি স্কুলে যাব না।
+まっすぐ|まっすぐ|massugu|straight|সোজা|この道をまっすぐ行ってください。|この みち を まっすぐ いって ください。|Please go straight along this road.|এই রাস্তা ধরে সোজা যান।
+ちょうど|ちょうど|choudo|exactly, just|ঠিক|今ちょうど三時です。|いま ちょうど さんじ です。|It is exactly three o'clock now.|এখন ঠিক তিনটা বাজে।
+いかが|いかが|ikaga|how (polite)|কেমন (ভদ্র রূপ)|コーヒーはいかがですか。|コーヒー は いかが です か。|Would you like some coffee?|কফি খাবেন?
+後で|あとで|ato de|later|পরে|後で電話します。|あとで でんわ します。|I will call you later.|আমি পরে ফোন করব।
+もちろん|もちろん|mochiron|of course|অবশ্যই|もちろん行きます。|もちろん いきます。|Of course I will go.|অবশ্যই যাব।
