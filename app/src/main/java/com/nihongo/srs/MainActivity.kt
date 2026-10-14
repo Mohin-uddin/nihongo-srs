@@ -1,5 +1,6 @@
 package com.nihongo.srs
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -43,6 +44,12 @@ import com.nihongo.srs.ui.exam.ExamViewModel
 import com.nihongo.srs.ui.home.HomeScreen
 import com.nihongo.srs.ui.kana.KanaScreen
 import com.nihongo.srs.ui.manage.ManageScreen
+import com.nihongo.srs.ui.news.ArticleScreen
+import com.nihongo.srs.ui.news.ArticleViewModel
+import com.nihongo.srs.ui.news.NewsListScreen
+import com.nihongo.srs.ui.news.RadioScreen
+import com.nihongo.srs.ui.players.BattleScreen
+import com.nihongo.srs.ui.players.PlayersScreen
 import com.nihongo.srs.ui.practice.PracticeScreen
 import com.nihongo.srs.ui.progress.ProgressScreen
 import com.nihongo.srs.ui.review.FlashcardScreen
@@ -73,6 +80,12 @@ private object Routes {
     const val MANAGE = "manage"
     const val SPEAK = "speak"
     const val ASK = "ask"
+    const val NEWS = "news"
+    const val ARTICLE = "article/{${ArticleViewModel.ARG_LINK}}"
+    const val RADIO = "radio"
+    const val PLAYERS = "players"
+    const val BATTLE = "battle"
+    fun article(link: String) = "article/${Uri.encode(link)}"
     fun cards(mode: SessionMode, level: String = "ALL") = "cards/${mode.name}/$level"
     fun exam(scope: ExamScope) = "exam/${scope.name}"
 }
@@ -144,6 +157,10 @@ private fun AppNavHost(nav: NavHostController, modifier: Modifier) {
                 onSpeak = { nav.navigate(Routes.SPEAK) },
                 onKana = { nav.navigate(Routes.KANA) },
                 onAsk = { nav.navigate(Routes.ASK) },
+                onNews = { nav.navigate(Routes.NEWS) },
+                onRadio = { nav.navigate(Routes.RADIO) },
+                onPlayers = { nav.navigate(Routes.PLAYERS) },
+                onBattle = { nav.navigate(Routes.BATTLE) },
                 onMyWords = { nav.goToTab(Routes.WORDS) },
                 onProgress = { nav.goToTab(Routes.PROGRESS) },
             )
@@ -155,6 +172,10 @@ private fun AppNavHost(nav: NavHostController, modifier: Modifier) {
                 onKana = { nav.navigate(Routes.KANA) },
                 onReview = { nav.navigate(Routes.cards(SessionMode.REVIEW)) },
                 onAsk = { nav.navigate(Routes.ASK) },
+                onNews = { nav.navigate(Routes.NEWS) },
+                onRadio = { nav.navigate(Routes.RADIO) },
+                onBattle = { nav.navigate(Routes.BATTLE) },
+                onPlayers = { nav.navigate(Routes.PLAYERS) },
             )
         }
         composable(Routes.WORDS) { StudyListScreen(onManage = { nav.navigate(Routes.MANAGE) }) }
@@ -177,5 +198,24 @@ private fun AppNavHost(nav: NavHostController, modifier: Modifier) {
         composable(Routes.MANAGE) { ManageScreen(onBack = { nav.popBackStack() }) }
         composable(Routes.SPEAK) { SpeakScreen(onBack = { nav.popBackStack() }) }
         composable(Routes.ASK) { AskScreen(onBack = { nav.popBackStack() }) }
+        composable(Routes.NEWS) {
+            NewsListScreen(
+                onBack = { nav.popBackStack() },
+                onOpen = { nav.navigate(Routes.article(it.link)) },
+                onRadio = { nav.navigate(Routes.RADIO) },
+                onAddKey = { nav.navigate(Routes.ASK) },
+            )
+        }
+        composable(
+            Routes.ARTICLE,
+            arguments = listOf(navArgument(ArticleViewModel.ARG_LINK) { type = NavType.StringType })
+        ) { ArticleScreen(onBack = { nav.popBackStack() }, onAddKey = { nav.navigate(Routes.ASK) }) }
+        composable(Routes.RADIO) { RadioScreen(onBack = { nav.popBackStack() }) }
+        composable(Routes.PLAYERS) {
+            PlayersScreen(onBack = { nav.popBackStack() }, onBattle = { nav.navigate(Routes.BATTLE) })
+        }
+        composable(Routes.BATTLE) {
+            BattleScreen(onBack = { nav.popBackStack() }, onPlayers = { nav.navigate(Routes.PLAYERS) })
+        }
     }
 }

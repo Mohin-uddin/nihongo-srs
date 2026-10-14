@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -30,6 +31,9 @@ import androidx.compose.material.icons.automirrored.rounded.MenuBook
 import androidx.compose.material.icons.rounded.AutoAwesome
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.Forum
+import androidx.compose.material.icons.rounded.Headphones
+import androidx.compose.material.icons.rounded.Newspaper
+import androidx.compose.material.icons.rounded.SportsEsports
 import androidx.compose.material.icons.rounded.LocalFireDepartment
 import androidx.compose.material.icons.rounded.NotificationsActive
 import androidx.compose.material.icons.rounded.PlayArrow
@@ -61,6 +65,9 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nihongo.srs.data.LevelProgress
+import com.nihongo.srs.data.Player
+import com.nihongo.srs.ui.players.Avatar
+import com.nihongo.srs.ui.players.playerColor
 import com.nihongo.srs.data.VocabEntity
 import com.nihongo.srs.ui.components.Bilingual
 import com.nihongo.srs.ui.components.GridTile
@@ -83,12 +90,18 @@ fun HomeScreen(
     onSpeak: () -> Unit,
     onKana: () -> Unit,
     onAsk: () -> Unit,
+    onNews: () -> Unit,
+    onRadio: () -> Unit,
+    onPlayers: () -> Unit,
+    onBattle: () -> Unit,
     onMyWords: () -> Unit,
     onProgress: () -> Unit,
     vm: HomeViewModel = viewModel(factory = HomeViewModel.Factory),
 ) {
     val state by vm.uiState.collectAsStateWithLifecycle()
     val reminder by vm.reminder.collectAsStateWithLifecycle()
+    val players by vm.players.collectAsStateWithLifecycle()
+    val activeId by vm.activeId.collectAsStateWithLifecycle()
     val context = LocalContext.current
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { vm.refreshDay() }
 
@@ -112,8 +125,9 @@ fun HomeScreen(
             .padding(horizontal = ScreenPadding, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Greeting(state.streak)
+        Greeting(state.streak, players.firstOrNull { it.id == activeId } ?: players.first(), onPlayers)
         ReviewHero(state.dueToday, onStartReview)
+        ScoreboardCard(players, activeId, onPlayers, onBattle)
         MenuTile(
             Icons.Rounded.AutoAwesome, "Ask in Banglish", "বাংলিশে লিখুন, জাপানি দেখুন", onAsk,
             Modifier.testTag("home_ask"),
@@ -133,6 +147,13 @@ fun HomeScreen(
         }
 
         SectionTitle("Practice", "অনুশীলন")
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            GridTile(Icons.Rounded.Newspaper, "Japanese news", "খবর পড়ুন ও শব্দ শিখুন", onNews,
+                Modifier.weight(1f).testTag("home_news"))
+            GridTile(Icons.Rounded.Headphones, "Radio news", "রেডিও খবর শুনুন", onRadio,
+                Modifier.weight(1f).testTag("home_radio"),
+                tint = Extra.correct, tintBackground = Extra.correctSoft)
+        }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             GridTile(Icons.Rounded.Quiz, "Today's exam", "আজকের পরীক্ষা", { onExam(ExamScope.TODAY) },
                 Modifier.weight(1f).testTag("home_exam"))
@@ -163,13 +184,17 @@ fun HomeScreen(
 }
 
 @Composable
-private fun Greeting(streak: Int) {
+private fun Greeting(streak: Int, player: Player, onPlayers: () -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) {
             Text("こんにちは!", style = MaterialTheme.typography.headlineLarge)
             Text("Let's learn Japanese today • আজ জাপানি শিখি",
                 style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
+        Box(Modifier.clip(CircleShape).clickable(onClick = onPlayers).testTag("home_player")) {
+            Avatar(player, 40.dp)
+        }
+        Spacer(Modifier.width(8.dp))
         Pill(
             "$streak", icon = Icons.Rounded.LocalFireDepartment,
             color = Extra.streak.copy(alpha = 0.15f), textColor = Extra.streak,
@@ -224,6 +249,50 @@ private fun ReviewHero(due: Int, onStart: () -> Unit) {
                 Spacer(Modifier.width(6.dp))
                 Text("Start Review • রিভিউ শুরু", style = MaterialTheme.typography.labelLarge)
             }
+        }
+    }
+}
+
+/** Who is ahead, at a glance. Tap to switch player or see the full scoreboard. */
+@Composable
+private fun ScoreboardCard(players: List<Player>, activeId: Int, onPlayers: () -> Unit, onBattle: () -> Unit) {
+    val leaderPoints = players.maxOf { it.points }
+    SoftCard(onClick = onPlayers, padding = 16.dp, modifier = Modifier.testTag("home_scoreboard")) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Bilingual("Scoreboard", "স্কোরবোর্ড • কার পয়েন্ট বেশি", Modifier.weight(1f),
+                enStyle = MaterialTheme.typography.titleLarge)
+            if (players.size >= 2) {
+                Button(
+                    onClick = onBattle, shape = MaterialTheme.shapes.medium,
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
+                    modifier = Modifier.testTag("home_battle"),
+                ) {
+                    Icon(Icons.Rounded.SportsEsports, null, Modifier.size(18.dp))
+                    Spacer(Modifier.width(6.dp))
+                    Text("Battle", style = MaterialTheme.typography.labelLarge)
+                }
+            }
+        }
+        players.sortedByDescending { it.points }.forEach { p ->
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Avatar(p, 34.dp)
+                Spacer(Modifier.width(10.dp))
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        p.name + if (p.points == leaderPoints && players.size > 1 && p.points > 0) "  👑" else "",
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                    Text(
+                        (if (p.id == activeId) "Studying now • " else "") + "today +${p.todayPoints()}",
+                        style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+                Text("${p.points}", style = MaterialTheme.typography.headlineSmall, color = playerColor(p))
+            }
+        }
+        if (players.size < 2) {
+            Text("Add your partner and compete • সঙ্গীকে যোগ করে প্রতিযোগিতা করুন ›",
+                style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         }
     }
 }

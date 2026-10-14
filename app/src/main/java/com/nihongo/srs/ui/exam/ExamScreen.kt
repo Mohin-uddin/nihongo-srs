@@ -188,10 +188,10 @@ private fun Prompt(en: String, bn: String) {
         textColor = MaterialTheme.colorScheme.onSurfaceVariant)
 }
 
-private enum class OptionState { NORMAL, CORRECT, WRONG, DIMMED }
+internal enum class OptionState { NORMAL, CORRECT, WRONG, DIMMED }
 
 @Composable
-private fun OptionCard(
+internal fun OptionCard(
     letter: String,
     main: String,
     sub: String?,

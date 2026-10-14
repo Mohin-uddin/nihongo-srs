@@ -7,8 +7,11 @@
     <!-- Daily study reminder (Android 13+ asks the user). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
-    <!-- Only used by the optional "Ask in Banglish" feature (Gemini). Everything else works offline. -->
+    <!-- Used by Ask in Banglish (Gemini) and the NHK news / radio. Study, review and exams work offline. -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Keeps radio news playing when the screen turns off. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <!-- Android 11+ package visibility: let the app find the TTS engine and speech recognizer. -->
     <queries>

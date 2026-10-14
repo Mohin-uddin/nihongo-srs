@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.nihongo.srs.NihongoApp
+import com.nihongo.srs.data.PlayerStore
+import com.nihongo.srs.data.Points
 import com.nihongo.srs.data.UserProgress
 import com.nihongo.srs.data.VocabEntity
 import com.nihongo.srs.data.VocabRepository
@@ -55,6 +57,7 @@ class ReviewViewModel(
     private val speaker: JapaneseSpeaker,
     mode: SessionMode,
     private val level: String,
+    private val players: PlayerStore,
 ) : ViewModel() {
 
     // Learn mode shows the whole card at once: there is nothing to test yet.
@@ -118,6 +121,7 @@ class ReviewViewModel(
         _state.update { it.copy(isBusy = true) }
         viewModelScope.launch {
             repo.submitReview(progress, correct)
+            players.award(if (correct) Points.REVIEW_CORRECT else Points.REVIEW_TRIED)
             _state.update {
                 moveNext(it).copy(
                     isBusy = false,
@@ -136,6 +140,7 @@ class ReviewViewModel(
         _state.update { it.copy(isBusy = true) }
         viewModelScope.launch {
             repo.markLearned(card.vocab.id)
+            players.award(Points.LEARN)
             _state.update { moveNext(it).copy(isBusy = false, correctCount = it.correctCount + 1) }
             afterMove()
         }
@@ -164,7 +169,7 @@ class ReviewViewModel(
                     ?.let { runCatching { SessionMode.valueOf(it) }.getOrNull() }
                     ?: SessionMode.REVIEW
                 val level = handle.get<String>(ARG_LEVEL) ?: "N5"
-                ReviewViewModel(app.repository, app.speaker, mode, level)
+                ReviewViewModel(app.repository, app.speaker, mode, level, app.players)
             }
         }
     }

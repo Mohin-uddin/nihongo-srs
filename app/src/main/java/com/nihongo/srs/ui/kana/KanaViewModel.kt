@@ -8,6 +8,8 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.nihongo.srs.NihongoApp
 import com.nihongo.srs.data.Kana
 import com.nihongo.srs.data.KanaData
+import com.nihongo.srs.data.PlayerStore
+import com.nihongo.srs.data.Points
 import com.nihongo.srs.data.ProgressRepository
 import com.nihongo.srs.speech.JapaneseSpeaker
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,6 +39,7 @@ data class KanaQuizState(
 class KanaViewModel(
     private val speaker: JapaneseSpeaker,
     private val progress: ProgressRepository,
+    private val players: PlayerStore,
 ) : ViewModel() {
 
     val katakana = MutableStateFlow(false)
@@ -70,6 +73,7 @@ class KanaViewModel(
         if (s.selected != null) return
         val correct = option == q.kana.romaji
         speaker.speak(q.kana.char, slow = true)
+        if (correct && !q.isRetry) players.award(Points.KANA_CORRECT)
         _quiz.update {
             it?.copy(
                 selected = option,
@@ -93,7 +97,7 @@ class KanaViewModel(
         val Factory = viewModelFactory {
             initializer {
                 val app = this[APPLICATION_KEY] as NihongoApp
-                KanaViewModel(app.speaker, app.progress)
+                KanaViewModel(app.speaker, app.progress, app.players)
             }
         }
     }

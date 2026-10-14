@@ -3,8 +3,9 @@
 A free, offline Android app to learn Japanese with the 1-4-7 spaced repetition method,
 with meanings in **English and Bangla (বাংলা)** and **speaking practice**.
 
-No ads, no account, no paid APIs. Everything works offline except the optional "Ask in Banglish" box,
-which uses your own free Gemini API key (typed in the app, stored only on your phone).
+No ads, no account, no paid APIs. Studying works offline. Japanese news and radio news need internet
+(free NHK feeds). "Ask in Banglish" and the meaning of every word in the news use your own free Gemini API key
+(typed in the app, stored only on your phone).
 
 ## Open and run in Android Studio
 
@@ -37,6 +38,10 @@ Phone: Android 8.0 (API 26) or newer.
 | Today's goals | On Home: finish reviews, learn 10 words, take an exam, speak 5 phrases |
 | Kana | Hiragana and katakana chart with sound, plus a 20-question kana quiz |
 | Reminder | Local notification once a day at a time you choose (default 8 PM) |
+| Japanese news | Today's NHK stories. Read the real text, or an easy N5 / N4 version (Gemini). Tap any word for its reading, Bangla and English meaning, then add it to your words with the news sentence as its example |
+| Radio news | NHK radio news podcast (free), with 0.75x speed and 10-second skip. Keeps playing while you use the app |
+| Scoreboard | Players sharing one phone (for example husband and wife). Points for learning, reviews, exams, kana and news words go to whoever is studying now |
+| Quiz Battle | Two players, one phone, 6 questions each. +10 per right answer, +5 for three in a row, the winner gets +20 on the scoreboard |
 
 Bundled content (in `app/src/main/assets`): 719 N5 words (the full N5 level) and 106 N4 words, each with an example
 sentence, plus 72 phrases, all in English and Bangla. Edit those text files to add more; bump

@@ -17,7 +17,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AllInclusive
 import androidx.compose.material.icons.rounded.AutoAwesome
+import androidx.compose.material.icons.rounded.EmojiEvents
 import androidx.compose.material.icons.rounded.Forum
+import androidx.compose.material.icons.rounded.Headphones
+import androidx.compose.material.icons.rounded.Newspaper
+import androidx.compose.material.icons.rounded.SportsEsports
 import androidx.compose.material.icons.rounded.Lightbulb
 import androidx.compose.material.icons.rounded.Quiz
 import androidx.compose.material.icons.rounded.Replay
@@ -48,6 +52,10 @@ fun PracticeScreen(
     onKana: () -> Unit,
     onReview: () -> Unit,
     onAsk: () -> Unit,
+    onNews: () -> Unit,
+    onRadio: () -> Unit,
+    onBattle: () -> Unit,
+    onPlayers: () -> Unit,
 ) {
     AppScreen(title = "Practice", subtitle = "অনুশীলন") { pad ->
         Column(
@@ -67,6 +75,21 @@ fun PracticeScreen(
             MenuTile(Icons.Rounded.Replay, "Review due words", "আজকের রিভিউ কার্ড",
                 onReview, tint = MaterialTheme.colorScheme.secondary,
                 tintBackground = MaterialTheme.colorScheme.secondaryContainer)
+
+            SectionTitle("Play together", "দুজনে মিলে খেলুন")
+            MenuTile(Icons.Rounded.SportsEsports, "Quiz Battle", "পালা করে উত্তর দিন, কে জেতে দেখুন",
+                onBattle, Modifier.testTag("practice_battle"),
+                tint = MaterialTheme.colorScheme.secondary, tintBackground = MaterialTheme.colorScheme.secondaryContainer)
+            MenuTile(Icons.Rounded.EmojiEvents, "Scoreboard", "কার পয়েন্ট বেশি",
+                onPlayers, Modifier.testTag("practice_players"),
+                tint = Extra.streak, tintBackground = Extra.streak.copy(alpha = 0.15f))
+
+            SectionTitle("Real Japanese", "আসল জাপানি পড়ুন ও শুনুন")
+            MenuTile(Icons.Rounded.Newspaper, "Japanese news", "খবর পড়ুন, শব্দে চাপ দিয়ে মানে দেখুন",
+                onNews, Modifier.testTag("practice_news"))
+            MenuTile(Icons.Rounded.Headphones, "Radio news", "NHK রেডিও খবর শুনুন",
+                onRadio, Modifier.testTag("practice_radio"),
+                tint = Extra.correct, tintBackground = Extra.correctSoft)
 
             SectionTitle("Speak and read", "বলা ও পড়া")
             MenuTile(Icons.Rounded.AutoAwesome, "Ask in Banglish", "বাংলিশে লিখুন, জাপানি বাক্য দেখুন",

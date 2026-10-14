@@ -33,4 +33,9 @@ class AppPrefs(context: Context) {
     var geminiKey: String
         get() = sp.getString("gemini_key", "") ?: ""
         set(v) = sp.edit().putString("gemini_key", v.trim()).apply()
+
+    /** Last easy-news level chosen (EASY_N5 / EASY_N4). */
+    var newsMode: String
+        get() = sp.getString("news_mode", "EASY_N5") ?: "EASY_N5"
+        set(v) = sp.edit().putString("news_mode", v).apply()
 }

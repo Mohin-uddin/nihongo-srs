@@ -73,6 +73,16 @@ class PreviewTour {
         rule.waitForIdle()
     }
 
+    private fun has(tag: String) = rule.onAllNodesWithTag(tag).fetchSemanticsNodes().isNotEmpty()
+
+    private fun waitTag(tag: String, ms: Long = 20_000) = runCatching { rule.waitUntil(ms) { has(tag) } }.isSuccess
+
+    /** System back (closes sheets and dialogs too). */
+    private fun systemBack() {
+        rule.runOnUiThread { rule.activity.onBackPressedDispatcher.onBackPressed() }
+        rule.waitForIdle()
+    }
+
     private fun back() {
         rule.onNodeWithContentDescription("Back").performClick()
         rule.waitForIdle()
@@ -136,6 +146,65 @@ class PreviewTour {
         // Practice tab
         tapTag("tab_practice")
         shot("practice")
+
+        // Scoreboard: add a second player, then a quiz battle
+        tapTag("practice_players")
+        shot("scoreboard")
+        tapTag("players_add")
+        rule.onNodeWithTag("player_name").performTextInput("Wife")
+        tap("Save • সেভ")
+        shot("scoreboard_two_players")
+        tapTag("players_battle")
+        shot("battle_setup")
+        tapTag("battle_start")
+        var turns = 0
+        while (turns < 20 && !has("battle_again") && waitTag("battle_ready", 10_000)) {
+            tapTag("battle_ready")
+            waitTag("battle_option0")
+            if (turns == 0) shot("battle_question")
+            // Mix right and wrong answers so the scores differ.
+            val pick = if (turns % 3 == 1) 1 else 0
+            rule.onNodeWithTag("battle_option$pick").performClick()
+            rule.waitForIdle()
+            if (turns == 1) shot("battle_answer")
+            tapTag("battle_next")
+            turns++
+        }
+        waitTag("battle_again")
+        shot("battle_result")
+        back()
+        shot("scoreboard_after_battle")
+        back()
+
+        // Japanese news: list, a story with tappable words, the word sheet
+        tapTag("practice_news")
+        if (waitTag("news_item_0", 30_000)) {
+            shot("news_list")
+            tapTag("news_item_0")
+            waitTag("news_title", 30_000)
+            shot("news_article")
+            runCatching {
+                tapTag("token_-1_0")
+                Thread.sleep(800)
+                shot("news_word")
+                systemBack()
+            }
+            back()
+        } else {
+            shot("news_list_offline")
+        }
+
+        // Radio news
+        tapTag("news_radio")
+        if (waitTag("radio_episode_0", 30_000)) {
+            shot("radio")
+            tapTag("radio_episode_0")
+            Thread.sleep(4000)
+            shot("radio_playing")
+            runCatching { rule.onNodeWithTag("radio_play").performClick() }
+        }
+        back()
+        back()
 
         // Exam
         tapTag("practice_exam_today")

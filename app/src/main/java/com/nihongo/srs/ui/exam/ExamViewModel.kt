@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.nihongo.srs.NihongoApp
+import com.nihongo.srs.data.PlayerStore
+import com.nihongo.srs.data.Points
 import com.nihongo.srs.data.ProgressRepository
 import com.nihongo.srs.data.UserProgress
 import com.nihongo.srs.data.VocabEntity
@@ -50,6 +52,7 @@ class ExamViewModel(
     private val speaker: JapaneseSpeaker,
     private val progress: ProgressRepository,
     scope: ExamScope,
+    private val players: PlayerStore,
 ) : ViewModel() {
 
     private val generator = ExamGenerator()
@@ -90,6 +93,7 @@ class ExamViewModel(
                 questions = if (correct) st.questions else st.questions + generator.retry(q, distractors),
             )
         }
+        if (correct && !q.isRetry) players.award(Points.EXAM_CORRECT)
         speaker.speak(q.word.reading)
     }
 
@@ -125,7 +129,7 @@ class ExamViewModel(
                 val handle: SavedStateHandle = createSavedStateHandle()
                 val scope = handle.get<String>(ARG_SCOPE)
                     ?.let { runCatching { ExamScope.valueOf(it) }.getOrNull() } ?: ExamScope.TODAY
-                ExamViewModel(app.repository, app.speaker, app.progress, scope)
+                ExamViewModel(app.repository, app.speaker, app.progress, scope, app.players)
             }
         }
     }
