@@ -28,4 +28,9 @@ class AppPrefs(context: Context) {
     var notificationPermissionAsked: Boolean
         get() = sp.getBoolean("notif_asked", false)
         set(v) = sp.edit().putBoolean("notif_asked", v).apply()
+
+    /** The user's own Gemini API key for "Ask in Banglish". Stored only on this phone. */
+    var geminiKey: String
+        get() = sp.getString("gemini_key", "") ?: ""
+        set(v) = sp.edit().putString("gemini_key", v.trim()).apply()
 }

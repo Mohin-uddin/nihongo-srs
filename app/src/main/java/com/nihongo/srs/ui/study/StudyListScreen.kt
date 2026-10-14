@@ -15,6 +15,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.VolumeUp
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.Search
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.rounded.SlowMotionVideo
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
@@ -49,6 +54,7 @@ fun StudyListScreen(
     val items by vm.items.collectAsStateWithLifecycle()
     val filter by vm.filter.collectAsStateWithLifecycle()
     val sentencesOnly by vm.sentencesOnly.collectAsStateWithLifecycle()
+    val query by vm.query.collectAsStateWithLifecycle()
 
     AppScreen(
         title = "My words",
@@ -65,6 +71,20 @@ fun StudyListScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = { vm.query.value = it },
+                    leadingIcon = { Icon(Icons.Rounded.Search, null) },
+                    trailingIcon = {
+                        if (query.isNotEmpty()) {
+                            IconButton(onClick = { vm.query.value = "" }) { Icon(Icons.Rounded.Close, "Clear") }
+                        }
+                    },
+                    placeholder = { Text("Search: বাংলা, English, 日本語, romaji") },
+                    singleLine = true,
+                    shape = MaterialTheme.shapes.large,
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 12.dp).testTag("words_search"),
+                )
                 Row(
                     Modifier.horizontalScroll(rememberScrollState()),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -77,6 +97,7 @@ fun StudyListScreen(
                     if (sentencesOnly)
                         "Read each sentence out loud 3 times. Then cover the Japanese and say it from the Bangla.\n" +
                             "প্রতিটি বাক্য ৩ বার জোরে পড়ুন। তারপর বাংলা দেখে জাপানিতে বলুন।"
+                    else if (query.isNotBlank()) "${items.size} found in all words • ${items.size}টি পাওয়া গেছে"
                     else "${items.size} words • ${items.size}টি শব্দ",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -85,7 +106,9 @@ fun StudyListScreen(
             }
             if (items.isEmpty()) {
                 item {
-                    if (filter == StudyFilter.TODAY) {
+                    if (query.isNotBlank()) {
+                        EmptyState("🔍", "No word found", "কোনো শব্দ পাওয়া যায়নি। Ask in Banglish দিয়ে চেষ্টা করুন।")
+                    } else if (filter == StudyFilter.TODAY) {
                         EmptyState("🌱", "Nothing learned today yet", "আজ এখনো কিছু শেখা হয়নি। হোম থেকে নতুন শব্দ শিখুন।")
                     } else {
                         EmptyState("📖", "No words learned yet", "এখনো কোনো শব্দ শেখা হয়নি।")

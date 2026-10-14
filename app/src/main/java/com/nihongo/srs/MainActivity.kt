@@ -36,6 +36,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.nihongo.srs.ui.ask.AskScreen
 import com.nihongo.srs.ui.exam.ExamScope
 import com.nihongo.srs.ui.exam.ExamScreen
 import com.nihongo.srs.ui.exam.ExamViewModel
@@ -71,6 +72,7 @@ private object Routes {
     const val KANA = "kana"
     const val MANAGE = "manage"
     const val SPEAK = "speak"
+    const val ASK = "ask"
     fun cards(mode: SessionMode, level: String = "ALL") = "cards/${mode.name}/$level"
     fun exam(scope: ExamScope) = "exam/${scope.name}"
 }
@@ -141,6 +143,7 @@ private fun AppNavHost(nav: NavHostController, modifier: Modifier) {
                 onExam = { scope -> nav.navigate(Routes.exam(scope)) },
                 onSpeak = { nav.navigate(Routes.SPEAK) },
                 onKana = { nav.navigate(Routes.KANA) },
+                onAsk = { nav.navigate(Routes.ASK) },
                 onMyWords = { nav.goToTab(Routes.WORDS) },
                 onProgress = { nav.goToTab(Routes.PROGRESS) },
             )
@@ -151,6 +154,7 @@ private fun AppNavHost(nav: NavHostController, modifier: Modifier) {
                 onSpeak = { nav.navigate(Routes.SPEAK) },
                 onKana = { nav.navigate(Routes.KANA) },
                 onReview = { nav.navigate(Routes.cards(SessionMode.REVIEW)) },
+                onAsk = { nav.navigate(Routes.ASK) },
             )
         }
         composable(Routes.WORDS) { StudyListScreen(onManage = { nav.navigate(Routes.MANAGE) }) }
@@ -172,5 +176,6 @@ private fun AppNavHost(nav: NavHostController, modifier: Modifier) {
         composable(Routes.KANA) { KanaScreen(onBack = { nav.popBackStack() }) }
         composable(Routes.MANAGE) { ManageScreen(onBack = { nav.popBackStack() }) }
         composable(Routes.SPEAK) { SpeakScreen(onBack = { nav.popBackStack() }) }
+        composable(Routes.ASK) { AskScreen(onBack = { nav.popBackStack() }) }
     }
 }

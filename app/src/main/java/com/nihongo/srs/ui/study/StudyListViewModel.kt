@@ -32,10 +32,23 @@ class StudyListViewModel(
     val filter = MutableStateFlow(StudyFilter.TODAY)
     val sentencesOnly = MutableStateFlow(false)
 
+    /** Search box: Japanese, kana, romaji, English or Bangla, including example sentences. */
+    val query = MutableStateFlow("")
+
     val items: StateFlow<List<VocabWithProgress>> =
-        combine(repo.observeLearned(), filter) { list, f ->
-            if (f == StudyFilter.ALL) list else list.filter(repo::isFromToday)
+        combine(repo.observeLearned(), repo.observeAll(VocabEntity.TYPE_WORD), filter, query) { learned, all, f, q ->
+            val text = q.trim()
+            when {
+                // A search looks through every word in the app, learned or not.
+                text.isNotEmpty() -> all.filter { it.vocab.matches(text) }
+                f == StudyFilter.ALL -> learned
+                else -> learned.filter(repo::isFromToday)
+            }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    private fun VocabEntity.matches(q: String): Boolean =
+        listOf(japanese, reading, romaji, meaning, meaningBn, example, exampleReading, exampleEn, exampleBn)
+            .any { it.contains(q, ignoreCase = true) }
 
     fun speakWord(v: VocabEntity) = speaker.speak(v.reading)
 

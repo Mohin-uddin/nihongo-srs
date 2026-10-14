@@ -7,7 +7,8 @@
     <!-- Daily study reminder (Android 13+ asks the user). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
-    <!-- The app has no INTERNET permission: everything works offline. -->
+    <!-- Only used by the optional "Ask in Banglish" feature (Gemini). Everything else works offline. -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Android 11+ package visibility: let the app find the TTS engine and speech recognizer. -->
     <queries>

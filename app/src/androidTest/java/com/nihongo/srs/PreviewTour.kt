@@ -10,6 +10,8 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performTextClearance
+import androidx.compose.ui.test.performTextInput
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -123,6 +125,11 @@ class PreviewTour {
         // Words tab + sentences
         tapTag("tab_words")
         shot("my_words")
+        rule.onNodeWithTag("words_search").performTextInput("বন্ধু")
+        rule.waitForIdle()
+        shot("search_bangla")
+        rule.onNodeWithTag("words_search").performTextClearance()
+        rule.waitForIdle()
         tap("Sentences • বাক্য")
         shot("my_sentences")
 
@@ -137,6 +144,11 @@ class PreviewTour {
         rule.onNodeWithTag("option0").performClick()
         rule.waitForIdle()
         shot("exam_answer")
+        back()
+
+        // Ask in Banglish (no key on the emulator: shows the key card and examples)
+        tapTag("practice_ask")
+        shot("ask_banglish")
         back()
 
         // Daily conversation

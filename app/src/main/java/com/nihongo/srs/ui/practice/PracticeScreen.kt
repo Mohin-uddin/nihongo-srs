@@ -16,6 +16,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AllInclusive
+import androidx.compose.material.icons.rounded.AutoAwesome
 import androidx.compose.material.icons.rounded.Forum
 import androidx.compose.material.icons.rounded.Lightbulb
 import androidx.compose.material.icons.rounded.Quiz
@@ -46,6 +47,7 @@ fun PracticeScreen(
     onSpeak: () -> Unit,
     onKana: () -> Unit,
     onReview: () -> Unit,
+    onAsk: () -> Unit,
 ) {
     AppScreen(title = "Practice", subtitle = "অনুশীলন") { pad ->
         Column(
@@ -67,6 +69,9 @@ fun PracticeScreen(
                 tintBackground = MaterialTheme.colorScheme.secondaryContainer)
 
             SectionTitle("Speak and read", "বলা ও পড়া")
+            MenuTile(Icons.Rounded.AutoAwesome, "Ask in Banglish", "বাংলিশে লিখুন, জাপানি বাক্য দেখুন",
+                onAsk, Modifier.testTag("practice_ask"),
+                tint = MaterialTheme.colorScheme.secondary, tintBackground = MaterialTheme.colorScheme.secondaryContainer)
             MenuTile(Icons.Rounded.Forum, "Daily conversation", "প্রতিদিনের কথা, মাইকে যাচাই",
                 onSpeak, Modifier.testTag("practice_speak"),
                 tint = MaterialTheme.colorScheme.secondary, tintBackground = MaterialTheme.colorScheme.secondaryContainer)

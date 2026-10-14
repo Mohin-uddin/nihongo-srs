@@ -27,6 +27,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.MenuBook
+import androidx.compose.material.icons.rounded.AutoAwesome
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.Forum
 import androidx.compose.material.icons.rounded.LocalFireDepartment
@@ -64,6 +65,7 @@ import com.nihongo.srs.data.VocabEntity
 import com.nihongo.srs.ui.components.Bilingual
 import com.nihongo.srs.ui.components.GridTile
 import com.nihongo.srs.ui.components.IconBadge
+import com.nihongo.srs.ui.components.MenuTile
 import com.nihongo.srs.ui.components.Pill
 import com.nihongo.srs.ui.components.ProgressBar
 import com.nihongo.srs.ui.components.ProgressRing
@@ -80,6 +82,7 @@ fun HomeScreen(
     onExam: (ExamScope) -> Unit,
     onSpeak: () -> Unit,
     onKana: () -> Unit,
+    onAsk: () -> Unit,
     onMyWords: () -> Unit,
     onProgress: () -> Unit,
     vm: HomeViewModel = viewModel(factory = HomeViewModel.Factory),
@@ -111,6 +114,11 @@ fun HomeScreen(
     ) {
         Greeting(state.streak)
         ReviewHero(state.dueToday, onStartReview)
+        MenuTile(
+            Icons.Rounded.AutoAwesome, "Ask in Banglish", "বাংলিশে লিখুন, জাপানি দেখুন", onAsk,
+            Modifier.testTag("home_ask"),
+            tint = MaterialTheme.colorScheme.secondary, tintBackground = MaterialTheme.colorScheme.secondaryContainer,
+        )
         StatsStrip(state)
         GoalsCard(state, onProgress)
 

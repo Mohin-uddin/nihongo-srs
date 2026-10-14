@@ -3,7 +3,8 @@
 A free, offline Android app to learn Japanese with the 1-4-7 spaced repetition method,
 with meanings in **English and Bangla (বাংলা)** and **speaking practice**.
 
-No ads, no account, no internet permission, no paid APIs.
+No ads, no account, no paid APIs. Everything works offline except the optional "Ask in Banglish" box,
+which uses your own free Gemini API key (typed in the app, stored only on your phone).
 
 ## Open and run in Android Studio
 
