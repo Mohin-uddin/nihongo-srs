@@ -15,9 +15,16 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
-/** TODAY = learned or reviewed today. ALL = every word you have started. */
-enum class StudyFilter { TODAY, ALL }
+/** LEARNED = every word you have started, TODAY = learned or reviewed today, N5 / N4 / MINE = the whole list. */
+enum class StudyFilter(val en: String, val bn: String) {
+    LEARNED("Learned", "শেখা"),
+    TODAY("Today", "আজ"),
+    N5("All N5", "N5 সব"),
+    N4("All N4", "N4 সব"),
+    MINE("Mine", "আমার যোগ করা"),
+}
 
 /**
  * "My Words": every learned word with its answer and example sentence visible,
@@ -29,7 +36,7 @@ class StudyListViewModel(
     private val speaker: JapaneseSpeaker,
 ) : ViewModel() {
 
-    val filter = MutableStateFlow(StudyFilter.TODAY)
+    val filter = MutableStateFlow(StudyFilter.LEARNED)
     val sentencesOnly = MutableStateFlow(false)
 
     /** Search box: Japanese, kana, romaji, English or Bangla, including example sentences. */
@@ -41,10 +48,18 @@ class StudyListViewModel(
             when {
                 // A search looks through every word in the app, learned or not.
                 text.isNotEmpty() -> all.filter { it.vocab.matches(text) }
-                f == StudyFilter.ALL -> learned
-                else -> learned.filter(repo::isFromToday)
+                f == StudyFilter.LEARNED -> learned
+                f == StudyFilter.TODAY -> learned.filter(repo::isFromToday)
+                f == StudyFilter.N5 -> all.filter { it.vocab.level == "N5" }
+                f == StudyFilter.N4 -> all.filter { it.vocab.level == "N4" }
+                else -> all.filter { it.vocab.level == VocabEntity.LEVEL_MINE }
             }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    init {
+        // Nothing learned yet: show the whole N5 list instead of an empty page.
+        viewModelScope.launch { if (repo.getLearned().isEmpty()) filter.value = StudyFilter.N5 }
+    }
 
     private fun VocabEntity.matches(q: String): Boolean =
         listOf(japanese, reading, romaji, meaning, meaningBn, example, exampleReading, exampleEn, exampleBn)

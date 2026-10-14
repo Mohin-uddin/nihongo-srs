@@ -57,8 +57,8 @@ fun StudyListScreen(
     val query by vm.query.collectAsStateWithLifecycle()
 
     AppScreen(
-        title = "My words",
-        subtitle = "আমার শেখা শব্দ ও বাক্য",
+        title = "শব্দের বই",
+        subtitle = "Words · সব শব্দ, মানে ও উদাহরণ এখানে",
         actions = {
             FilledTonalIconButton(onClick = onManage, modifier = Modifier.testTag("manage")) {
                 Icon(Icons.Rounded.Add, "Add / Manage words")
@@ -89,8 +89,12 @@ fun StudyListScreen(
                     Modifier.horizontalScroll(rememberScrollState()),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    ChoiceChip("Today • আজ", filter == StudyFilter.TODAY, { vm.filter.value = StudyFilter.TODAY })
-                    ChoiceChip("All • সব", filter == StudyFilter.ALL, { vm.filter.value = StudyFilter.ALL })
+                    StudyFilter.entries.forEach { f ->
+                        ChoiceChip(f.bn, filter == f && !sentencesOnly, {
+                            vm.filter.value = f
+                            vm.sentencesOnly.value = false
+                        })
+                    }
                     ChoiceChip("Sentences • বাক্য", sentencesOnly, { vm.sentencesOnly.value = !sentencesOnly })
                 }
                 Text(
@@ -109,9 +113,11 @@ fun StudyListScreen(
                     if (query.isNotBlank()) {
                         EmptyState("🔍", "No word found", "কোনো শব্দ পাওয়া যায়নি। Ask in Banglish দিয়ে চেষ্টা করুন।")
                     } else if (filter == StudyFilter.TODAY) {
-                        EmptyState("🌱", "Nothing learned today yet", "আজ এখনো কিছু শেখা হয়নি। হোম থেকে নতুন শব্দ শিখুন।")
+                        EmptyState("🌱", "Nothing learned today yet", "আজ এখনো কিছু শেখা হয়নি। \"আজ\" ট্যাব থেকে নতুন শব্দ শিখুন।")
+                    } else if (filter == StudyFilter.MINE) {
+                        EmptyState("✍️", "You haven't added words yet", "উপরের + চেপে বা খবর থেকে শব্দ যোগ করুন।")
                     } else {
-                        EmptyState("📖", "No words learned yet", "এখনো কোনো শব্দ শেখা হয়নি।")
+                        EmptyState("📖", "No words learned yet", "এখনো কোনো শব্দ শেখা হয়নি। \"N5 সব\" চাপলে সব শব্দ দেখবেন।")
                     }
                 }
             }

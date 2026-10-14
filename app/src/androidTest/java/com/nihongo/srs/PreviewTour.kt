@@ -105,10 +105,16 @@ class PreviewTour {
     fun tour() {
         shell("mkdir -p $DIR")
 
-        // Home (first launch fills the database, so wait for it)
+        // First launch: the guide explains every tab and asks for a name
+        waitTag("guide_start", 30_000)
+        shot("guide")
+        rule.onNodeWithTag("guide_name").performTextInput("Mohin")
+        tapTag("guide_start")
+
+        // Today tab (first launch fills the database, so wait for it)
         rule.waitUntil(30_000) { wordsLoaded() }
         shot("home")
-        runCatching { node("Daily reminder").performScrollTo() }
+        runCatching { node("নিচের ট্যাবগুলো").performScrollTo() }
         shot("home_bottom")
 
         // Learn new words
@@ -121,7 +127,6 @@ class PreviewTour {
         // Review (with reverse cards)
         makeLearnedWordsDue()
         Thread.sleep(1500)
-        runCatching { rule.onNodeWithTag("start_review").performScrollTo() }
         tapTag("start_review")
         waitFor("show answer")
         shot("review_question")
@@ -132,23 +137,45 @@ class PreviewTour {
         shot("review_question_2")
         back()
 
-        // Words tab + sentences
-        tapTag("tab_words")
-        shot("my_words")
-        rule.onNodeWithTag("words_search").performTextInput("বন্ধু")
+        // Exam from step 3
+        tapTag("home_exam")
+        waitFor("Question 1")
+        shot("exam_question")
+        rule.onNodeWithTag("option0").performClick()
         rule.waitForIdle()
-        shot("search_bangla")
-        rule.onNodeWithTag("words_search").performTextClearance()
-        rule.waitForIdle()
-        tap("Sentences • বাক্য")
-        shot("my_sentences")
+        shot("exam_answer")
+        back()
 
-        // Practice tab
-        tapTag("tab_practice")
-        shot("practice")
+        // News tab: list, a story with tappable words, the word sheet, radio
+        tapTag("tab_news")
+        if (waitTag("news_item_0", 30_000)) {
+            shot("news_list")
+            tapTag("news_item_0")
+            waitTag("news_title", 30_000)
+            shot("news_article")
+            runCatching {
+                tapTag("token_-1_0")
+                Thread.sleep(800)
+                shot("news_word")
+                systemBack()
+            }
+            // The sheet may close or the screen may go back, depending on the Android version.
+            if (!has("news_radio")) back()
+        } else {
+            shot("news_list_offline")
+        }
+        tapTag("news_radio")
+        if (waitTag("radio_episode_0", 30_000)) {
+            shot("radio")
+            tapTag("radio_episode_0")
+            Thread.sleep(4000)
+            shot("radio_playing")
+            runCatching { rule.onNodeWithTag("radio_play").performClick() }
+        }
+        back()
 
-        // Scoreboard: add a second player, then a quiz battle
-        tapTag("practice_players")
+        // Play tab: add a second player, then a quiz battle
+        tapTag("tab_players")
         shot("scoreboard")
         tapTag("players_add")
         rule.onNodeWithTag("player_name").performTextInput("Wife")
@@ -174,59 +201,27 @@ class PreviewTour {
         shot("battle_result")
         back()
         shot("scoreboard_after_battle")
-        back()
 
-        // Japanese news: list, a story with tappable words, the word sheet
-        tapTag("practice_news")
-        if (waitTag("news_item_0", 30_000)) {
-            shot("news_list")
-            tapTag("news_item_0")
-            waitTag("news_title", 30_000)
-            shot("news_article")
-            runCatching {
-                tapTag("token_-1_0")
-                Thread.sleep(800)
-                shot("news_word")
-                systemBack()
-            }
-            // The sheet may close or the screen may go back, depending on the Android version.
-            if (!has("news_radio")) back()
-        } else {
-            shot("news_list_offline")
-        }
-
-        // Radio news
-        tapTag("news_radio")
-        if (waitTag("radio_episode_0", 30_000)) {
-            shot("radio")
-            tapTag("radio_episode_0")
-            Thread.sleep(4000)
-            shot("radio_playing")
-            runCatching { rule.onNodeWithTag("radio_play").performClick() }
-        }
-        back()
-        back()
-
-        // Exam
-        tapTag("practice_exam_today")
-        waitFor("Question 1")
-        shot("exam_question")
-        rule.onNodeWithTag("option0").performClick()
+        // Words tab: the whole word book, search in Bangla, sentences
+        tapTag("tab_words")
+        shot("my_words")
+        rule.onNodeWithTag("words_search").performTextInput("বন্ধু")
         rule.waitForIdle()
-        shot("exam_answer")
-        back()
+        shot("search_bangla")
+        rule.onNodeWithTag("words_search").performTextClearance()
+        rule.waitForIdle()
+        tap("Sentences • বাক্য")
+        shot("my_sentences")
 
-        // Ask in Banglish (no key on the emulator: shows the key card and examples)
+        // More tab
+        tapTag("tab_practice")
+        shot("more")
         tapTag("practice_ask")
         shot("ask_banglish")
         back()
-
-        // Daily conversation
         tapTag("practice_speak")
         shot("conversation")
         back()
-
-        // Kana
         tapTag("practice_kana")
         shot("kana_chart")
         tapTag("kana_quiz_start")
@@ -236,17 +231,13 @@ class PreviewTour {
         shot("kana_quiz_answer")
         back() // close quiz
         back()
-
-        // Progress tab
-        tapTag("tab_progress")
+        tapTag("more_progress")
         waitFor("Course completion")
         shot("progress")
         runCatching { node("Recent exams").performScrollTo() }
         shot("progress_bottom")
-
-        // Manage
-        tapTag("tab_words")
-        tapTag("manage")
+        back()
+        tapTag("more_manage")
         shot("manage")
         back()
     }

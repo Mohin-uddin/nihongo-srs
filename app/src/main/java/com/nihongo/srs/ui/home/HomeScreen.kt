@@ -1,11 +1,9 @@
 package com.nihongo.srs.ui.home
 
 import android.Manifest
-import android.app.TimePickerDialog
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -27,24 +24,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.MenuBook
-import androidx.compose.material.icons.rounded.AutoAwesome
-import androidx.compose.material.icons.rounded.CheckCircle
-import androidx.compose.material.icons.rounded.Forum
-import androidx.compose.material.icons.rounded.Headphones
-import androidx.compose.material.icons.rounded.Newspaper
-import androidx.compose.material.icons.rounded.SportsEsports
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.EmojiEvents
 import androidx.compose.material.icons.rounded.LocalFireDepartment
-import androidx.compose.material.icons.rounded.NotificationsActive
 import androidx.compose.material.icons.rounded.PlayArrow
-import androidx.compose.material.icons.rounded.Quiz
-import androidx.compose.material.icons.rounded.RadioButtonUnchecked
-import androidx.compose.material.icons.rounded.Translate
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -52,10 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -66,49 +50,36 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nihongo.srs.data.LevelProgress
 import com.nihongo.srs.data.Player
-import com.nihongo.srs.ui.players.Avatar
-import com.nihongo.srs.ui.players.playerColor
 import com.nihongo.srs.data.VocabEntity
 import com.nihongo.srs.ui.components.Bilingual
-import com.nihongo.srs.ui.components.GridTile
-import com.nihongo.srs.ui.components.IconBadge
-import com.nihongo.srs.ui.components.MenuTile
 import com.nihongo.srs.ui.components.Pill
 import com.nihongo.srs.ui.components.ProgressBar
-import com.nihongo.srs.ui.components.ProgressRing
 import com.nihongo.srs.ui.components.ScreenPadding
 import com.nihongo.srs.ui.components.SectionTitle
 import com.nihongo.srs.ui.components.SoftCard
 import com.nihongo.srs.ui.exam.ExamScope
+import com.nihongo.srs.ui.players.Avatar
 import com.nihongo.srs.ui.theme.Extra
 
+/**
+ * The "আজ" (Today) tab: only today's three steps, in order.
+ * Everything else lives in its own tab so this page stays simple.
+ */
 @Composable
 fun HomeScreen(
     onStartReview: () -> Unit,
     onLearnNew: (level: String) -> Unit,
     onExam: (ExamScope) -> Unit,
-    onSpeak: () -> Unit,
-    onKana: () -> Unit,
-    onAsk: () -> Unit,
-    onNews: () -> Unit,
-    onRadio: () -> Unit,
     onPlayers: () -> Unit,
-    onBattle: () -> Unit,
-    onMyWords: () -> Unit,
-    onProgress: () -> Unit,
     vm: HomeViewModel = viewModel(factory = HomeViewModel.Factory),
 ) {
     val state by vm.uiState.collectAsStateWithLifecycle()
-    val reminder by vm.reminder.collectAsStateWithLifecycle()
     val players by vm.players.collectAsStateWithLifecycle()
     val activeId by vm.activeId.collectAsStateWithLifecycle()
-    val context = LocalContext.current
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { vm.refreshDay() }
 
     // Android 13+: ask once for permission to show the daily reminder.
-    val notifPermission = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { }
+    val notifPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { }
     LaunchedEffect(Unit) {
         if (Build.VERSION.SDK_INT >= 33 && vm.shouldAskNotificationPermission) {
             vm.onNotificationPermissionAsked()
@@ -116,6 +87,7 @@ fun HomeScreen(
         }
     }
 
+    val player = players.firstOrNull { it.id == activeId } ?: players.first()
     Column(
         Modifier
             .fillMaxSize()
@@ -123,291 +95,173 @@ fun HomeScreen(
             .verticalScroll(rememberScrollState())
             .statusBarsPadding()
             .padding(horizontal = ScreenPadding, vertical = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
-        Greeting(state.streak, players.firstOrNull { it.id == activeId } ?: players.first(), onPlayers)
-        ReviewHero(state.dueToday, onStartReview)
-        ScoreboardCard(players, activeId, onPlayers, onBattle)
-        MenuTile(
-            Icons.Rounded.AutoAwesome, "Ask in Banglish", "বাংলিশে লিখুন, জাপানি দেখুন", onAsk,
-            Modifier.testTag("home_ask"),
-            tint = MaterialTheme.colorScheme.secondary, tintBackground = MaterialTheme.colorScheme.secondaryContainer,
+        Greeting(player, state.streak, onPlayers)
+
+        SectionTitle("আজকের ৩টি কাজ", "Today's 3 steps · ওপর থেকে নিচে করুন")
+
+        val reviewDone = state.dueToday == 0
+        StepCard(
+            n = 1, done = reviewDone,
+            title = "পুরনো শব্দ রিভিউ",
+            sub = if (reviewDone) "আজ রিভিউ বাকি নেই ✓" else "${state.dueToday}টি শব্দ আজ মনে করার পালা",
+            en = "Review",
+            button = if (reviewDone) null else "রিভিউ শুরু",
+            onClick = onStartReview,
+            tag = "start_review",
         )
-        StatsStrip(state)
-        GoalsCard(state, onProgress)
 
-        SectionTitle("Learn new words", "নতুন শব্দ শিখুন • প্রতিবার ১০টি")
-        LevelCard("N5", "Beginner", "প্রাথমিক স্তর", state.level("N5"), state.newN5,
-            MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.primaryContainer) { onLearnNew("N5") }
-        LevelCard("N4", "Elementary", "দ্বিতীয় স্তর", state.level("N4"), state.newN4,
-            MaterialTheme.colorScheme.secondary, MaterialTheme.colorScheme.secondaryContainer) { onLearnNew("N4") }
-        if ((state.level(VocabEntity.LEVEL_MINE)?.total ?: 0) > 0) {
-            LevelCard("My", "My own words", "নিজের যোগ করা শব্দ", state.level(VocabEntity.LEVEL_MINE),
-                state.newMine, Extra.correct, Extra.correctSoft) { onLearnNew(VocabEntity.LEVEL_MINE) }
-        }
-
-        SectionTitle("Practice", "অনুশীলন")
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            GridTile(Icons.Rounded.Newspaper, "Japanese news", "খবর পড়ুন ও শব্দ শিখুন", onNews,
-                Modifier.weight(1f).testTag("home_news"))
-            GridTile(Icons.Rounded.Headphones, "Radio news", "রেডিও খবর শুনুন", onRadio,
-                Modifier.weight(1f).testTag("home_radio"),
-                tint = Extra.correct, tintBackground = Extra.correctSoft)
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            GridTile(Icons.Rounded.Quiz, "Today's exam", "আজকের পরীক্ষা", { onExam(ExamScope.TODAY) },
-                Modifier.weight(1f).testTag("home_exam"))
-            GridTile(Icons.Rounded.Forum, "Conversation", "প্রতিদিনের কথা", onSpeak,
-                Modifier.weight(1f).testTag("home_speak"),
-                tint = MaterialTheme.colorScheme.secondary, tintBackground = MaterialTheme.colorScheme.secondaryContainer)
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            GridTile(Icons.Rounded.Translate, "Kana", "হিরাগানা ও কাতাকানা", onKana,
-                Modifier.weight(1f).testTag("home_kana"),
-                tint = Extra.streak, tintBackground = Extra.streak.copy(alpha = 0.15f))
-            GridTile(Icons.AutoMirrored.Rounded.MenuBook, "My words", "আমার শব্দ ও বাক্য", onMyWords,
-                Modifier.weight(1f).testTag("home_words"),
-                tint = Extra.correct, tintBackground = Extra.correctSoft)
-        }
-
-        ReminderCard(
-            enabled = reminder.enabled,
-            label = reminder.label,
-            onToggle = { vm.setReminder(it) },
-            onChangeTime = {
-                TimePickerDialog(context, { _, h, m -> vm.setReminder(true, h, m) },
-                    reminder.hour, reminder.minute, false).show()
+        val learned = state.today.learned
+        val learnDone = learned >= HomeUiState.GOAL_NEW_WORDS
+        StepCard(
+            n = 2, done = learnDone,
+            title = "নতুন ১০টি শব্দ শিখুন",
+            sub = "আজ শিখেছেন $learned/${HomeUiState.GOAL_NEW_WORDS}। নিচে একটি লেভেল বেছে নিন",
+            en = "Learn new words",
+            button = null, onClick = {}, tag = "step_learn",
+        ) {
+            LevelRow("N5", "শুরুর লেভেল", state.level("N5"), state.newN5, MaterialTheme.colorScheme.primary) { onLearnNew("N5") }
+            LevelRow("N4", "দ্বিতীয় লেভেল", state.level("N4"), state.newN4, MaterialTheme.colorScheme.secondary) { onLearnNew("N4") }
+            if ((state.level(VocabEntity.LEVEL_MINE)?.total ?: 0) > 0) {
+                LevelRow("My", "আমার যোগ করা শব্দ", state.level(VocabEntity.LEVEL_MINE), state.newMine, Extra.correct) {
+                    onLearnNew(VocabEntity.LEVEL_MINE)
+                }
             }
+        }
+
+        val examDone = state.today.exams >= 1
+        StepCard(
+            n = 3, done = examDone,
+            title = "ছোট পরীক্ষা দিন",
+            sub = when {
+                examDone -> "আজ পরীক্ষা হয়ে গেছে ✓"
+                learned == 0 && state.today.reviewed == 0 -> "আগে ১ বা ২ নম্বর কাজ করুন"
+                else -> "আজ যা শিখলেন তা থেকে ২০টি প্রশ্ন"
+            },
+            en = "Quick exam",
+            button = if (examDone) "আবার দিন" else "পরীক্ষা শুরু",
+            enabled = learned > 0 || state.today.reviewed > 0,
+            onClick = { onExam(ExamScope.TODAY) },
+            tag = "home_exam",
         )
+
+        if (reviewDone && learnDone && examDone) {
+            SoftCard(color = Extra.correctSoft, border = false) {
+                Bilingual("お疲れ様! আজকের সব কাজ শেষ!", "Great job! Try the News or Play tab for more.",
+                    enStyle = MaterialTheme.typography.titleLarge, color = Extra.correct)
+            }
+        }
+
+        SoftCard(color = MaterialTheme.colorScheme.primaryContainer, border = false, padding = 16.dp) {
+            Text("নিচের ট্যাবগুলো", style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer)
+            Text(
+                "📰 খবর: জাপানি খবর পড়ুন ও শুনুন\n🎮 খেলা: স্কোর আর কুইজ যুদ্ধ\n📖 শব্দ: সব শব্দের বই\n☰ আরও: কানা, কথা বলা, অগ্রগতি, সেটিংস",
+                style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onPrimaryContainer,
+            )
+        }
         Spacer(Modifier.height(8.dp))
     }
 }
 
 @Composable
-private fun Greeting(streak: Int, player: Player, onPlayers: () -> Unit) {
+private fun Greeting(player: Player, streak: Int, onPlayers: () -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically) {
+        Box(Modifier.clip(CircleShape).clickable(onClick = onPlayers).testTag("home_player")) { Avatar(player, 48.dp) }
+        Spacer(Modifier.width(12.dp))
         Column(Modifier.weight(1f)) {
-            Text("こんにちは!", style = MaterialTheme.typography.headlineLarge)
-            Text("Let's learn Japanese today • আজ জাপানি শিখি",
-                style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("こんにちは, ${player.name}!", style = MaterialTheme.typography.headlineSmall)
+            Text("আজ জাপানি শিখি • Let's learn", style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        Box(Modifier.clip(CircleShape).clickable(onClick = onPlayers).testTag("home_player")) {
-            Avatar(player, 40.dp)
+        Column(horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Pill("${player.points} পয়েন্ট", icon = Icons.Rounded.EmojiEvents,
+                color = Extra.streak.copy(alpha = 0.15f), textColor = Extra.streak)
+            Pill("$streak দিন", icon = Icons.Rounded.LocalFireDepartment,
+                color = MaterialTheme.colorScheme.secondaryContainer, textColor = MaterialTheme.colorScheme.secondary)
         }
-        Spacer(Modifier.width(8.dp))
-        Pill(
-            "$streak", icon = Icons.Rounded.LocalFireDepartment,
-            color = Extra.streak.copy(alpha = 0.15f), textColor = Extra.streak,
-        )
     }
 }
 
-/** Gradient card with today's review count. A red "sun" circle nods to the Japanese flag. */
+/** One numbered step of today's plan. */
 @Composable
-private fun ReviewHero(due: Int, onStart: () -> Unit) {
-    val shape = RoundedCornerShape(28.dp)
-    Box(
-        Modifier
-            .fillMaxWidth()
-            .clip(shape)
-            .background(Brush.linearGradient(listOf(Extra.heroStart, Extra.heroEnd)))
-    ) {
-        val sun = MaterialTheme.colorScheme.secondary
-        Canvas(Modifier.matchParentSize()) {
-            drawCircle(sun.copy(alpha = 0.9f), radius = size.minDimension * 0.22f,
-                center = Offset(size.width * 0.86f, size.height * 0.24f))
-            drawCircle(Color.White.copy(alpha = 0.06f), radius = size.minDimension * 0.75f,
-                center = Offset(size.width * 0.95f, size.height * 1.05f))
-        }
-        Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            Text("TODAY'S REVIEW • আজকের রিভিউ", style = MaterialTheme.typography.labelMedium,
-                color = Color.White.copy(alpha = 0.8f))
-            Row(verticalAlignment = Alignment.Bottom) {
-                Text("$due", fontSize = 56.sp, fontWeight = FontWeight.Bold, color = Color.White, lineHeight = 60.sp)
-                Spacer(Modifier.width(8.dp))
-                Text(if (due == 1) "word due" else "words due", style = MaterialTheme.typography.titleMedium,
-                    color = Color.White.copy(alpha = 0.85f), modifier = Modifier.padding(bottom = 10.dp))
+private fun StepCard(
+    n: Int,
+    done: Boolean,
+    title: String,
+    sub: String,
+    en: String,
+    button: String?,
+    onClick: () -> Unit,
+    tag: String,
+    enabled: Boolean = true,
+    extra: @Composable () -> Unit = {},
+) {
+    SoftCard(color = if (done) Extra.correctSoft.copy(alpha = 0.5f) else MaterialTheme.colorScheme.surface) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Box(
+                Modifier.size(40.dp).clip(CircleShape)
+                    .background(if (done) Extra.correct else MaterialTheme.colorScheme.primary),
+                contentAlignment = Alignment.Center,
+            ) {
+                if (done) Icon(Icons.Rounded.Check, null, tint = Color.White)
+                else Text("$n", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 18.sp)
             }
-            Text(
-                if (due > 0) "Say each answer out loud before you check. • উত্তর দেখার আগে জোরে বলুন।"
-                else "All caught up! Learn new words below. • আজ রিভিউ বাকি নেই।",
-                style = MaterialTheme.typography.bodyMedium, color = Color.White.copy(alpha = 0.85f)
-            )
-            Spacer(Modifier.height(6.dp))
+            Spacer(Modifier.width(14.dp))
+            Column(Modifier.weight(1f)) {
+                Text(title, style = MaterialTheme.typography.titleLarge)
+                Text("$en · $sub", style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        }
+        extra()
+        if (button != null) {
             Button(
-                onClick = onStart,
-                enabled = due > 0,
+                onClick = onClick, enabled = enabled,
                 shape = MaterialTheme.shapes.medium,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White, contentColor = Extra.heroStart,
-                    disabledContainerColor = Color.White.copy(alpha = 0.18f),
-                    disabledContentColor = Color.White.copy(alpha = 0.7f),
-                ),
-                modifier = Modifier.fillMaxWidth().heightIn(min = 54.dp).testTag("start_review"),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp).testTag(tag),
             ) {
                 Icon(Icons.Rounded.PlayArrow, null)
                 Spacer(Modifier.width(6.dp))
-                Text("Start Review • রিভিউ শুরু", style = MaterialTheme.typography.labelLarge)
-            }
-        }
-    }
-}
-
-/** Who is ahead, at a glance. Tap to switch player or see the full scoreboard. */
-@Composable
-private fun ScoreboardCard(players: List<Player>, activeId: Int, onPlayers: () -> Unit, onBattle: () -> Unit) {
-    val leaderPoints = players.maxOf { it.points }
-    SoftCard(onClick = onPlayers, padding = 16.dp, modifier = Modifier.testTag("home_scoreboard")) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Bilingual("Scoreboard", "স্কোরবোর্ড • কার পয়েন্ট বেশি", Modifier.weight(1f),
-                enStyle = MaterialTheme.typography.titleLarge)
-            if (players.size >= 2) {
-                Button(
-                    onClick = onBattle, shape = MaterialTheme.shapes.medium,
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
-                    modifier = Modifier.testTag("home_battle"),
-                ) {
-                    Icon(Icons.Rounded.SportsEsports, null, Modifier.size(18.dp))
-                    Spacer(Modifier.width(6.dp))
-                    Text("Battle", style = MaterialTheme.typography.labelLarge)
-                }
-            }
-        }
-        players.sortedByDescending { it.points }.forEach { p ->
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Avatar(p, 34.dp)
-                Spacer(Modifier.width(10.dp))
-                Column(Modifier.weight(1f)) {
-                    Text(
-                        p.name + if (p.points == leaderPoints && players.size > 1 && p.points > 0) "  👑" else "",
-                        style = MaterialTheme.typography.titleMedium,
-                    )
-                    Text(
-                        (if (p.id == activeId) "Studying now • " else "") + "today +${p.todayPoints()}",
-                        style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-                Text("${p.points}", style = MaterialTheme.typography.headlineSmall, color = playerColor(p))
-            }
-        }
-        if (players.size < 2) {
-            Text("Add your partner and compete • সঙ্গীকে যোগ করে প্রতিযোগিতা করুন ›",
-                style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-        }
-    }
-}
-
-@Composable
-private fun StatsStrip(state: HomeUiState) {
-    SoftCard(padding = 16.dp) {
-        Row {
-            Stat("${state.learning}", "Learning", "শিখছি", Modifier.weight(1f))
-            Stat("${state.mastered}", "Mastered", "আয়ত্ত", Modifier.weight(1f))
-            Stat("${state.today.learned}", "New today", "আজ নতুন", Modifier.weight(1f))
-        }
-    }
-}
-
-@Composable
-private fun Stat(value: String, en: String, bn: String, modifier: Modifier) {
-    Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(value, style = MaterialTheme.typography.headlineMedium)
-        Text(en, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        Text(bn, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-    }
-}
-
-@Composable
-private fun GoalsCard(state: HomeUiState, onProgress: () -> Unit) {
-    val goals = state.goals
-    val done = goals.count { it.done }
-    SoftCard(onClick = onProgress, modifier = Modifier.testTag("home_progress")) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            ProgressRing(done / goals.size.toFloat(), size = 58.dp,
-                color = if (done == goals.size) Extra.correct else MaterialTheme.colorScheme.primary) {
-                Text("$done/${goals.size}", style = MaterialTheme.typography.titleSmall)
-            }
-            Spacer(Modifier.width(14.dp))
-            Bilingual(
-                "Today's goals",
-                if (done == goals.size) "সব লক্ষ্য পূর্ণ! お疲れ様!" else "আজকের লক্ষ্য",
-                Modifier.weight(1f), enStyle = MaterialTheme.typography.titleLarge,
-            )
-            Text("Progress ›", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-        }
-        goals.forEach { g ->
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    if (g.done) Icons.Rounded.CheckCircle else Icons.Rounded.RadioButtonUnchecked, null,
-                    tint = if (g.done) Extra.correct else MaterialTheme.colorScheme.outline,
-                    modifier = Modifier.size(22.dp)
-                )
-                Spacer(Modifier.width(12.dp))
-                Bilingual(g.en, g.bn, Modifier.weight(1f),
-                    enStyle = MaterialTheme.typography.bodyLarge, bnStyle = MaterialTheme.typography.bodyMedium)
-                if (g.count != null) {
-                    Text(g.count, style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant)
-                }
+                Text(button, style = MaterialTheme.typography.labelLarge)
             }
         }
     }
 }
 
 @Composable
-private fun LevelCard(
+private fun LevelRow(
     badge: String,
-    en: String,
     bn: String,
     progress: LevelProgress?,
     newCount: Int,
     tint: Color,
-    tintSoft: Color,
     onClick: () -> Unit,
 ) {
     val total = progress?.total ?: 0
     val learned = progress?.learned ?: 0
-    SoftCard(
-        onClick = if (newCount > 0) onClick else null,
-        modifier = Modifier.testTag("learn_$badge"),
-        padding = 16.dp,
+    Row(
+        Modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainerLow)
+            .clickable(enabled = newCount > 0, onClick = onClick)
+            .padding(12.dp)
+            .testTag("learn_$badge"),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Box(
-                Modifier.size(52.dp).clip(RoundedCornerShape(16.dp)).background(tintSoft),
-                contentAlignment = Alignment.Center
-            ) { Text(badge, style = MaterialTheme.typography.titleLarge, color = tint) }
-            Spacer(Modifier.width(14.dp))
-            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Bilingual(if (badge == "My") en else "JLPT $badge · $en", bn, Modifier.weight(1f))
-                    Text("$newCount new", style = MaterialTheme.typography.labelLarge, color = tint)
-                }
-                ProgressBar(if (total == 0) 0f else learned / total.toFloat(), color = tint, height = 8.dp)
-                Text("$learned / $total learned • শেখা হয়েছে", style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
+        Box(
+            Modifier.size(44.dp).clip(RoundedCornerShape(12.dp)).background(tint.copy(alpha = 0.12f)),
+            contentAlignment = Alignment.Center,
+        ) { Text(badge, style = MaterialTheme.typography.titleMedium, color = tint) }
+        Spacer(Modifier.width(12.dp))
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(bn, style = MaterialTheme.typography.titleMedium)
+            ProgressBar(if (total == 0) 0f else learned / total.toFloat(), color = tint, height = 6.dp)
+            Text("$learned / $total শেখা", style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-    }
-}
-
-@Composable
-private fun ReminderCard(enabled: Boolean, label: String, onToggle: (Boolean) -> Unit, onChangeTime: () -> Unit) {
-    SoftCard(padding = 16.dp) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            IconBadge(Icons.Rounded.NotificationsActive, MaterialTheme.colorScheme.primary,
-                MaterialTheme.colorScheme.primaryContainer)
-            Spacer(Modifier.width(14.dp))
-            Column(Modifier.weight(1f).clickable(enabled = enabled, onClick = onChangeTime)) {
-                Text("Daily reminder", style = MaterialTheme.typography.titleMedium)
-                Text(
-                    if (enabled) "Every day at $label · tap to change" else "Off • বন্ধ",
-                    style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Text("প্রতিদিনের রিমাইন্ডার", style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-            Switch(checked = enabled, onCheckedChange = onToggle)
-        }
+        Spacer(Modifier.width(10.dp))
+        Text("$newCount new", style = MaterialTheme.typography.labelLarge, color = tint)
     }
 }

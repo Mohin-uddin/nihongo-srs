@@ -83,7 +83,7 @@ private val timeFormat = DateTimeFormatter.ofPattern("d MMM, h:mm a")
 /** List of today's NHK headlines. */
 @Composable
 fun NewsListScreen(
-    onBack: () -> Unit,
+    onBack: (() -> Unit)?,
     onOpen: (NewsItem) -> Unit,
     onRadio: () -> Unit,
     onAddKey: () -> Unit,
@@ -93,7 +93,7 @@ fun NewsListScreen(
     val headlines by vm.headlines.collectAsStateWithLifecycle()
 
     AppScreen(
-        title = "Japanese news", subtitle = "আজকের জাপানি খবর • NHK", onBack = onBack,
+        title = "জাপানি খবর", subtitle = "News · খবরে চাপ দিন, তারপর শব্দে চাপ দিয়ে মানে দেখুন", onBack = onBack,
         actions = { IconButton(onClick = { vm.refresh() }) { Icon(Icons.Rounded.Refresh, "Refresh") } },
     ) { pad ->
         Column(
@@ -102,7 +102,7 @@ fun NewsListScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             MenuTile(
-                Icons.Rounded.Headphones, "Listen: NHK radio news", "রেডিও খবর শুনুন", onRadio,
+                Icons.Rounded.Headphones, "রেডিও খবর শুনুন", "Radio news · শুধু কান দিয়ে শোনার অভ্যাস", onRadio,
                 Modifier.testTag("news_radio"),
                 tint = MaterialTheme.colorScheme.secondary, tintBackground = MaterialTheme.colorScheme.secondaryContainer,
             )
@@ -121,7 +121,7 @@ fun NewsListScreen(
                     }
                 }
             }
-            SectionTitle("Today's stories", "যেকোনো খবরে চাপ দিন, তারপর শব্দে চাপ দিয়ে মানে দেখুন")
+            SectionTitle("আজকের খবর", "Today's stories from NHK")
             when {
                 state.isLoading && headlines.isEmpty() -> Box(Modifier.fillMaxWidth().padding(40.dp), Alignment.Center) {
                     CircularProgressIndicator()

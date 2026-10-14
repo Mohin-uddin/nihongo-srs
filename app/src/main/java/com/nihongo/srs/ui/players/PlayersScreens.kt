@@ -96,7 +96,7 @@ fun Avatar(p: Player, size: Dp = 44.dp) {
 /** Scoreboard: who has more points, who is studying now, and the quiz battle. */
 @Composable
 fun PlayersScreen(
-    onBack: () -> Unit,
+    onBack: (() -> Unit)?,
     onBattle: () -> Unit,
     vm: PlayersViewModel = viewModel(factory = PlayersViewModel.Factory),
 ) {
@@ -105,7 +105,7 @@ fun PlayersScreen(
     var editing by remember { mutableStateOf<Player?>(null) }
     var adding by remember { mutableStateOf(false) }
 
-    AppScreen(title = "Scoreboard", subtitle = "কে কত পয়েন্ট পেল", onBack = onBack) { pad ->
+    AppScreen(title = "খেলা ও স্কোর", subtitle = "Play · কার পয়েন্ট বেশি, কুইজ যুদ্ধ", onBack = onBack) { pad ->
         Column(
             Modifier.padding(pad).fillMaxSize().verticalScroll(rememberScrollState())
                 .padding(horizontal = ScreenPadding, vertical = 8.dp),

@@ -12,9 +12,10 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.MenuBook
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Insights
-import androidx.compose.material.icons.rounded.School
+import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.Newspaper
+import androidx.compose.material.icons.rounded.SportsEsports
+import androidx.compose.material.icons.rounded.Today
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -24,6 +25,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -37,6 +42,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.nihongo.srs.ui.GuideScreen
 import com.nihongo.srs.ui.ask.AskScreen
 import com.nihongo.srs.ui.exam.ExamScope
 import com.nihongo.srs.ui.exam.ExamScreen
@@ -92,11 +98,13 @@ private object Routes {
 
 private data class Tab(val route: String, val en: String, val bn: String, val icon: ImageVector)
 
+/** Five tabs, named in Bangla first: Today, News, Play, Words, More. */
 private val tabs = listOf(
-    Tab(Routes.HOME, "Home", "হোম", Icons.Rounded.Home),
-    Tab(Routes.PRACTICE, "Practice", "অনুশীলন", Icons.Rounded.School),
+    Tab(Routes.HOME, "Today", "আজ", Icons.Rounded.Today),
+    Tab(Routes.NEWS, "News", "খবর", Icons.Rounded.Newspaper),
+    Tab(Routes.PLAYERS, "Play", "খেলা", Icons.Rounded.SportsEsports),
     Tab(Routes.WORDS, "Words", "শব্দ", Icons.AutoMirrored.Rounded.MenuBook),
-    Tab(Routes.PROGRESS, "Progress", "অগ্রগতি", Icons.Rounded.Insights),
+    Tab(Routes.PRACTICE, "More", "আরও", Icons.Rounded.Menu),
 )
 
 @Composable
@@ -105,13 +113,24 @@ private fun AppRoot() {
     val entry by nav.currentBackStackEntryAsState()
     val route = entry?.destination?.route
     val showTabs = tabs.any { it.route == route }
+    val app = LocalContext.current.applicationContext as NihongoApp
+    var showGuide by rememberSaveable { mutableStateOf(!app.prefs.guideSeen) }
+
+    if (showGuide) {
+        GuideScreen(initialName = app.players.active.name.takeIf { it != "Me" }.orEmpty()) { name ->
+            if (name.isNotBlank()) app.players.rename(app.players.active.id, name)
+            app.prefs.guideSeen = true
+            showGuide = false
+        }
+        return
+    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets = WindowInsets.navigationBars,
         bottomBar = { if (showTabs) BottomTabs(nav, route) },
     ) { pad ->
-        AppNavHost(nav, Modifier.padding(pad))
+        AppNavHost(nav, Modifier.padding(pad), onGuide = { showGuide = true })
     }
 }
 
@@ -125,8 +144,8 @@ private fun BottomTabs(nav: NavHostController, route: String?) {
                 icon = { Icon(tab.icon, null) },
                 label = {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(tab.en, style = MaterialTheme.typography.labelMedium)
-                        Text(tab.bn, style = MaterialTheme.typography.labelSmall)
+                        Text(tab.bn, style = MaterialTheme.typography.labelLarge)
+                        Text(tab.en, style = MaterialTheme.typography.labelSmall)
                     }
                 },
                 colors = NavigationBarItemDefaults.colors(
@@ -147,22 +166,14 @@ private fun NavHostController.goToTab(route: String) = navigate(route) {
 }
 
 @Composable
-private fun AppNavHost(nav: NavHostController, modifier: Modifier) {
+private fun AppNavHost(nav: NavHostController, modifier: Modifier, onGuide: () -> Unit) {
     NavHost(navController = nav, startDestination = Routes.HOME, modifier = modifier.fillMaxSize()) {
         composable(Routes.HOME) {
             HomeScreen(
                 onStartReview = { nav.navigate(Routes.cards(SessionMode.REVIEW)) },
                 onLearnNew = { level -> nav.navigate(Routes.cards(SessionMode.LEARN, level)) },
                 onExam = { scope -> nav.navigate(Routes.exam(scope)) },
-                onSpeak = { nav.navigate(Routes.SPEAK) },
-                onKana = { nav.navigate(Routes.KANA) },
-                onAsk = { nav.navigate(Routes.ASK) },
-                onNews = { nav.navigate(Routes.NEWS) },
-                onRadio = { nav.navigate(Routes.RADIO) },
-                onPlayers = { nav.navigate(Routes.PLAYERS) },
-                onBattle = { nav.navigate(Routes.BATTLE) },
-                onMyWords = { nav.goToTab(Routes.WORDS) },
-                onProgress = { nav.goToTab(Routes.PROGRESS) },
+                onPlayers = { nav.goToTab(Routes.PLAYERS) },
             )
         }
         composable(Routes.PRACTICE) {
@@ -170,16 +181,14 @@ private fun AppNavHost(nav: NavHostController, modifier: Modifier) {
                 onExam = { scope -> nav.navigate(Routes.exam(scope)) },
                 onSpeak = { nav.navigate(Routes.SPEAK) },
                 onKana = { nav.navigate(Routes.KANA) },
-                onReview = { nav.navigate(Routes.cards(SessionMode.REVIEW)) },
                 onAsk = { nav.navigate(Routes.ASK) },
-                onNews = { nav.navigate(Routes.NEWS) },
-                onRadio = { nav.navigate(Routes.RADIO) },
-                onBattle = { nav.navigate(Routes.BATTLE) },
-                onPlayers = { nav.navigate(Routes.PLAYERS) },
+                onProgress = { nav.navigate(Routes.PROGRESS) },
+                onManage = { nav.navigate(Routes.MANAGE) },
+                onGuide = onGuide,
             )
         }
         composable(Routes.WORDS) { StudyListScreen(onManage = { nav.navigate(Routes.MANAGE) }) }
-        composable(Routes.PROGRESS) { ProgressScreen() }
+        composable(Routes.PROGRESS) { ProgressScreen(onBack = { nav.popBackStack() }) }
         composable(
             Routes.CARDS,
             arguments = listOf(
@@ -200,7 +209,7 @@ private fun AppNavHost(nav: NavHostController, modifier: Modifier) {
         composable(Routes.ASK) { AskScreen(onBack = { nav.popBackStack() }) }
         composable(Routes.NEWS) {
             NewsListScreen(
-                onBack = { nav.popBackStack() },
+                onBack = null,
                 onOpen = { nav.navigate(Routes.article(it.link)) },
                 onRadio = { nav.navigate(Routes.RADIO) },
                 onAddKey = { nav.navigate(Routes.ASK) },
@@ -212,10 +221,10 @@ private fun AppNavHost(nav: NavHostController, modifier: Modifier) {
         ) { ArticleScreen(onBack = { nav.popBackStack() }, onAddKey = { nav.navigate(Routes.ASK) }) }
         composable(Routes.RADIO) { RadioScreen(onBack = { nav.popBackStack() }) }
         composable(Routes.PLAYERS) {
-            PlayersScreen(onBack = { nav.popBackStack() }, onBattle = { nav.navigate(Routes.BATTLE) })
+            PlayersScreen(onBack = null, onBattle = { nav.navigate(Routes.BATTLE) })
         }
         composable(Routes.BATTLE) {
-            BattleScreen(onBack = { nav.popBackStack() }, onPlayers = { nav.navigate(Routes.PLAYERS) })
+            BattleScreen(onBack = { nav.popBackStack() }, onPlayers = { nav.popBackStack() })
         }
     }
 }

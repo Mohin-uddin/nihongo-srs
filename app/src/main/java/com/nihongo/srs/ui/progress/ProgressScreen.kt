@@ -46,11 +46,12 @@ import java.util.Locale
 /** Progress tab: completion per level, streak, SRS stages, history. */
 @Composable
 fun ProgressScreen(
+    onBack: (() -> Unit)? = null,
     vm: ProgressViewModel = viewModel(factory = ProgressViewModel.Factory),
 ) {
     val s by vm.state.collectAsStateWithLifecycle()
 
-    AppScreen(title = "My progress", subtitle = "আমার অগ্রগতি") { pad ->
+    AppScreen(title = "আমার অগ্রগতি", subtitle = "My progress", onBack = onBack) { pad ->
         Column(
             Modifier.padding(pad).fillMaxSize().verticalScroll(rememberScrollState())
                 .padding(horizontal = ScreenPadding, vertical = 8.dp),
