@@ -21,6 +21,9 @@ interface VocabDao {
     @Delete
     suspend fun deleteVocab(vocab: VocabEntity)
 
+    @Query("SELECT COUNT(*) FROM vocab WHERE type = 'WORD'")
+    suspend fun countWords(): Int
+
     @Query("SELECT id FROM vocab WHERE japanese = :japanese AND type = :type LIMIT 1")
     suspend fun findId(japanese: String, type: String): Long?
 

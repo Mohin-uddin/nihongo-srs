@@ -119,7 +119,7 @@ class HomeViewModel(
 
     init {
         // First launch / app update: load the bundled N5 + N4 words and phrases.
-        viewModelScope.launch { repo.syncStarterContentIfNeeded() }
+        viewModelScope.launch { runCatching { repo.syncStarterContentIfNeeded() } }
     }
 
     /** Call when the Home screen becomes visible again. */

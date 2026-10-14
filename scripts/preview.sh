@@ -4,6 +4,11 @@
 set -x
 OUT=preview
 mkdir -p "$OUT"
+# Install an older version first and start it, so the tour checks a real update
+# (words and progress must survive), not only a fresh install.
+curl -sSL -o old.apk https://github.com/Mohin-uddin/nihongo-srs/releases/download/build-14/NihongoSRS.apk && \
+  adb install old.apk && adb shell monkey -p com.nihongo.srs -c android.intent.category.LAUNCHER 1 && sleep 20 && \
+  adb shell am force-stop com.nihongo.srs || true
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 adb install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
 # Pre-grant permissions so no system dialog covers the screens.

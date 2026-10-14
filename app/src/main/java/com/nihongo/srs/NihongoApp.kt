@@ -1,6 +1,10 @@
 package com.nihongo.srs
 
 import android.app.Application
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import com.nihongo.srs.data.AppDatabase
 import com.nihongo.srs.data.AppPrefs
 import com.nihongo.srs.data.PlayerStore
@@ -37,8 +41,13 @@ class NihongoApp : Application() {
     /** One shared TTS engine for the whole app. */
     val speaker by lazy { JapaneseSpeaker(this) }
 
+    /** Work that should finish even if no screen is open (e.g. loading the word lists). */
+    private val appScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
     override fun onCreate() {
         super.onCreate()
+        // Load / update the bundled N5 + N4 words as soon as the app starts (also after an update).
+        appScope.launch { runCatching { repository.syncStarterContentIfNeeded() } }
         ReminderWorker.createChannel(this)
         ReminderScheduler.schedule(
             this, prefs.reminderEnabled, prefs.reminderHour, prefs.reminderMinute, replace = false

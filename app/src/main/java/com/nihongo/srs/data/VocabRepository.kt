@@ -5,6 +5,8 @@ import androidx.room.withTransaction
 import com.nihongo.srs.srs.SpacedRepetitionEngine
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
 /**
@@ -25,11 +27,14 @@ class VocabRepository(
      * time, and again whenever the bundled lists are updated (new version).
      * Existing words keep their progress; only their text is refreshed.
      */
-    suspend fun syncStarterContentIfNeeded() {
-        if (prefs.contentVersion >= StarterContent.VERSION) return
+    suspend fun syncStarterContentIfNeeded() = syncLock.withLock {
+        // Also re-load when the word table is somehow empty (e.g. an interrupted first start).
+        if (prefs.contentVersion >= StarterContent.VERSION && dao.countWords() > 0) return@withLock
         reloadStarterContent()
         prefs.contentVersion = StarterContent.VERSION
     }
+
+    private val syncLock = Mutex()
 
     /** Returns how many new items were added. */
     suspend fun reloadStarterContent(): Int {
@@ -45,10 +50,13 @@ class VocabRepository(
                 if (id == null) {
                     if (dao.insertVocab(v) != -1L) added++
                 } else {
-                    dao.updateContent(
-                        id, v.reading, v.romaji, v.meaning, v.meaningBn, v.level,
-                        v.example, v.exampleReading, v.exampleEn, v.exampleBn, v.category
-                    )
+                    // One bad row (e.g. a clash with a word you added yourself) must not stop the rest.
+                    runCatching {
+                        dao.updateContent(
+                            id, v.reading, v.romaji, v.meaning, v.meaningBn, v.level,
+                            v.example, v.exampleReading, v.exampleEn, v.exampleBn, v.category
+                        )
+                    }
                 }
             }
             added

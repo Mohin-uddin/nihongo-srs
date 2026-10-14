@@ -15,15 +15,14 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 
 /** LEARNED = every word you have started, TODAY = learned or reviewed today, N5 / N4 / MINE = the whole list. */
 enum class StudyFilter(val en: String, val bn: String) {
-    LEARNED("Learned", "শেখা"),
-    TODAY("Today", "আজ"),
-    N5("All N5", "N5 সব"),
-    N4("All N4", "N4 সব"),
-    MINE("Mine", "আমার যোগ করা"),
+    N5("All N5", "N5 সব শব্দ"),
+    N4("All N4", "N4 সব শব্দ"),
+    LEARNED("Learned", "আমার শেখা"),
+    TODAY("Today", "আজ শেখা"),
+    MINE("Mine", "নিজে যোগ করা"),
 }
 
 /**
@@ -36,7 +35,7 @@ class StudyListViewModel(
     private val speaker: JapaneseSpeaker,
 ) : ViewModel() {
 
-    val filter = MutableStateFlow(StudyFilter.LEARNED)
+    val filter = MutableStateFlow(StudyFilter.N5)
     val sentencesOnly = MutableStateFlow(false)
 
     /** Search box: Japanese, kana, romaji, English or Bangla, including example sentences. */
@@ -55,11 +54,6 @@ class StudyListViewModel(
                 else -> all.filter { it.vocab.level == VocabEntity.LEVEL_MINE }
             }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
-
-    init {
-        // Nothing learned yet: show the whole N5 list instead of an empty page.
-        viewModelScope.launch { if (repo.getLearned().isEmpty()) filter.value = StudyFilter.N5 }
-    }
 
     private fun VocabEntity.matches(q: String): Boolean =
         listOf(japanese, reading, romaji, meaning, meaningBn, example, exampleReading, exampleEn, exampleBn)

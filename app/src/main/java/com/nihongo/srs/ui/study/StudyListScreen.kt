@@ -102,7 +102,7 @@ fun StudyListScreen(
                         "Read each sentence out loud 3 times. Then cover the Japanese and say it from the Bangla.\n" +
                             "প্রতিটি বাক্য ৩ বার জোরে পড়ুন। তারপর বাংলা দেখে জাপানিতে বলুন।"
                     else if (query.isNotBlank()) "${items.size} found in all words • ${items.size}টি পাওয়া গেছে"
-                    else "${items.size} words • ${items.size}টি শব্দ",
+                    else "${filter.bn}: ${items.size}টি • ${items.size} words",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 10.dp)
