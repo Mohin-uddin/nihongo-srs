@@ -72,8 +72,9 @@ class HomeViewModel(
 ) : ViewModel() {
 
     /** Players sharing the phone, for the scoreboard on Home. */
-    val players = (app as NihongoApp).players.players
-    val activeId = app.players.activeId
+    private val playerStore = (app as NihongoApp).players
+    val players = playerStore.players
+    val activeId = playerStore.activeId
 
     /** Changes after midnight so "due today" counts stay correct. */
     private val endOfToday = MutableStateFlow(repo.endOfToday())

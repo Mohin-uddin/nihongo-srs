@@ -16,6 +16,17 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      # One-time cleanup of a temporary news-source check (safe to delete this step later).
+      - name: Remove temporary probe releases
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for t in $(gh release list --limit 100 --json tagName --jq '.[].tagName | select(startswith("probe-"))'); do
+            gh release delete "$t" -y --cleanup-tag
+          done
+          git push origin --delete probe || true
+
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
