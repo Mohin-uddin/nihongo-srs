@@ -48,10 +48,7 @@ data class NewsReading(
 class Segmenter(words: List<VocabEntity>) {
 
     private val dict: Map<String, VocabEntity> = buildMap {
-        // Kana-only spellings first, so a kanji spelling of the same word wins.
-        words.forEach { w ->
-            if (w.reading.length >= 2 && !w.reading.contains(' ')) putIfAbsent(w.reading, w)
-        }
+        // Only real spellings: a kana reading like した (下) would wrongly match the verb ending.
         words.forEach { w -> if (w.japanese.isNotBlank()) put(w.japanese, w) }
     }
     private val maxLen = dict.keys.maxOfOrNull { it.length }?.coerceAtMost(10) ?: 1
@@ -69,8 +66,9 @@ class Segmenter(words: List<VocabEntity>) {
             var len = minOf(maxLen, text.length - i)
             while (len >= 1) {
                 val w = dict[text.substring(i, i + len)]
-                // Single kana are too ambiguous (particles, word endings); single kanji are fine.
-                if (w != null && (len > 1 || text[i].isKanji())) {
+                // Single kana are too ambiguous (particles, word endings). A single kanji is only taken
+                // when it stands alone: in 10月 or 鉄道 it is part of a bigger word with another reading.
+                if (w != null && (len > 1 || (text[i].isKanji() && standsAlone(text, i)))) {
                     match = w
                     break
                 }
@@ -100,5 +98,10 @@ class Segmenter(words: List<VocabEntity>) {
             .filter { it.isNotEmpty() }
             .map { segment(it) }
 
-    private fun Char.isKanji() = this in '一'..'鿿' || this == '々'
+    private fun Char.isKanji() = this in '\u4E00'..'\u9FFF' || this == '々'
+
+    private fun Char.joinsWord() = isKanji() || isDigit()
+
+    private fun standsAlone(text: String, i: Int) =
+        text.getOrNull(i - 1)?.joinsWord() != true && text.getOrNull(i + 1)?.joinsWord() != true
 }

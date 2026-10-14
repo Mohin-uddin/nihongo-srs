@@ -312,7 +312,7 @@ private fun TokenView(
         t.hasMeaning -> MaterialTheme.colorScheme.primary.copy(alpha = 0.45f)
         else -> Color.Transparent
     }
-    val hasKanji = t.text.any { it in '一'..'鿿' || it == '々' }
+    val hasKanji = t.text.any { it in '\u4E00'..'\u9FFF' || it == '々' }
     Column(
         modifier
             .clip(RoundedCornerShape(6.dp))

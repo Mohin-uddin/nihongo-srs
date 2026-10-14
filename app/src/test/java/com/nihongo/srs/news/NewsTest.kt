@@ -68,6 +68,15 @@ class NewsTest {
     }
 
     @Test
+    fun segmenterSkipsSingleKanjiInsideBiggerWords() {
+        val seg = Segmenter(listOf(word("月", "つき", "moon"), word("道", "みち", "road"), word("下", "した", "below")))
+        val s = seg.segment("10月に鉄道ができました。道を歩きました。")
+        assertTrue(s.tokens.none { it.text == "月" && it.hasMeaning })
+        assertEquals(1, s.tokens.count { it.text == "道" && it.hasMeaning })
+        assertTrue(s.tokens.none { it.text == "した" })
+    }
+
+    @Test
     fun segmenterSplitsSentences() {
         val seg = Segmenter(emptyList())
         val list = seg.sentences("一つ目です。二つ目です！\n三つ目")

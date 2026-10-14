@@ -189,7 +189,8 @@ class PreviewTour {
                 shot("news_word")
                 systemBack()
             }
-            back()
+            // The sheet may close or the screen may go back, depending on the Android version.
+            if (!has("news_radio")) back()
         } else {
             shot("news_list_offline")
         }
