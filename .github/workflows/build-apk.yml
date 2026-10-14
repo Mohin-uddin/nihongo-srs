@@ -28,10 +28,21 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Run unit tests
-        run: ./gradlew --no-daemon testDebugUnitTest
+        run: |
+          set -o pipefail
+          ./gradlew --no-daemon testDebugUnitTest 2>&1 | tee -a build.log
 
       - name: Build debug APK
-        run: ./gradlew --no-daemon assembleDebug
+        run: |
+          set -o pipefail
+          ./gradlew --no-daemon assembleDebug 2>&1 | tee -a build.log
+
+      # Surface compiler errors as an annotation so they are easy to read.
+      - name: Report build errors
+        if: failure()
+        run: |
+          msg=$(grep -E "^e: |error:|What went wrong|FAILED" -A4 build.log | head -60 | sed ':a;N;$!ba;s/%/%25/g;s/\r/%0D/g;s/\n/%0A/g')
+          echo "::error title=Build errors::${msg}"
 
       - name: Rename APK
         run: cp app/build/outputs/apk/debug/app-debug.apk NihongoSRS.apk
