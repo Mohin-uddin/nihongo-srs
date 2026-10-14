@@ -33,6 +33,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -137,7 +138,7 @@ private fun Quiz(q: KanaQuizState, vm: KanaViewModel) {
             modifier = Modifier.fillMaxWidth().padding(16.dp))
     }
     Text("How do you read it? • এটা কীভাবে পড়ে?", style = MaterialTheme.typography.titleSmall)
-    cur.options.forEach { opt ->
+    cur.options.forEachIndexed { i, opt ->
         val color = when {
             q.selected == null -> Color.Unspecified
             opt == cur.kana.romaji -> CorrectGreen
@@ -148,7 +149,7 @@ private fun Quiz(q: KanaQuizState, vm: KanaViewModel) {
             onClick = { vm.select(opt) },
             enabled = q.selected == null || color != Color.Unspecified,
             border = if (color == Color.Unspecified) null else BorderStroke(3.dp, color),
-            modifier = Modifier.fillMaxWidth().height(52.dp)
+            modifier = Modifier.fillMaxWidth().height(52.dp).testTag("kana$i")
         ) { Text(opt, style = MaterialTheme.typography.titleLarge, color = color) }
     }
     if (q.selected != null) {

@@ -32,6 +32,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -150,7 +151,8 @@ private fun QuestionView(state: ExamUiState, vm: ExamViewModel) {
                 else -> OptionState.NORMAL
             },
             enabled = state.selected == null,
-            onClick = { vm.select(i) }
+            onClick = { vm.select(i) },
+            tag = "option$i"
         )
     }
 
@@ -172,7 +174,7 @@ private fun QuestionView(state: ExamUiState, vm: ExamViewModel) {
 private enum class OptionState { NORMAL, CORRECT, WRONG }
 
 @Composable
-private fun OptionButton(text: String, state: OptionState, enabled: Boolean, onClick: () -> Unit) {
+private fun OptionButton(text: String, state: OptionState, enabled: Boolean, onClick: () -> Unit, tag: String) {
     val color = when (state) {
         OptionState.CORRECT -> CorrectGreen
         OptionState.WRONG -> ForgotRed
@@ -182,7 +184,7 @@ private fun OptionButton(text: String, state: OptionState, enabled: Boolean, onC
         onClick = onClick,
         enabled = enabled || state != OptionState.NORMAL,
         border = if (state == OptionState.NORMAL) null else BorderStroke(3.dp, color),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().testTag(tag)
     ) {
         Text(
             text,
