@@ -23,9 +23,13 @@ fun TtsBanner(status: JapaneseSpeaker.Status, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     Card(
         modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)
+        shape = MaterialTheme.shapes.large,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+        )
     ) {
-        Column(Modifier.padding(12.dp)) {
+        Column(Modifier.padding(16.dp)) {
             Text(
                 "Japanese voice not installed. Install it free to hear pronunciation.\n" +
                     "জাপানি ভয়েস ইনস্টল নেই। উচ্চারণ শুনতে ফ্রি ইনস্টল করুন।",

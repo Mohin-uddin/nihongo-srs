@@ -9,27 +9,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.VolumeUp
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Download
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.automirrored.rounded.VolumeUp
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Download
+import androidx.compose.material.icons.rounded.Refresh
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -38,16 +31,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nihongo.srs.data.VocabEntity
 import com.nihongo.srs.data.VocabWithProgress
 import com.nihongo.srs.srs.SpacedRepetitionEngine
+import com.nihongo.srs.ui.components.AppScreen
+import com.nihongo.srs.ui.components.BigButton
+import com.nihongo.srs.ui.components.BigOutlinedButton
+import com.nihongo.srs.ui.components.Bilingual
+import com.nihongo.srs.ui.components.ScreenPadding
+import com.nihongo.srs.ui.components.SoftCard
 
 /** Add a word manually, preload JLPT N5, search, delete or reset words. */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ManageScreen(
     onBack: () -> Unit,
@@ -61,26 +58,16 @@ fun ManageScreen(
 
     LaunchedEffect(Unit) { vm.messages.collect { snackbar.showSnackbar(it) } }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Manage words • শব্দ") },
-                navigationIcon = {
-                    IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back") }
-                }
-            )
-        },
-        snackbarHost = { SnackbarHost(snackbar) }
-    ) { pad ->
+    AppScreen(title = "Add / Manage words", subtitle = "শব্দ যোগ ও পরিচালনা", onBack = onBack, snackbar = snackbar) { pad ->
         LazyColumn(
             Modifier.padding(pad).fillMaxSize(),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = ScreenPadding, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
-                Card(Modifier.fillMaxWidth()) {
-                    Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text("Add a word • নতুন শব্দ যোগ করুন", style = MaterialTheme.typography.titleMedium)
+                SoftCard {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Bilingual("Add a word", "নতুন শব্দ যোগ করুন", enStyle = MaterialTheme.typography.titleLarge)
                         Field("Japanese (漢字/かな) *", form.japanese) { v -> vm.updateForm { it.copy(japanese = v) } }
                         Field("Reading (かな) *", form.reading) { v -> vm.updateForm { it.copy(reading = v) } }
                         Field("Romaji (e.g. mizu)", form.romaji) { v -> vm.updateForm { it.copy(romaji = v) } }
@@ -89,28 +76,26 @@ fun ManageScreen(
                         Field("Example sentence (optional) • উদাহরণ বাক্য", form.example) { v -> vm.updateForm { it.copy(example = v) } }
                         Field("Sentence in English (optional)", form.exampleEn) { v -> vm.updateForm { it.copy(exampleEn = v) } }
                         Field("বাক্যের বাংলা অর্থ (optional)", form.exampleBn) { v -> vm.updateForm { it.copy(exampleBn = v) } }
-                        Button(onClick = vm::save, modifier = Modifier.fillMaxWidth()) {
-                            Text("Save • সেভ করুন")
-                        }
+                        BigButton("Save", "সেভ করুন", onClick = vm::save, icon = Icons.Rounded.Check)
                     }
                 }
             }
             item {
-                OutlinedButton(onClick = { vm.preloadN5() }, modifier = Modifier.fillMaxWidth()) {
-                    Icon(Icons.Default.Download, null)
-                    Text("  Load N5 + N4 words & phrases • N5 + N4 লোড করুন")
-                }
+                BigOutlinedButton("Reload N5 + N4 words & phrases", "N5 + N4 আবার লোড করুন",
+                    onClick = { vm.preloadN5() }, icon = Icons.Rounded.Download)
             }
             item {
                 OutlinedTextField(
                     value = query,
                     onValueChange = { vm.query.value = it },
-                    leadingIcon = { Icon(Icons.Default.Search, null) },
+                    leadingIcon = { Icon(Icons.Rounded.Search, null) },
                     label = { Text("Search • খুঁজুন") },
                     singleLine = true,
+                    shape = MaterialTheme.shapes.medium,
                     modifier = Modifier.fillMaxWidth()
                 )
-                Text("${words.size} words", style = MaterialTheme.typography.labelMedium)
+                Text("${words.size} words • ${words.size}টি শব্দ", style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 8.dp))
             }
             items(words, key = { it.vocab.id }) { item ->
                 WordRow(
@@ -143,6 +128,7 @@ private fun Field(label: String, value: String, onChange: (String) -> Unit) {
         onValueChange = onChange,
         label = { Text(label) },
         singleLine = true,
+        shape = MaterialTheme.shapes.medium,
         modifier = Modifier.fillMaxWidth()
     )
 }
@@ -156,20 +142,21 @@ private fun WordRow(
 ) {
     val v = item.vocab
     val p = item.progress
-    Card(Modifier.fillMaxWidth()) {
-        Row(Modifier.padding(start = 12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f).padding(vertical = 8.dp)) {
-                Text("${v.japanese}  (${v.reading})  · ${v.level}", fontWeight = FontWeight.Bold)
-                Text("${v.meaning} • ${v.meaningBn}", style = MaterialTheme.typography.bodyMedium)
+    SoftCard(padding = 12.dp) {
+        Row(Modifier.padding(start = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("${v.japanese}  ${v.reading}", style = MaterialTheme.typography.titleMedium)
+                Text("${v.meaning} • ${v.meaningBn}", style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text(
-                    p?.let { SpacedRepetitionEngine.stageLabel(it.stage, it.isMastered) } ?: "Not started • শুরু হয়নি",
+                    v.level + " · " + (p?.let { SpacedRepetitionEngine.stageLabel(it.stage, it.isMastered) } ?: "Not started • শুরু হয়নি"),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.primary
                 )
             }
-            IconButton(onClick = onSpeak) { Icon(Icons.AutoMirrored.Filled.VolumeUp, "Listen") }
-            if (p != null) IconButton(onClick = onReset) { Icon(Icons.Default.Refresh, "Reset") }
-            IconButton(onClick = onDelete) { Icon(Icons.Default.Delete, "Delete") }
+            IconButton(onClick = onSpeak) { Icon(Icons.AutoMirrored.Rounded.VolumeUp, "Listen") }
+            if (p != null) IconButton(onClick = onReset) { Icon(Icons.Rounded.Refresh, "Reset") }
+            IconButton(onClick = onDelete) { Icon(Icons.Rounded.Delete, "Delete") }
         }
     }
 }

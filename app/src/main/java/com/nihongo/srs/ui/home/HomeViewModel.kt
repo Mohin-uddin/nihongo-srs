@@ -8,6 +8,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.nihongo.srs.NihongoApp
 import com.nihongo.srs.data.AppPrefs
+import com.nihongo.srs.data.LevelProgress
 import com.nihongo.srs.data.ProgressRepository
 import com.nihongo.srs.data.StudyDay
 import com.nihongo.srs.data.VocabEntity
@@ -32,23 +33,28 @@ data class HomeUiState(
     val mastered: Int = 0,
     val streak: Int = 0,
     val today: StudyDay = StudyDay(""),
+    val levels: List<LevelProgress> = emptyList(),
 ) {
-    /** Today's 4 goals: (label, done). */
-    val goals: List<Pair<String, Boolean>>
+    /** Today's 4 goals. */
+    val goals: List<Goal>
         get() = listOf(
-            "Finish today's reviews • রিভিউ শেষ" to (dueToday == 0),
-            "Learn ${GOAL_NEW_WORDS} new words • ${GOAL_NEW_WORDS}টি নতুন শব্দ (${today.learned}/${GOAL_NEW_WORDS})" to
-                (today.learned >= GOAL_NEW_WORDS),
-            "Take an exam • একটি পরীক্ষা" to (today.exams >= 1),
-            "Speak ${GOAL_SPOKEN} phrases with the mic • মাইকে ${GOAL_SPOKEN}টি বাক্য (${today.spoken}/${GOAL_SPOKEN})" to
-                (today.spoken >= GOAL_SPOKEN),
+            Goal("Finish today's reviews", "আজকের রিভিউ শেষ করুন", null, dueToday == 0),
+            Goal("Learn $GOAL_NEW_WORDS new words", "${GOAL_NEW_WORDS}টি নতুন শব্দ শিখুন",
+                "${today.learned.coerceAtMost(GOAL_NEW_WORDS)}/$GOAL_NEW_WORDS", today.learned >= GOAL_NEW_WORDS),
+            Goal("Take an exam", "একটি পরীক্ষা দিন", null, today.exams >= 1),
+            Goal("Speak $GOAL_SPOKEN phrases", "মাইকে ${GOAL_SPOKEN}টি বাক্য বলুন",
+                "${today.spoken.coerceAtMost(GOAL_SPOKEN)}/$GOAL_SPOKEN", today.spoken >= GOAL_SPOKEN),
         )
+
+    fun level(name: String): LevelProgress? = levels.firstOrNull { it.level == name }
 
     companion object {
         const val GOAL_NEW_WORDS = 10
         const val GOAL_SPOKEN = 5
     }
 }
+
+data class Goal(val en: String, val bn: String, val count: String?, val done: Boolean)
 
 data class ReminderUi(val enabled: Boolean, val hour: Int, val minute: Int) {
     val label: String
@@ -89,7 +95,8 @@ class HomeViewModel(
         counts,
         progress.observeStreak(),
         endOfToday.flatMapLatest { progress.observeToday() },
-    ) { c, streak, today -> c.copy(streak = streak, today = today) }
+        progress.observeLevelProgress(),
+    ) { c, streak, today, levels -> c.copy(streak = streak, today = today, levels = levels) }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), HomeUiState())
 
     private val _reminder = MutableStateFlow(

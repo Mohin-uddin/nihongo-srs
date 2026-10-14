@@ -2,6 +2,9 @@ package com.nihongo.srs
 
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
@@ -60,6 +63,14 @@ class PreviewTour {
         rule.waitForIdle()
     }
 
+    private fun tapTag(tag: String) {
+        rule.waitUntil(20_000) { rule.onAllNodesWithTag(tag).fetchSemanticsNodes().isNotEmpty() }
+        val n = rule.onAllNodesWithTag(tag)[0]
+        runCatching { n.performScrollTo() }
+        n.performClick()
+        rule.waitForIdle()
+    }
+
     private fun back() {
         rule.onNodeWithContentDescription("Back").performClick()
         rule.waitForIdle()
@@ -71,82 +82,89 @@ class PreviewTour {
         dao.getLearned().mapNotNull { it.progress }.forEach { dao.upsertProgress(it.copy(nextReview = 0)) }
     }
 
+    /** True once a "N new" counter above zero is on screen, i.e. the word lists are loaded. */
+    private fun wordsLoaded(): Boolean =
+        rule.onAllNodesWithText(" new", substring = true).fetchSemanticsNodes().any { node ->
+            val text = node.config.getOrNull(SemanticsProperties.Text)?.joinToString("") { it.text } ?: ""
+            text.isNotEmpty() && !text.startsWith("0 ")
+        }
+
     @Test
     fun tour() {
         shell("mkdir -p $DIR")
 
-        // Home
-        // Wait until the bundled words are loaded (first launch fills the database).
-        rule.waitUntil(30_000) {
-            rule.onAllNodesWithText("N5\n", substring = true).fetchSemanticsNodes().isNotEmpty() &&
-                rule.onAllNodesWithText("N5\n0 new").fetchSemanticsNodes().isEmpty()
-        }
+        // Home (first launch fills the database, so wait for it)
+        rule.waitUntil(30_000) { wordsLoaded() }
         shot("home")
-        runCatching { node("Daily 25-minute plan").performScrollTo() }
+        runCatching { node("Daily reminder").performScrollTo() }
         shot("home_bottom")
-        runCatching { node("Words to review today").performScrollTo() }
 
         // Learn new words
-        tap("N5\n")
+        tapTag("learn_N5")
         waitFor("Learned, review tomorrow")
         shot("learn_new_word")
-        repeat(4) { tap("Learned, review tomorrow"); Thread.sleep(300) }
+        repeat(4) { tapTag("learned"); Thread.sleep(300) }
         back()
 
         // Review (with reverse cards)
         makeLearnedWordsDue()
-        waitFor("Start Review")
         Thread.sleep(1500)
-        tap("Start Review")
+        runCatching { rule.onNodeWithTag("start_review").performScrollTo() }
+        tapTag("start_review")
         waitFor("show answer")
         shot("review_question")
-        tap("show answer")
+        tapTag("show_answer")
         shot("review_answer")
-        tap("I Knew It")
+        tapTag("knew")
         waitFor("show answer")
         shot("review_question_2")
         back()
 
-        // My words + sentences
-        tap("My words & sentences")
+        // Words tab + sentences
+        tapTag("tab_words")
         shot("my_words")
         tap("Sentences • বাক্য")
         shot("my_sentences")
-        back()
+
+        // Practice tab
+        tapTag("tab_practice")
+        shot("practice")
 
         // Exam
-        tap("Today's exam")
+        tapTag("practice_exam_today")
         waitFor("Question 1")
         shot("exam_question")
         rule.onNodeWithTag("option0").performClick()
+        rule.waitForIdle()
         shot("exam_answer")
         back()
 
         // Daily conversation
-        tap("Daily conversation")
+        tapTag("practice_speak")
         shot("conversation")
         back()
 
         // Kana
-        tap("Hiragana & Katakana")
+        tapTag("practice_kana")
         shot("kana_chart")
-        tap("Start kana quiz")
+        tapTag("kana_quiz_start")
         shot("kana_quiz")
         rule.onNodeWithTag("kana0").performClick()
+        rule.waitForIdle()
         shot("kana_quiz_answer")
         back() // close quiz
         back()
 
-        // Progress
-        tap("My progress")
+        // Progress tab
+        tapTag("tab_progress")
         waitFor("Course completion")
         shot("progress")
         runCatching { node("Recent exams").performScrollTo() }
         shot("progress_bottom")
-        back()
 
         // Manage
-        tap("Add / Manage words")
+        tapTag("tab_words")
+        tapTag("manage")
         shot("manage")
         back()
     }

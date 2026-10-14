@@ -4,37 +4,25 @@ import android.Manifest
 import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.NavigateBefore
-import androidx.compose.material.icons.automirrored.filled.NavigateNext
-import androidx.compose.material.icons.automirrored.filled.VolumeUp
-import androidx.compose.material.icons.filled.Mic
-import androidx.compose.material.icons.filled.SlowMotionVideo
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.FilterChip
+import androidx.compose.material.icons.automirrored.rounded.NavigateBefore
+import androidx.compose.material.icons.automirrored.rounded.NavigateNext
+import androidx.compose.material.icons.automirrored.rounded.VolumeUp
+import androidx.compose.material.icons.rounded.Mic
+import androidx.compose.material.icons.rounded.SlowMotionVideo
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -48,13 +36,22 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nihongo.srs.ui.TtsBanner
-import com.nihongo.srs.ui.theme.CorrectGreen
+import com.nihongo.srs.ui.components.AppScreen
+import com.nihongo.srs.ui.components.BigButton
+import com.nihongo.srs.ui.components.BigOutlinedButton
+import com.nihongo.srs.ui.components.Bilingual
+import com.nihongo.srs.ui.components.ChoiceChip
+import com.nihongo.srs.ui.components.Pill
+import com.nihongo.srs.ui.components.ProgressBar
+import com.nihongo.srs.ui.components.ScreenPadding
+import com.nihongo.srs.ui.components.SessionProgress
+import com.nihongo.srs.ui.components.SoftCard
+import com.nihongo.srs.ui.theme.Extra
 
 /**
  * Speaking practice (shadowing):
  *  1. Listen (normal or slow)  2. Repeat out loud 3 times  3. Tap the mic to check.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SpeakScreen(
     onBack: () -> Unit,
@@ -77,19 +74,11 @@ fun SpeakScreen(
         if (granted) vm.startSpeaking() else micPermission.launch(Manifest.permission.RECORD_AUDIO)
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Daily conversation • প্রতিদিনের কথা") },
-                navigationIcon = {
-                    IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back") }
-                }
-            )
-        }
-    ) { pad ->
+    AppScreen(title = "Daily conversation", subtitle = "প্রতিদিনের কথা", onBack = onBack) { pad ->
         Column(
-            Modifier.padding(pad).fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            Modifier.padding(pad).fillMaxSize().verticalScroll(rememberScrollState())
+                .padding(horizontal = ScreenPadding, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             TtsBanner(tts)
 
@@ -98,11 +87,9 @@ fun SpeakScreen(
                 Modifier.horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                FilterChip(selected = category == null, onClick = { vm.selectCategory(null) },
-                    label = { Text("All • সব") })
+                ChoiceChip("All • সব", selected = category == null, onClick = { vm.selectCategory(null) })
                 categories.forEach { c ->
-                    FilterChip(selected = category == c, onClick = { vm.selectCategory(c) },
-                        label = { Text(c) })
+                    ChoiceChip(c, selected = category == c, onClick = { vm.selectCategory(c) })
                 }
             }
 
@@ -110,23 +97,28 @@ fun SpeakScreen(
             if (phrase == null) {
                 Text("Loading phrases… • লোড হচ্ছে…")
             } else {
-                Text("${state.index + 1} / ${phrases.size}", style = MaterialTheme.typography.labelLarge)
+                SessionProgress(state.index, phrases.size)
 
-                Card(Modifier.fillMaxWidth(), elevation = CardDefaults.cardElevation(6.dp)) {
+                SoftCard(padding = 24.dp) {
                     Column(
-                        Modifier.padding(20.dp).fillMaxWidth(),
+                        Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
-                        Text(phrase.japanese, fontSize = 28.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                        if (phrase.category.isNotBlank()) Pill(phrase.category)
+                        Text(phrase.japanese, fontSize = 30.sp, fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center, lineHeight = 40.sp)
                         if (phrase.reading != phrase.japanese) {
-                            Text(phrase.reading, style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center)
+                            Text(phrase.reading, style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.primary, textAlign = TextAlign.Center)
                         }
                         Text(phrase.romaji, style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center)
                         if (state.showMeaning) {
-                            Text("🇬🇧 ${phrase.meaning}", textAlign = TextAlign.Center)
-                            Text("🇧🇩 ${phrase.meaningBn}", textAlign = TextAlign.Center)
+                            Bilingual(phrase.meaning, phrase.meaningBn, align = TextAlign.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                enStyle = MaterialTheme.typography.titleLarge,
+                                bnStyle = MaterialTheme.typography.titleMedium)
                         }
                         TextButton(onClick = vm::toggleMeaning) {
                             Text(if (state.showMeaning) "Hide meaning • অর্থ লুকান" else "Show meaning • অর্থ দেখুন")
@@ -136,31 +128,29 @@ fun SpeakScreen(
 
                 // Step 1: listen
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    FilledTonalButton(onClick = { vm.listen(slow = false) }, modifier = Modifier.weight(1f)) {
-                        Icon(Icons.AutoMirrored.Filled.VolumeUp, null); Text(" Listen • শুনুন")
-                    }
-                    FilledTonalButton(onClick = { vm.listen(slow = true) }, modifier = Modifier.weight(1f)) {
-                        Icon(Icons.Default.SlowMotionVideo, null); Text(" Slow • ধীরে")
-                    }
+                    BigOutlinedButton("Listen", "শুনুন", onClick = { vm.listen(slow = false) },
+                        icon = Icons.AutoMirrored.Rounded.VolumeUp, modifier = Modifier.weight(1f))
+                    BigOutlinedButton("Slow", "ধীরে", onClick = { vm.listen(slow = true) },
+                        icon = Icons.Rounded.SlowMotionVideo, modifier = Modifier.weight(1f))
                 }
 
                 // Step 2 + 3: speak and check
-                Button(
+                val listening = state.mic is MicState.Listening
+                BigButton(
+                    if (listening) "Listening… speak now" else "Speak & check",
+                    if (listening) "এখন বলুন" else "বলুন ও যাচাই করুন",
                     onClick = { onMicClick() },
-                    enabled = vm.micAvailable && state.mic !is MicState.Listening,
-                    modifier = Modifier.fillMaxWidth().height(56.dp)
-                ) {
-                    Icon(Icons.Default.Mic, null)
-                    Text(
-                        if (state.mic is MicState.Listening) "  Listening… speak now • এখন বলুন"
-                        else "  Speak & check • বলুন ও যাচাই করুন"
-                    )
-                }
+                    enabled = vm.micAvailable && !listening,
+                    icon = Icons.Rounded.Mic,
+                    container = MaterialTheme.colorScheme.secondary,
+                    content = MaterialTheme.colorScheme.onSecondary,
+                )
                 if (!vm.micAvailable) {
                     Text(
                         "Mic check isn't available on this phone. You can still listen and repeat. " +
                             "• এই ফোনে মাইক যাচাই নেই, তবে শুনে শুনে বলতে পারবেন।",
-                        style = MaterialTheme.typography.bodySmall
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 
@@ -168,10 +158,10 @@ fun SpeakScreen(
 
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     TextButton(onClick = vm::previous) {
-                        Icon(Icons.AutoMirrored.Filled.NavigateBefore, null); Text("Previous • আগে")
+                        Icon(Icons.AutoMirrored.Rounded.NavigateBefore, null); Text("Previous • আগে")
                     }
                     TextButton(onClick = vm::next) {
-                        Text("Next • পরে"); Icon(Icons.AutoMirrored.Filled.NavigateNext, null)
+                        Text("Next • পরে"); Icon(Icons.AutoMirrored.Rounded.NavigateNext, null)
                     }
                 }
             }
@@ -186,13 +176,12 @@ private fun MicResult(mic: MicState) {
     when (mic) {
         MicState.Idle, MicState.Listening -> Unit
         is MicState.Error -> Text(mic.message, color = MaterialTheme.colorScheme.error)
-        is MicState.Result -> Card(Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        is MicState.Result -> SoftCard(padding = 16.dp) {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("Phone heard • ফোন শুনেছে: ${mic.heard.ifBlank { "—" }}")
-                LinearProgressIndicator(
-                    progress = { mic.score / 100f },
-                    color = if (mic.score >= 80) CorrectGreen else MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.fillMaxWidth()
+                ProgressBar(
+                    mic.score / 100f,
+                    color = if (mic.score >= 80) Extra.correct else MaterialTheme.colorScheme.primary,
                 )
                 Text(
                     when {
@@ -210,9 +199,9 @@ private fun MicResult(mic: MicState) {
 /** How to actually start speaking Japanese, in English + Bengali. */
 @Composable
 private fun SpeakingTips() {
-    Card(Modifier.fillMaxWidth()) {
-        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            Text("How to start speaking • কিভাবে কথা বলা শিখবেন", style = MaterialTheme.typography.titleMedium)
+    SoftCard {
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Bilingual("How to start speaking", "কিভাবে কথা বলা শিখবেন", enStyle = MaterialTheme.typography.titleLarge)
             Text("• Shadowing: play a phrase and say it at the same time, copying the rhythm. • শুনতে শুনতে একসাথে বলুন, সুর নকল করুন।")
             Text("• Say every word out loud, never only in your head. • মনে মনে নয়, জোরে বলুন।")
             Text("• Japanese sounds are flat and even. Give each kana the same length. • প্রতিটি অক্ষর সমান লম্বা করে বলুন।")

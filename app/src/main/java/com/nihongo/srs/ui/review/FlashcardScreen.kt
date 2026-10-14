@@ -12,34 +12,31 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.VolumeUp
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.SlowMotionVideo
-import androidx.compose.material3.AssistChip
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material.icons.automirrored.rounded.VolumeUp
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.SlowMotionVideo
+import androidx.compose.material.icons.rounded.Visibility
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -51,16 +48,23 @@ import com.nihongo.srs.srs.SpacedRepetitionEngine
 import com.nihongo.srs.ui.ExampleSentence
 import com.nihongo.srs.ui.TtsBanner
 import com.nihongo.srs.ui.WordAnswer
-import com.nihongo.srs.ui.theme.CorrectGreen
-import com.nihongo.srs.ui.theme.ForgotRed
+import com.nihongo.srs.ui.components.AppScreen
+import com.nihongo.srs.ui.components.BigButton
+import com.nihongo.srs.ui.components.BigOutlinedButton
+import com.nihongo.srs.ui.components.Bilingual
+import com.nihongo.srs.ui.components.EmptyState
+import com.nihongo.srs.ui.components.Pill
+import com.nihongo.srs.ui.components.ScreenPadding
+import com.nihongo.srs.ui.components.SessionProgress
+import com.nihongo.srs.ui.components.SoftCard
+import com.nihongo.srs.ui.theme.Extra
 
 /**
  * Flashcard screen used for both reviewing due words and learning new ones.
  *
- * Front: the Japanese word. Tap to flip (3D animation) and reveal the
- * reading, romaji, English and Bengali meaning. Pronunciation plays on flip.
+ * Front: the Japanese word (or, on reverse cards, the meaning). Tap to flip and
+ * reveal the reading, romaji, English and Bengali meaning plus an example.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FlashcardScreen(
     onBack: () -> Unit,
@@ -69,26 +73,15 @@ fun FlashcardScreen(
     val state by vm.state.collectAsStateWithLifecycle()
     val tts by vm.ttsStatus.collectAsStateWithLifecycle()
 
-    val title = when (state.mode) {
-        SessionMode.REVIEW -> "Review • রিভিউ"
-        SessionMode.LEARN -> "Learn new • নতুন শিখুন"
+    val (title, subtitle) = when (state.mode) {
+        SessionMode.REVIEW -> "Review" to "রিভিউ"
+        SessionMode.LEARN -> "Learn new words" to "নতুন শব্দ শিখুন"
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(title) },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
-                    }
-                }
-            )
-        }
-    ) { pad ->
+    AppScreen(title = title, subtitle = subtitle, onBack = onBack) { pad ->
         Column(
-            Modifier.padding(pad).fillMaxSize().padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            Modifier.padding(pad).fillMaxSize().padding(horizontal = ScreenPadding, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             TtsBanner(tts)
             when {
@@ -98,14 +91,7 @@ fun FlashcardScreen(
                 state.isFinished -> SessionSummary(state, onBack)
                 else -> {
                     val card = state.current!!
-                    LinearProgressIndicator(
-                        progress = { state.index / state.total.toFloat() },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Text(
-                        "${state.index + 1} / ${state.total}",
-                        style = MaterialTheme.typography.labelLarge
-                    )
+                    SessionProgress(state.index, state.total)
 
                     FlipCard(
                         vocab = card.vocab,
@@ -129,10 +115,11 @@ fun FlashcardScreen(
                                 onKnew = { vm.answer(true) }
                             )
                         } else {
-                            Button(onClick = vm::flip, modifier = Modifier.fillMaxWidth().height(56.dp)) {
-                                Text("Say it out loud, then show answer\nজোরে বলুন, তারপর উত্তর দেখুন",
-                                    textAlign = TextAlign.Center)
-                            }
+                            BigButton(
+                                "Say it out loud, then show answer", "জোরে বলুন, তারপর উত্তর দেখুন",
+                                onClick = vm::flip, icon = Icons.Rounded.Visibility,
+                                modifier = Modifier.testTag("show_answer"),
+                            )
                         }
                         SessionMode.LEARN -> LearnButtons(
                             enabled = !state.isBusy,
@@ -140,6 +127,7 @@ fun FlashcardScreen(
                             onLearned = vm::markLearned
                         )
                     }
+                    Spacer(Modifier.height(4.dp))
                 }
             }
         }
@@ -164,38 +152,44 @@ private fun FlipCard(
         label = "cardFlip"
     )
     val showBack = rotation > 90f
+    val shape = RoundedCornerShape(28.dp)
 
-    Card(
+    Surface(
         modifier = modifier
             .fillMaxWidth()
             .graphicsLayer {
                 rotationY = rotation
                 cameraDistance = 12f * density
             }
+            .shadow(10.dp, shape, ambientColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f),
+                spotColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.25f))
+            .clip(shape)
             .clickable(onClick = onFlip),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        shape = shape,
+        color = MaterialTheme.colorScheme.surface,
     ) {
         Column(
             Modifier
                 .fillMaxSize()
                 // Un-mirror the back side's content.
                 .graphicsLayer { rotationY = if (showBack) 180f else 0f }
-                .padding(16.dp)
+                .padding(18.dp)
         ) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                AssistChip(onClick = {}, label = { Text(stageText) })
+                Pill(stageText)
                 Spacer(Modifier.weight(1f))
                 // On a reverse card the sound would give the answer away, so it waits for the flip.
                 if (showBack || !reverse) {
-                    IconButton(onClick = onSpeakSlow) { Icon(Icons.Default.SlowMotionVideo, "Slow") }
-                    IconButton(onClick = onSpeak) { Icon(Icons.AutoMirrored.Filled.VolumeUp, "Listen") }
+                    FilledTonalIconButton(onClick = onSpeakSlow) { Icon(Icons.Rounded.SlowMotionVideo, "Slow") }
+                    Spacer(Modifier.width(4.dp))
+                    FilledTonalIconButton(onClick = onSpeak) { Icon(Icons.AutoMirrored.Rounded.VolumeUp, "Listen") }
                 }
             }
 
             Column(
                 Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically)
+                verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically)
             ) {
                 when {
                     showBack -> {
@@ -203,25 +197,28 @@ private fun FlipCard(
                         ExampleSentence(vocab, onSpeak = onSpeakExample)
                     }
                     reverse -> {
-                        Text("How do you say this in Japanese?\nজাপানিতে কী বলে?",
-                            style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center,
-                            color = MaterialTheme.colorScheme.primary)
-                        Text("🇬🇧 ${vocab.meaning}", style = MaterialTheme.typography.headlineSmall,
-                            textAlign = TextAlign.Center)
-                        Text("🇧🇩 ${vocab.meaningBn}", style = MaterialTheme.typography.headlineSmall,
-                            textAlign = TextAlign.Center)
+                        Pill("How do you say this in Japanese? • জাপানিতে কী বলে?",
+                            color = MaterialTheme.colorScheme.secondaryContainer,
+                            textColor = MaterialTheme.colorScheme.onSecondaryContainer)
+                        Text(vocab.meaning, style = MaterialTheme.typography.headlineMedium, textAlign = TextAlign.Center)
+                        Text(vocab.meaningBn, style = MaterialTheme.typography.headlineSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center)
                     }
                     else -> {
                         Text(
                             vocab.japanese,
-                            fontSize = if (vocab.japanese.length > 6) 36.sp else 56.sp,
+                            fontSize = if (vocab.japanese.length > 6) 40.sp else 64.sp,
                             fontWeight = FontWeight.Bold,
                             textAlign = TextAlign.Center
                         )
                         Text("What does it mean? • এর মানে কী?",
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
+                }
+                if (!showBack) {
+                    Text("Tap the card to flip • কার্ডে চাপ দিন", style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.outline)
                 }
             }
         }
@@ -231,37 +228,19 @@ private fun FlipCard(
 @Composable
 private fun ReviewButtons(enabled: Boolean, onForgot: () -> Unit, onKnew: () -> Unit) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        Button(
-            onClick = onForgot,
-            enabled = enabled,
-            colors = ButtonDefaults.buttonColors(containerColor = ForgotRed),
-            modifier = Modifier.weight(1f).height(56.dp)
-        ) {
-            Icon(Icons.Default.Close, null)
-            Text(" Forgot\nভুলে গেছি", textAlign = TextAlign.Center)
-        }
-        Button(
-            onClick = onKnew,
-            enabled = enabled,
-            colors = ButtonDefaults.buttonColors(containerColor = CorrectGreen),
-            modifier = Modifier.weight(1f).height(56.dp)
-        ) {
-            Icon(Icons.Default.Check, null)
-            Text(" I Knew It\nমনে আছে", textAlign = TextAlign.Center)
-        }
+        BigButton("Forgot", "ভুলে গেছি", onClick = onForgot, enabled = enabled, icon = Icons.Rounded.Close,
+            container = Extra.wrongSoft, content = Extra.wrong, modifier = Modifier.weight(1f).testTag("forgot"))
+        BigButton("I Knew It", "মনে আছে", onClick = onKnew, enabled = enabled, icon = Icons.Rounded.Check,
+            container = Extra.correct, content = Color.White, modifier = Modifier.weight(1f).testTag("knew"))
     }
 }
 
 @Composable
 private fun LearnButtons(enabled: Boolean, onSkip: () -> Unit, onLearned: () -> Unit) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        OutlinedButton(onClick = onSkip, enabled = enabled, modifier = Modifier.weight(1f).height(56.dp)) {
-            Text("Skip\nপরে", textAlign = TextAlign.Center)
-        }
-        Button(onClick = onLearned, enabled = enabled, modifier = Modifier.weight(2f).height(56.dp)) {
-            Icon(Icons.Default.Check, null)
-            Text(" Learned, review tomorrow\nশিখেছি, কাল রিভিউ", textAlign = TextAlign.Center)
-        }
+        BigOutlinedButton("Skip", "পরে", onClick = onSkip, enabled = enabled, modifier = Modifier.weight(1f))
+        BigButton("Learned, review tomorrow", "শিখেছি, কাল রিভিউ", onClick = onLearned, enabled = enabled,
+            icon = Icons.Rounded.Check, modifier = Modifier.weight(2f).testTag("learned"))
     }
 }
 
@@ -270,25 +249,33 @@ private fun SessionSummary(state: ReviewUiState, onBack: () -> Unit) {
     Column(
         Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
     ) {
         if (state.total == 0) {
-            Text("Nothing here right now 🎉", style = MaterialTheme.typography.headlineSmall)
-            Text("এখন কিছু নেই", style = MaterialTheme.typography.titleMedium)
+            EmptyState("🎉", "Nothing here right now", "এখন কিছু নেই")
         } else {
-            Text("お疲れ様! Well done!", style = MaterialTheme.typography.headlineSmall)
-            Text("সাবাশ! আজকের সেশন শেষ", style = MaterialTheme.typography.titleMedium)
-            Spacer(Modifier.height(16.dp))
+            Text("🎉", fontSize = 64.sp)
+            Bilingual("お疲れ様! Well done!", "সাবাশ! আজকের সেশন শেষ",
+                enStyle = MaterialTheme.typography.headlineMedium, align = TextAlign.Center,
+                horizontalAlignment = Alignment.CenterHorizontally)
             when (state.mode) {
-                SessionMode.REVIEW -> {
-                    Text("✅ Knew • মনে ছিল: ${state.correctCount}")
-                    Text("❌ Forgot • ভুলেছি: ${state.forgotCount} (review tomorrow • কাল আবার)")
+                SessionMode.REVIEW -> Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    ResultTile("${state.correctCount}", "Knew", "মনে ছিল", Extra.correct, Extra.correctSoft, Modifier.weight(1f))
+                    ResultTile("${state.forgotCount}", "Forgot", "কাল আবার আসবে", Extra.wrong, Extra.wrongSoft, Modifier.weight(1f))
                 }
                 SessionMode.LEARN ->
-                    Text("📚 Learned • শিখেছি: ${state.correctCount} (first review tomorrow • কাল প্রথম রিভিউ)")
+                    ResultTile("${state.correctCount}", "Words learned", "প্রথম রিভিউ কাল",
+                        MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.primaryContainer, Modifier.fillMaxWidth())
             }
         }
-        Spacer(Modifier.height(24.dp))
-        Button(onClick = onBack) { Text("Back to Home • হোমে ফিরুন") }
+        BigButton("Back to Home", "হোমে ফিরুন", onClick = onBack)
+    }
+}
+
+@Composable
+private fun ResultTile(value: String, en: String, bn: String, color: Color, soft: Color, modifier: Modifier) {
+    SoftCard(modifier, color = soft, border = false) {
+        Text(value, style = MaterialTheme.typography.displayMedium, color = color)
+        Bilingual(en, bn, color = color)
     }
 }
