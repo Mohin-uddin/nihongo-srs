@@ -85,8 +85,8 @@ class PreviewTour {
     /** True once a "N new" counter above zero is on screen, i.e. the word lists are loaded. */
     private fun wordsLoaded(): Boolean =
         rule.onAllNodesWithText(" new", substring = true).fetchSemanticsNodes().any { node ->
-            val text = node.config.getOrNull(SemanticsProperties.Text)?.joinToString("") { it.text } ?: ""
-            Regex("""[1-9]\d* new""").matches(text)
+            node.config.getOrNull(SemanticsProperties.Text).orEmpty()
+                .any { Regex("""[1-9]\d* new""").matches(it.text) }
         }
 
     @Test
