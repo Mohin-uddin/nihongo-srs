@@ -1,0 +1,4 @@
+<resources>
+    <!-- Compose draws the UI; this theme is only for the window before Compose starts. -->
+    <style name="Theme.NihongoSRS" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

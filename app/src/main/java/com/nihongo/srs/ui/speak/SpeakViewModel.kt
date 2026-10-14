@@ -1,0 +1,110 @@
+package com.nihongo.srs.ui.speak
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.nihongo.srs.NihongoApp
+import com.nihongo.srs.data.VocabEntity
+import com.nihongo.srs.data.VocabRepository
+import com.nihongo.srs.speech.JapaneseSpeaker
+import com.nihongo.srs.speech.PronunciationChecker
+import com.nihongo.srs.speech.PronunciationScorer
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+
+/** State of the microphone check for the current phrase. */
+sealed interface MicState {
+    data object Idle : MicState
+    data object Listening : MicState
+    data class Result(val heard: String, val score: Int) : MicState
+    data class Error(val message: String) : MicState
+}
+
+data class SpeakUiState(
+    val index: Int = 0,
+    val showMeaning: Boolean = true,
+    val mic: MicState = MicState.Idle,
+)
+
+/**
+ * Speaking practice with the "shadowing" method:
+ * 1) listen (normal / slow)  2) repeat out loud  3) let the phone check you.
+ */
+class SpeakViewModel(
+    repo: VocabRepository,
+    private val speaker: JapaneseSpeaker,
+    private val checker: PronunciationChecker,
+) : ViewModel() {
+
+    val phrases: StateFlow<List<VocabEntity>> = repo.observePhrases()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    private val _state = MutableStateFlow(SpeakUiState())
+    val state: StateFlow<SpeakUiState> = _state.asStateFlow()
+
+    val ttsStatus = speaker.status
+    val micAvailable: Boolean get() = checker.isAvailable
+
+    private fun current(): VocabEntity? = phrases.value.getOrNull(_state.value.index)
+
+    fun listen(slow: Boolean) {
+        current()?.let { speaker.speak(it.reading, slow) }
+    }
+
+    fun next() = move(+1)
+    fun previous() = move(-1)
+
+    private fun move(delta: Int) {
+        val size = phrases.value.size
+        if (size == 0) return
+        checker.stop()
+        _state.update {
+            it.copy(index = (it.index + delta + size) % size, mic = MicState.Idle)
+        }
+    }
+
+    fun toggleMeaning() = _state.update { it.copy(showMeaning = !it.showMeaning) }
+
+    /** Start the microphone. Caller must already hold RECORD_AUDIO permission. */
+    fun startSpeaking() {
+        val target = current() ?: return
+        speaker.stop()
+        checker.start(object : PronunciationChecker.Callback {
+            override fun onListening() = _state.update { it.copy(mic = MicState.Listening) }
+
+            override fun onResult(candidates: List<String>) {
+                val score = PronunciationScorer.score(candidates, target.japanese, target.reading)
+                _state.update {
+                    it.copy(mic = MicState.Result(candidates.firstOrNull().orEmpty(), score))
+                }
+            }
+
+            override fun onError(message: String) =
+                _state.update { it.copy(mic = MicState.Error(message)) }
+        })
+    }
+
+    fun onMicPermissionDenied() = _state.update {
+        it.copy(mic = MicState.Error("Microphone permission needed • মাইক্রোফোনের অনুমতি দিন"))
+    }
+
+    override fun onCleared() {
+        checker.destroy()
+        speaker.stop()
+    }
+
+    companion object {
+        val Factory = viewModelFactory {
+            initializer {
+                val app = this[APPLICATION_KEY] as NihongoApp
+                SpeakViewModel(app.repository, app.speaker, PronunciationChecker(app))
+            }
+        }
+    }
+}

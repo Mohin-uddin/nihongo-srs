@@ -1,0 +1,48 @@
+# Builds a debug APK on every push to main and publishes it as a GitHub Release,
+# so it can be downloaded straight to a phone. Free on GitHub Actions.
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: android-actions/setup-android@v3
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Run unit tests
+        run: ./gradlew --no-daemon testDebugUnitTest
+
+      - name: Build debug APK
+        run: ./gradlew --no-daemon assembleDebug
+
+      - name: Rename APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk NihongoSRS.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NihongoSRS-apk
+          path: NihongoSRS.apk
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Nihongo SRS build ${{ github.run_number }}
+          body: Download NihongoSRS.apk below and open it on your Android phone.
+          files: NihongoSRS.apk
