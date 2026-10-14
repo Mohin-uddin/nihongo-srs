@@ -12,13 +12,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase
  * so the app works 100% offline.
  */
 @Database(
-    entities = [VocabEntity::class, UserProgress::class],
-    version = 2,
+    entities = [VocabEntity::class, UserProgress::class, StudyDay::class, ExamResult::class],
+    version = 3,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun vocabDao(): VocabDao
+    abstract fun statsDao(): StatsDao
 
     companion object {
         @Volatile
@@ -35,13 +36,39 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        /** v2 -> v3: daily study log and exam history for the Progress screen. */
+        val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `study_day` (" +
+                        "`date` TEXT NOT NULL, " +
+                        "`reviewed` INTEGER NOT NULL DEFAULT 0, " +
+                        "`reviewedCorrect` INTEGER NOT NULL DEFAULT 0, " +
+                        "`learned` INTEGER NOT NULL DEFAULT 0, " +
+                        "`exams` INTEGER NOT NULL DEFAULT 0, " +
+                        "`bestExamPercent` INTEGER NOT NULL DEFAULT -1, " +
+                        "`spoken` INTEGER NOT NULL DEFAULT 0, " +
+                        "`kanaQuizzes` INTEGER NOT NULL DEFAULT 0, " +
+                        "PRIMARY KEY(`date`))"
+                )
+                db.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `exam_result` (" +
+                        "`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                        "`timestamp` INTEGER NOT NULL, " +
+                        "`scope` TEXT NOT NULL, " +
+                        "`percent` INTEGER NOT NULL, " +
+                        "`total` INTEGER NOT NULL)"
+                )
+            }
+        }
+
         fun get(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
                     "nihongo_srs.db"
-                ).addMigrations(MIGRATION_1_2)
+                ).addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .build().also { INSTANCE = it }
             }
     }

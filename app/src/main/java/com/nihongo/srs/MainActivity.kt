@@ -15,6 +15,8 @@ import androidx.navigation.navArgument
 import com.nihongo.srs.ui.exam.ExamScreen
 import com.nihongo.srs.ui.exam.ExamViewModel
 import com.nihongo.srs.ui.home.HomeScreen
+import com.nihongo.srs.ui.kana.KanaScreen
+import com.nihongo.srs.ui.progress.ProgressScreen
 import com.nihongo.srs.ui.manage.ManageScreen
 import com.nihongo.srs.ui.review.FlashcardScreen
 import com.nihongo.srs.ui.review.ReviewViewModel
@@ -40,6 +42,8 @@ private object Routes {
     const val CARDS = "cards/{${ReviewViewModel.ARG_MODE}}/{${ReviewViewModel.ARG_LEVEL}}"
     const val EXAM = "exam/{${ExamViewModel.ARG_SCOPE}}"
     const val MY_WORDS = "my_words"
+    const val PROGRESS = "progress"
+    const val KANA = "kana"
     const val MANAGE = "manage"
     const val SPEAK = "speak"
     fun cards(mode: SessionMode, level: String = "ALL") = "cards/${mode.name}/$level"
@@ -56,6 +60,8 @@ private fun AppNavHost() {
                 onLearnNew = { level -> nav.navigate(Routes.cards(SessionMode.LEARN, level)) },
                 onMyWords = { nav.navigate(Routes.MY_WORDS) },
                 onExam = { scope -> nav.navigate(Routes.exam(scope)) },
+                onProgress = { nav.navigate(Routes.PROGRESS) },
+                onKana = { nav.navigate(Routes.KANA) },
                 onManage = { nav.navigate(Routes.MANAGE) },
                 onSpeak = { nav.navigate(Routes.SPEAK) },
             )
@@ -74,6 +80,8 @@ private fun AppNavHost() {
             Routes.EXAM,
             arguments = listOf(navArgument(ExamViewModel.ARG_SCOPE) { type = NavType.StringType })
         ) { ExamScreen(onBack = { nav.popBackStack() }) }
+        composable(Routes.PROGRESS) { ProgressScreen(onBack = { nav.popBackStack() }) }
+        composable(Routes.KANA) { KanaScreen(onBack = { nav.popBackStack() }) }
         composable(Routes.MY_WORDS) { StudyListScreen(onBack = { nav.popBackStack() }) }
         composable(Routes.MANAGE) { ManageScreen(onBack = { nav.popBackStack() }) }
         composable(Routes.SPEAK) { SpeakScreen(onBack = { nav.popBackStack() }) }

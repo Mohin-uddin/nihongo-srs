@@ -19,6 +19,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.EditNote
 import androidx.compose.material.icons.filled.Forum
+import androidx.compose.material.icons.filled.Insights
+import androidx.compose.material.icons.filled.Translate
 import androidx.compose.material.icons.automirrored.filled.ListAlt
 import androidx.compose.material.icons.filled.NotificationsActive
 import androidx.compose.material.icons.filled.PlayArrow
@@ -28,6 +30,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -60,6 +63,8 @@ fun HomeScreen(
     onExam: (ExamScope) -> Unit,
     onManage: () -> Unit,
     onSpeak: () -> Unit,
+    onProgress: () -> Unit,
+    onKana: () -> Unit,
     vm: HomeViewModel = viewModel(factory = HomeViewModel.Factory),
 ) {
     val state by vm.uiState.collectAsStateWithLifecycle()
@@ -119,8 +124,29 @@ fun HomeScreen(
             }
 
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                StatCard("Streak 🔥", "টানা দিন", state.streak, Modifier.weight(1f))
                 StatCard("Learning", "শিখছি", state.learning, Modifier.weight(1f))
                 StatCard("Mastered", "আয়ত্ত", state.mastered, Modifier.weight(1f))
+            }
+
+            // Today's goals
+            val done = state.goals.count { it.second }
+            Section("Today's goals • আজকের লক্ষ্য  $done/${state.goals.size}") {
+                LinearProgressIndicator(
+                    progress = { done / state.goals.size.toFloat() },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                state.goals.forEach { (label, ok) ->
+                    Text((if (ok) "✅ " else "⬜ ") + label, style = MaterialTheme.typography.bodyMedium)
+                }
+                if (done == state.goals.size) {
+                    Text("All done today! お疲れ様! • আজকের সব লক্ষ্য পূর্ণ!", fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.secondary)
+                }
+                FilledTonalButton(onClick = onProgress, modifier = Modifier.fillMaxWidth()) {
+                    Icon(Icons.Default.Insights, null)
+                    Text("  My progress • আমার অগ্রগতি")
+                }
             }
 
             // 2. Learn new words
@@ -164,6 +190,10 @@ fun HomeScreen(
                 FilledTonalButton(onClick = onSpeak, modifier = Modifier.fillMaxWidth()) {
                     Icon(Icons.Default.Forum, null)
                     Text("  Daily conversation • প্রতিদিনের কথা")
+                }
+                FilledTonalButton(onClick = onKana, modifier = Modifier.fillMaxWidth()) {
+                    Icon(Icons.Default.Translate, null)
+                    Text("  Hiragana & Katakana • কানা অক্ষর")
                 }
             }
 

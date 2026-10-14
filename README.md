@@ -32,6 +32,9 @@ Phone: Android 8.0 (API 26) or newer.
 | Exam | Today's or full exam, at least 20 multiple-choice questions (meaning, Japanese, listening). Wrong answers are asked again and go back to tomorrow's review |
 | Daily conversation | 72 phrases in 8 topics (greetings, self-intro, shopping, restaurant incl. halal, work, directions, daily life, health). Listen → repeat → mic check |
 | Manage | Add your own words (with Bangla meaning and sentence), reload N5 + N4, search, reset, delete |
+| Progress | N5 / N4 completion %, words at each SRS stage, streak, last 7 days chart, exam history |
+| Today's goals | On Home: finish reviews, learn 10 words, take an exam, speak 5 phrases |
+| Kana | Hiragana and katakana chart with sound, plus a 20-question kana quiz |
 | Reminder | Local notification once a day at a time you choose (default 8 PM) |
 
 Bundled content (in `app/src/main/assets`): 100 N5 words and 106 N4 words, each with an example

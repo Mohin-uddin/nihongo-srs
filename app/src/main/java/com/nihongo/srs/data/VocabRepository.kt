@@ -16,6 +16,7 @@ class VocabRepository(
     private val engine: SpacedRepetitionEngine,
     private val assets: AssetManager,
     private val prefs: AppPrefs,
+    private val progress: ProgressRepository,
 ) {
     private val dao = db.vocabDao()
 
@@ -100,12 +101,14 @@ class VocabRepository(
     /** Day 0: the user has just studied a new word. */
     suspend fun markLearned(vocabId: Long) {
         dao.upsertProgress(engine.startLearning(vocabId))
+        progress.log(learned = 1)
     }
 
     /** A review answer: "I Knew It" (correct = true) or "Forgot" (correct = false). */
-    suspend fun submitReview(current: UserProgress, correct: Boolean): UserProgress {
+    suspend fun submitReview(current: UserProgress, correct: Boolean, countAsReview: Boolean = true): UserProgress {
         val updated = engine.review(current, correct)
         dao.upsertProgress(updated)
+        if (countAsReview) progress.log(reviewed = 1, correct = if (correct) 1 else 0)
         return updated
     }
 }

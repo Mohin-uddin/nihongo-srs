@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.nihongo.srs.NihongoApp
+import com.nihongo.srs.data.ProgressRepository
 import com.nihongo.srs.data.UserProgress
 import com.nihongo.srs.data.VocabEntity
 import com.nihongo.srs.data.VocabRepository
@@ -47,6 +48,7 @@ data class ExamUiState(
 class ExamViewModel(
     private val repo: VocabRepository,
     private val speaker: JapaneseSpeaker,
+    private val progress: ProgressRepository,
     scope: ExamScope,
 ) : ViewModel() {
 
@@ -107,8 +109,10 @@ class ExamViewModel(
 
     /** Words missed in the exam go back to Stage 0 (review tomorrow). */
     private fun onFinished() = viewModelScope.launch {
-        _state.value.wrongWords.forEach { w ->
-            progressById[w.id]?.let { repo.submitReview(it, correct = false) }
+        val s = _state.value
+        progress.saveExam(s.scope.name, s.scorePercent, s.totalOriginal)
+        s.wrongWords.forEach { w ->
+            progressById[w.id]?.let { repo.submitReview(it, correct = false, countAsReview = false) }
         }
     }
 
@@ -121,7 +125,7 @@ class ExamViewModel(
                 val handle: SavedStateHandle = createSavedStateHandle()
                 val scope = handle.get<String>(ARG_SCOPE)
                     ?.let { runCatching { ExamScope.valueOf(it) }.getOrNull() } ?: ExamScope.TODAY
-                ExamViewModel(app.repository, app.speaker, scope)
+                ExamViewModel(app.repository, app.speaker, app.progress, scope)
             }
         }
     }

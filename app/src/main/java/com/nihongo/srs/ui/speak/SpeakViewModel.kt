@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.nihongo.srs.NihongoApp
+import com.nihongo.srs.data.ProgressRepository
 import com.nihongo.srs.data.VocabEntity
 import com.nihongo.srs.data.VocabRepository
 import com.nihongo.srs.speech.JapaneseSpeaker
@@ -19,6 +20,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 /** State of the microphone check for the current phrase. */
 sealed interface MicState {
@@ -42,6 +44,7 @@ class SpeakViewModel(
     repo: VocabRepository,
     private val speaker: JapaneseSpeaker,
     private val checker: PronunciationChecker,
+    private val progress: ProgressRepository,
 ) : ViewModel() {
 
     private val allPhrases: StateFlow<List<VocabEntity>> = repo.observePhrases()
@@ -99,6 +102,7 @@ class SpeakViewModel(
 
             override fun onResult(candidates: List<String>) {
                 val score = PronunciationScorer.score(candidates, target.japanese, target.reading)
+                viewModelScope.launch { progress.log(spoken = 1) }
                 _state.update {
                     it.copy(mic = MicState.Result(candidates.firstOrNull().orEmpty(), score))
                 }
@@ -124,7 +128,7 @@ class SpeakViewModel(
         val Factory = viewModelFactory {
             initializer {
                 val app = this[APPLICATION_KEY] as NihongoApp
-                SpeakViewModel(app.repository, app.speaker, PronunciationChecker(app))
+                SpeakViewModel(app.repository, app.speaker, PronunciationChecker(app), app.progress)
             }
         }
     }
