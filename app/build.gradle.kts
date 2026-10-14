@@ -20,6 +20,17 @@ android {
         vectorDrawables { useSupportLibrary = true }
     }
 
+    // A fixed debug key kept in the repo, so every GitHub build is signed the same way
+    // and a new APK installs over the old one without losing your progress.
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
