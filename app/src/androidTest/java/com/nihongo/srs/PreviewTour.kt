@@ -86,7 +86,7 @@ class PreviewTour {
     private fun wordsLoaded(): Boolean =
         rule.onAllNodesWithText(" new", substring = true).fetchSemanticsNodes().any { node ->
             val text = node.config.getOrNull(SemanticsProperties.Text)?.joinToString("") { it.text } ?: ""
-            text.isNotEmpty() && !text.startsWith("0 ")
+            Regex("""[1-9]\d* new""").matches(text)
         }
 
     @Test
